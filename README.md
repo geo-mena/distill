@@ -13,26 +13,24 @@ This system captures Distill's typographic, chromatic, and illustrative conventi
 
 ## Sources
 
-These uploads informed the system. They are **diagram clippings from Distill articles** (FiLM, Neural Turing Machines / Attention, AI Safety via Debate) plus one product screenshot showing an "Import" dialog in a separate cream-coloured UI which we've set aside as out-of-scope.
+These source screenshots informed the system. They are **diagram clippings from Distill articles** — FiLM, Neural Turing Machines, Attention, AI Safety via Debate.
 
 | File | What it shows |
 |---|---|
-| `uploads/Screenshot ... 1.42.34 PM.png` | Concatenation-based conditioning diagram |
-| `uploads/Screenshot ... 1.42.39 PM.png` | Conditional biasing diagram |
-| `uploads/Screenshot ... 1.42.56 PM.png` | Concat ≡ conditional bias proof diagram |
-| `uploads/Screenshot ... 1.43.12 PM.png` | Conditional scaling diagram |
-| `uploads/Screenshot ... 1.43.35 PM.png` | FiLM generator → FiLM-ed network |
-| `uploads/Screenshot ... 1.43.42 PM.png` | FiLM γ/β scaling+shifting on FC and conv |
-| `uploads/Screenshot ... 1.44.13 PM.png` | FiLM in visual reasoning (Perez et al.) |
-| `uploads/Screenshot ... 1.44.16 PM.png` | FiLM in artistic style transfer (Ghiasi et al.) |
-| `uploads/Screenshot ... 1.45.50 PM.png` | AI Safety via Debate — debate tree |
-| `uploads/Screenshot ... 1.47.02 PM.png` | Neural Turing Machine — memory + read/write |
-| `uploads/Screenshot ... 1.47.17 PM.png` | Attention as weighted sum over memory |
-| `uploads/Screenshot ... 1.47.37 PM.png` | NTM attention mechanism (softmax→interpolate→convolve→sharpen) |
-| `uploads/Screenshot ... 1.47.50 PM.png` | RNN attention — Network B attends to A |
-| `uploads/Screenshot ... 1.47.56 PM.png` | RNN attention — query/softmax internals |
-
-The cream-coloured "Import" screenshot (`1.42.22 PM.png`) is from a different product context (Anthropic-style cream UI) and is **not** part of this system.
+| `sources/film-01-concat-conditioning.png` | Concatenation-based conditioning diagram |
+| `sources/film-02-conditional-biasing.png` | Conditional biasing diagram |
+| `sources/film-03-concat-bias-proof.png` | Concat ≡ conditional bias proof diagram |
+| `sources/film-04-conditional-scaling.png` | Conditional scaling diagram |
+| `sources/film-05-generator-network.png` | FiLM generator → FiLM-ed network |
+| `sources/film-06-gamma-beta-scaling.png` | FiLM γ/β scaling+shifting on FC and conv |
+| `sources/film-07-visual-reasoning.png` | FiLM in visual reasoning (Perez et al.) |
+| `sources/film-08-style-transfer.png` | FiLM in artistic style transfer (Ghiasi et al.) |
+| `sources/ai-safety-01-debate-tree.png` | AI Safety via Debate — debate tree |
+| `sources/ntm-01-memory-read-write.png` | Neural Turing Machine — memory + read/write |
+| `sources/ntm-02-attention-mechanism.png` | NTM attention mechanism (softmax→interpolate→convolve→sharpen) |
+| `sources/attention-01-weighted-sum.png` | Attention as weighted sum over memory |
+| `sources/attention-02-rnn-overview.png` | RNN attention — Network B attends to A |
+| `sources/attention-03-rnn-internals.png` | RNN attention — query/softmax internals |
 
 ---
 
@@ -51,7 +49,7 @@ Root manifest:
 - `ui_kits/article/` — long-form article UI kit (the canonical Distill surface), TSX components + assembled `index.html`
 - `design-canvas.tsx` — author tool: Figma-ish canvas wrapper (sections, artboards, post-its); not part of the Distill brand surface, used to lay out variants during design exploration
 - `tweaks-panel.tsx` — author tool: floating panel with sliders/toggles/colors for live-tweaking prototype values; speaks the `__edit_mode_*` postMessage protocol so a host can persist edits back to disk
-- `uploads/` — source screenshots used to reconstruct the system
+- `sources/` — source screenshots used to reconstruct the system (one per diagram, named by article + content)
 
 ## TypeScript
 
@@ -213,4 +211,4 @@ See `assets/ICONOGRAPHY.md` for full details. Summary:
 - **UI scaffolding icons substituted with Lucide.** Distill never had bespoke product chrome at scale; for nav/share/copy we use Lucide @ 1.5px stroke. See `assets/ICONOGRAPHY.md`.
 - **Pointer-finger glyph reconstructed** as a typographic stand-in; it captures the orange-circle + white-pointing-hand intent but isn't a pixel lift of the original.
 - **One UI kit only** (article reader). Distill never shipped a second product surface — no app shell, no dashboard, no settings UI to recreate. If you need slide layouts for talks, ask and we can add a `slides/` folder using the same visual language.
-- **No Anthropic-style cream UI** — the one out-of-place Import-dialog screenshot in the uploads is from a different product context and was set aside.
+- **No Anthropic-style cream UI** — an out-of-place Import-dialog screenshot from a different product context was set aside during initial sourcing and is not part of `sources/`.

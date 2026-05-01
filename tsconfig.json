@@ -22,7 +22,7 @@
     "globals.d.ts"
   ],
   "exclude": [
-    "uploads",
+    "sources",
     "preview"
   ]
 }
