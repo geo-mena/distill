@@ -1,0 +1,358 @@
+/* ========================================================================
+   Distill Design System — colors_and_type.css
+   ------------------------------------------------------------------------
+   Core design tokens. Import this file first in any HTML using the system.
+   ======================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap");
+
+@font-face {
+  font-family: "Geist Pixel Square";
+  src: url("./fonts/GeistPixel-Square.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ---------- Color: paper / neutrals ---------- */
+  --paper:           #fdfdfd;          /* page background */
+  --paper-warm:      #faf9f6;          /* off-white, very subtle warm */
+  --paper-rule:      #e8e8e4;          /* faint horizontal section rules */
+  --hairline:        #d8d8d4;          /* 1px borders on figure containers, inputs */
+
+  --ink:             #2a2a2a;          /* body prose */
+  --ink-soft:        #4a4a4a;          /* h2/h3 secondary */
+  --ink-muted:       #6a6a6a;          /* captions, byline, footnotes */
+  --ink-faint:       #9a9a98;          /* placeholder, disabled */
+  --ink-quiet:       #c4c4c0;          /* very subtle hints */
+
+  /* ---------- Color: accents (the diagram palette) ---------- */
+  /* Salmon-coral — "inputs / data / source vectors" */
+  --salmon-50:       #fdecea;
+  --salmon-100:      #fbd9d4;
+  --salmon-200:      #f8c2bb;
+  --salmon-300:      #f5a39b;          /* canonical salmon */
+  --salmon-400:      #ee847b;
+  --salmon-500:      #d96459;
+  --salmon-stroke:   #c44a3f;
+
+  /* Powder-blue — "conditioning / parameters / generated structure" */
+  --blue-50:         #ecf3fa;
+  --blue-100:        #d6e4f3;
+  --blue-200:        #bdd2ec;
+  --blue-300:        #a8c8e8;          /* canonical powder blue */
+  --blue-400:        #7eaadb;
+  --blue-500:        #4f86c4;
+  --blue-stroke:     #356aa8;
+
+  /* Lavender — "attention / memory / recurrence" */
+  --lavender-50:     #efedf7;
+  --lavender-100:    #ddd9ee;
+  --lavender-200:    #c8c0e3;
+  --lavender-300:    #b8a8d8;          /* canonical lavender */
+  --lavender-400:    #9a85c4;
+  --lavender-500:    #6e58a6;
+  --lavender-stroke: #4f3d80;
+
+  /* Highlight — interactive-affordance pointer-glyph */
+  --highlight:       #f5b942;          /* warm orange-yellow */
+  --highlight-soft:  #fce4b3;
+
+  /* Link — body-prose link color */
+  --link:            #c44a3f;          /* salmon-stroke; matches diagram strokes */
+  --link-hover:      #a83a30;
+
+  /* ---------- Semantic ---------- */
+  --bg:              var(--paper);
+  --bg-soft:         var(--paper-warm);
+  --fg:              var(--ink);
+  --fg-soft:         var(--ink-soft);
+  --fg-muted:        var(--ink-muted);
+  --fg-faint:        var(--ink-faint);
+  --border:          var(--hairline);
+  --rule:            var(--paper-rule);
+  --focus-ring:      var(--blue-300);
+
+  /* ---------- Typography: families ---------- */
+  --font-display:    "Libre Franklin", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans:       "Libre Franklin", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif:      "Crimson Text", "Libre Baskerville", Georgia, "Times New Roman", serif;
+  --font-mono:       "Geist Pixel Square", ui-monospace, "SF Mono", "Menlo", "Monaco", "Cascadia Mono", monospace;
+
+  /* ---------- Typography: scale ---------- */
+  --text-xs:         12px;
+  --text-sm:         14px;
+  --text-base:       16px;
+  --text-md:         18px;     /* default body */
+  --text-lg:         20px;
+  --text-xl:         24px;
+  --text-2xl:        30px;
+  --text-3xl:        38px;
+  --text-4xl:        48px;
+  --text-5xl:        64px;
+
+  --leading-tight:   1.2;
+  --leading-snug:    1.4;
+  --leading-normal:  1.6;
+  --leading-relaxed: 1.7;      /* body prose */
+  --leading-loose:   1.85;
+
+  /* ---------- Spacing (8px base) ---------- */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* ---------- Layout widths ---------- */
+  --col-reading:     684px;    /* the article body column */
+  --col-figure:      984px;    /* figure break-out width */
+  --col-bleed:       1280px;   /* widest content */
+  --col-narrow:      560px;    /* sidenotes, asides */
+
+  /* ---------- Radii ---------- */
+  --radius-sm:       4px;      /* buttons, inputs, sub-network blocks */
+  --radius-md:       6px;      /* figure containers */
+  --radius-lg:       12px;     /* rare — modals only */
+  --radius-pill:     999px;    /* tags, pills, write/read glyphs */
+
+  /* ---------- Shadows ---------- */
+  --shadow-none:     none;
+  --shadow-sm:       0 1px 2px rgba(20, 20, 20, 0.04);
+  --shadow-md:       0 2px 8px rgba(20, 20, 20, 0.06);
+  --shadow-pop:      0 4px 16px rgba(20, 20, 20, 0.08);
+
+  /* ---------- Motion ---------- */
+  --ease-standard:   cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in-out:     cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  --dur-fast:        120ms;
+  --dur-base:        180ms;
+  --dur-slow:        300ms;
+  --dur-figure:      600ms;
+
+  /* ---------- Borders / strokes (for diagrams) ---------- */
+  --stroke-thin:     1px;
+  --stroke-base:     1.5px;
+  --stroke-bold:     2px;
+}
+
+/* ========================================================================
+   Element defaults
+   ======================================================================== */
+
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+body {
+  font-family: var(--font-serif);
+  font-size: var(--text-md);
+  line-height: var(--leading-relaxed);
+  color: var(--fg);
+  background: var(--bg);
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--fg);
+  letter-spacing: -0.005em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.015em;
+}
+h2 {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  line-height: var(--leading-snug);
+  margin-top: var(--space-12);
+  margin-bottom: var(--space-4);
+}
+h3 {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  line-height: var(--leading-snug);
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-3);
+}
+h4 {
+  font-size: var(--text-md);
+  font-weight: 600;
+  line-height: var(--leading-snug);
+}
+
+p {
+  margin: 0 0 var(--space-5) 0;
+  text-wrap: pretty;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--dur-base) var(--ease-standard),
+              color var(--dur-base) var(--ease-standard);
+}
+a:hover { border-bottom-color: var(--link); }
+
+code, pre, kbd, samp {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+code {
+  background: var(--bg-soft);
+  padding: 0.1em 0.35em;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--rule);
+}
+pre {
+  background: var(--bg-soft);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-5);
+  overflow-x: auto;
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+}
+pre code { background: none; padding: 0; border: none; }
+
+em, i { font-style: italic; }
+strong, b { font-weight: 700; }
+
+hr {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: var(--space-12) 0;
+}
+
+blockquote {
+  margin: var(--space-6) 0;
+  padding-left: var(--space-5);
+  border-left: 2px solid var(--hairline);
+  color: var(--fg-soft);
+  font-style: italic;
+}
+
+::selection { background: var(--blue-100); color: var(--ink); }
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ========================================================================
+   Article-specific helpers
+   ======================================================================== */
+
+.dt-article {
+  max-width: var(--col-reading);
+  margin: 0 auto;
+  padding: var(--space-12) var(--space-5);
+}
+
+.dt-figure {
+  margin: var(--space-10) auto;
+  max-width: var(--col-figure);
+}
+.dt-figure figcaption {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--fg-muted);
+  line-height: var(--leading-normal);
+  margin-top: var(--space-3);
+  text-align: left;
+}
+.dt-figure-label {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-right: var(--space-2);
+}
+
+.dt-anno {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--fg-soft);
+  line-height: var(--leading-normal);
+}
+
+/* ========================================================================
+   Diagram primitives — used inside SVG/HTML diagrams
+   ======================================================================== */
+
+.dt-cell-salmon   { fill: var(--salmon-300); stroke: var(--salmon-stroke); }
+.dt-cell-blue     { fill: var(--blue-300);   stroke: var(--blue-stroke); }
+.dt-cell-lavender { fill: var(--lavender-300); stroke: var(--lavender-stroke); }
+
+.dt-block {
+  background: var(--salmon-100);
+  border: 1px solid var(--salmon-300);
+  border-radius: var(--radius-sm);
+}
+.dt-block-blue   { background: var(--blue-100);     border-color: var(--blue-300); }
+.dt-block-lav    { background: var(--lavender-100); border-color: var(--lavender-300); }
+
+/* ========================================================================
+   Buttons (UI scaffolding — used in TOC, footer, etc.)
+   ======================================================================== */
+
+.dt-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--fg);
+  background: var(--bg);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background var(--dur-base) var(--ease-standard),
+              border-color var(--dur-base) var(--ease-standard);
+}
+.dt-btn:hover { background: var(--bg-soft); border-color: var(--ink-quiet); }
+.dt-btn:active { opacity: 0.85; }
+.dt-btn-primary {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+.dt-btn-primary:hover { background: var(--ink-soft); border-color: var(--ink-soft); }
+.dt-btn-quiet { border-color: transparent; }
+.dt-btn-quiet:hover { background: var(--bg-soft); border-color: var(--rule); }
+
+/* ========================================================================
+   Inputs
+   ======================================================================== */
+
+.dt-input {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--fg);
+  background: var(--bg);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: 9px 12px;
+  width: 100%;
+  transition: border-color var(--dur-base) var(--ease-standard);
+}
+.dt-input:hover { border-color: var(--ink-quiet); }
+.dt-input:focus { outline: none; border-color: var(--blue-400); box-shadow: 0 0 0 3px var(--blue-100); }
+.dt-input::placeholder { color: var(--fg-faint); }
