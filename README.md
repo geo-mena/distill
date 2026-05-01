@@ -51,9 +51,11 @@ Root manifest:
 
 ## Font substitution flag
 
-Distill historically uses **Libre Franklin** (display/headings) and **Libre Baskerville** / **Crimson Text**-family serifs (body) plus a system mono. We're loading these from **Google Fonts** as substitutes — they are the originals, just CDN-hosted rather than self-hosted. **No flagged substitutions.**
+Distill historically uses **Libre Franklin** (display/headings) and **Libre Baskerville** / **Crimson Text**-family serifs (body) plus a system mono. We load Libre Franklin and Crimson Text from **Google Fonts** as substitutes — they are the originals, just CDN-hosted rather than self-hosted.
 
-If you have access to the original Distill webfonts (woff2), drop them into `fonts/` and update the `@font-face` blocks at the top of `colors_and_type.css`.
+**One flagged substitution: mono.** Code/mono is set to **Geist Pixel Square** (self-hosted from `fonts/GeistPixel-Square.woff2`), with the system mono stack as fallback. This is an intentional departure from Distill's original system-mono — it gives code blocks a distinctive pixel-grid character that complements the diagrammatic visual language. If you want to revert to the original behavior, remove "Geist Pixel Square" from `--font-mono` in `colors_and_type.css`.
+
+If you have access to the original Distill display/serif webfonts (woff2), drop them into `fonts/` and update the `@font-face` blocks at the top of `colors_and_type.css`.
 
 ---
 
@@ -118,7 +120,7 @@ Distill's visual language is **diagrammatic-editorial**. Every page is a long-sc
 - **Display & headings**: Libre Franklin, weights 400 / 600 / 700. Tight tracking on h1; default elsewhere.
 - **Body prose**: serif (Crimson Text or Libre Baskerville), 18–20px, 1.7 line-height, max line length ~62ch.
 - **UI / labels / figure annotations**: Libre Franklin sans-serif, 14–15px, ~1.5 line-height.
-- **Mono / code**: system mono stack (`ui-monospace, SF Mono, ...`) at 0.92em.
+- **Mono / code**: **Geist Pixel Square** (self-hosted, see `fonts/`) with system mono stack as fallback, at 0.92em. Pixel-grid character; flagged substitution from Distill's original system-mono.
 - **Math**: KaTeX / Computer Modern via MathJax — italicized variables, upright operators.
 - **Headline weight is restrained**: h1 uses 700, h2/h3 use 600. Nothing heavier than 700; nothing lighter than 400 in display.
 
@@ -199,7 +201,7 @@ See `assets/ICONOGRAPHY.md` for full details. Summary:
 ## Caveats & open questions
 
 - **Source material was screenshots only.** No code or Figma access; CSS values (exact hex, line-heights) are reconstructed by eye plus close knowledge of distill.pub's published style. Verify against any internal source-of-truth before shipping production work.
-- **Webfonts substituted via Google Fonts** (Libre Franklin, Crimson Text). These are the originals — just CDN-hosted rather than self-hosted. If you have woff2 files, drop them in `fonts/` and update `colors_and_type.css`.
+- **Webfonts**: Libre Franklin and Crimson Text are loaded from Google Fonts (originals, just CDN-hosted). **Mono is flagged**: substituted with self-hosted Geist Pixel Square (`fonts/GeistPixel-Square.woff2`) instead of the system mono stack. If you have the original Distill display/serif woff2 files, drop them in `fonts/` and update `colors_and_type.css`.
 - **UI scaffolding icons substituted with Lucide.** Distill never had bespoke product chrome at scale; for nav/share/copy we use Lucide @ 1.5px stroke. See `assets/ICONOGRAPHY.md`.
 - **Pointer-finger glyph reconstructed** as a typographic stand-in; it captures the orange-circle + white-pointing-hand intent but isn't a pixel lift of the original.
 - **One UI kit only** (article reader). Distill never shipped a second product surface — no app shell, no dashboard, no settings UI to recreate. If you need slide layouts for talks, ask and we can add a `slides/` folder using the same visual language.
