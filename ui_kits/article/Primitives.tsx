@@ -1,17 +1,20 @@
-/* global React */
-const { useState, useEffect, useRef } = React;
+type DiagramAccent = "salmon" | "blue" | "lavender";
+type SubNetAccent = "salmon" | "salmon-strong" | "blue" | "lavender";
 
-// ============================================================
-// Primitives — vectors, arrows, blocks, operators
-// ============================================================
+interface TensorVectorProps {
+  cells?: number;
+  color?: DiagramAccent;
+  width?: number;
+  cellHeight?: number;
+}
 
-function TensorVector({ cells = 5, color = "salmon", width = 28, cellHeight = 30 }) {
-  const palettes = {
+function TensorVector({ cells = 5, color = "salmon", width = 28, cellHeight = 30 }: TensorVectorProps) {
+  const palettes: Record<DiagramAccent, string[]> = {
     salmon:   ["#fdecea", "#f8c2bb", "#f5a39b", "#f8c2bb", "#fbd9d4", "#f5a39b", "#ee847b"],
     blue:     ["#ecf3fa", "#bdd2ec", "#a8c8e8", "#bdd2ec", "#d6e4f3", "#a8c8e8", "#7eaadb"],
     lavender: ["#efedf7", "#c8c0e3", "#b8a8d8", "#c8c0e3", "#ddd9ee", "#b8a8d8", "#9a85c4"],
   };
-  const strokes = { salmon: "#c44a3f", blue: "#356aa8", lavender: "#4f3d80" };
+  const strokes: Record<DiagramAccent, string> = { salmon: "#c44a3f", blue: "#356aa8", lavender: "#4f3d80" };
   const palette = palettes[color] || palettes.salmon;
   const stroke = strokes[color] || strokes.salmon;
   const totalH = cells * cellHeight + 4;
@@ -25,7 +28,14 @@ function TensorVector({ cells = 5, color = "salmon", width = 28, cellHeight = 30
   );
 }
 
-function Arrow({ length = 80, dashed = false, color = "#555", label }) {
+interface ArrowProps {
+  length?: number;
+  dashed?: boolean;
+  color?: string;
+  label?: string;
+}
+
+function Arrow({ length = 80, dashed = false, color = "#555", label }: ArrowProps) {
   return (
     <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "center" }}>
       {label && <div style={{ fontFamily: "Libre Franklin", fontSize: 13, color: "#4a4a4a", marginBottom: 4 }}>{label}</div>}
@@ -38,7 +48,12 @@ function Arrow({ length = 80, dashed = false, color = "#555", label }) {
   );
 }
 
-function OperatorNode({ kind = "add", size = 40 }) {
+interface OperatorNodeProps {
+  kind?: "add" | "mul" | "outer";
+  size?: number;
+}
+
+function OperatorNode({ kind = "add", size = 40 }: OperatorNodeProps) {
   const r = size / 2 - 6;
   const c = size / 2;
   return (
@@ -51,8 +66,15 @@ function OperatorNode({ kind = "add", size = 40 }) {
   );
 }
 
-function SubNetBlock({ label, color = "salmon", height = 100, width = 36 }) {
-  const fills = {
+interface SubNetBlockProps {
+  label: string;
+  color?: SubNetAccent;
+  height?: number;
+  width?: number;
+}
+
+function SubNetBlock({ label, color = "salmon", height = 100, width = 36 }: SubNetBlockProps) {
+  const fills: Record<SubNetAccent, { bg: string; stroke: string }> = {
     salmon: { bg: "#fdecea", stroke: "#f5a39b" },
     "salmon-strong": { bg: "#fbd9d4", stroke: "#f5a39b" },
     blue: { bg: "#d6e4f3", stroke: "#a8c8e8" },
@@ -68,7 +90,11 @@ function SubNetBlock({ label, color = "salmon", height = 100, width = 36 }) {
   );
 }
 
-function PointerGlyph({ size = 18 }) {
+interface PointerGlyphProps {
+  size?: number;
+}
+
+function PointerGlyph({ size = 18 }: PointerGlyphProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" style={{ flexShrink: 0 }}>
       <circle cx="12" cy="12" r="11" fill="#f5b942" />
@@ -77,15 +103,22 @@ function PointerGlyph({ size = 18 }) {
   );
 }
 
-// ============================================================
-// Citation popover
-// ============================================================
+interface BibEntry {
+  authors: string;
+  title: string;
+  venue: string;
+}
 
-function Citation({ refs = [1], bib = {} }) {
-  const [open, setOpen] = useState(false);
-  const timer = useRef(null);
-  const onEnter = () => { clearTimeout(timer.current); timer.current = setTimeout(() => setOpen(true), 120); };
-  const onLeave = () => { clearTimeout(timer.current); timer.current = setTimeout(() => setOpen(false), 100); };
+interface CitationProps {
+  refs?: number[];
+  bib?: Record<number, BibEntry>;
+}
+
+function Citation({ refs = [1], bib = {} }: CitationProps) {
+  const [open, setOpen] = React.useState(false);
+  const timer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const onEnter = () => { if (timer.current) clearTimeout(timer.current); timer.current = setTimeout(() => setOpen(true), 120); };
+  const onLeave = () => { if (timer.current) clearTimeout(timer.current); timer.current = setTimeout(() => setOpen(false), 100); };
   return (
     <span style={{ position: "relative", display: "inline-block" }} onMouseEnter={onEnter} onMouseLeave={onLeave}>
       <sup style={{
@@ -113,11 +146,14 @@ function Citation({ refs = [1], bib = {} }) {
   );
 }
 
-// ============================================================
-// Figure
-// ============================================================
+interface FigureProps {
+  n?: number;
+  breakout?: boolean;
+  children?: any;
+  caption?: any;
+}
 
-function Figure({ n, breakout = false, children, caption }) {
+function Figure({ n, breakout = false, children, caption }: FigureProps) {
   return (
     <figure style={{
       margin: "48px auto", maxWidth: breakout ? 984 : 684,
@@ -142,11 +178,12 @@ function Figure({ n, breakout = false, children, caption }) {
   );
 }
 
-// ============================================================
-// Math block (KaTeX-y style — rendered as HTML)
-// ============================================================
+interface MathBlockProps {
+  children?: any;
+  eqRef?: string | number;
+}
 
-function MathBlock({ children, eqRef }) {
+function MathBlock({ children, eqRef }: MathBlockProps) {
   return (
     <div style={{
       margin: "32px auto", maxWidth: 684, textAlign: "center",
@@ -162,8 +199,7 @@ function MathBlock({ children, eqRef }) {
   );
 }
 
-// Export
-Object.assign(window, {
+Object.assign(window as any, {
   TensorVector, Arrow, OperatorNode, SubNetBlock, PointerGlyph,
   Citation, Figure, MathBlock,
 });

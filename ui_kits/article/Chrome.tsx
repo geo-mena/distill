@@ -1,7 +1,8 @@
-/* global React */
-const { useState: useStateNav } = React;
+interface ArticleNavProps {
+  onOpenTOC: () => void;
+}
 
-function ArticleNav({ onOpenTOC }) {
+function ArticleNav({ onOpenTOC }: ArticleNavProps) {
   return (
     <nav style={{
       position: "sticky", top: 0, zIndex: 20, background: "rgba(253,253,253,0.94)",
@@ -41,7 +42,16 @@ function ArticleNav({ onOpenTOC }) {
   );
 }
 
-function ArticleHeader({ title, subtitle, authors, affiliation, date, journal = "Distill" }) {
+interface ArticleHeaderProps {
+  title: string;
+  subtitle?: string;
+  authors: string;
+  affiliation?: string;
+  date: string;
+  journal?: string;
+}
+
+function ArticleHeader({ title, subtitle, authors, affiliation, date, journal = "Distill" }: ArticleHeaderProps) {
   return (
     <header style={{
       maxWidth: 684, margin: "0 auto", padding: "96px 24px 40px",
@@ -54,7 +64,7 @@ function ArticleHeader({ title, subtitle, authors, affiliation, date, journal = 
       <h1 style={{
         fontFamily: "Libre Franklin", fontSize: 52, fontWeight: 700, lineHeight: 1.1,
         letterSpacing: "-0.02em", color: "#2a2a2a", margin: 0, textWrap: "balance"
-      }}>{title}</h1>
+      } as React.CSSProperties}>{title}</h1>
       {subtitle && <p style={{
         fontFamily: "Crimson Text", fontStyle: "italic", fontSize: 22, lineHeight: 1.4,
         color: "#4a4a4a", marginTop: 18, marginBottom: 0
@@ -82,7 +92,19 @@ function ArticleHeader({ title, subtitle, authors, affiliation, date, journal = 
   );
 }
 
-function TOCDrawer({ open, onClose, items = [] }) {
+interface TOCItem {
+  id: string;
+  label: string;
+  depth: 1 | 2;
+}
+
+interface TOCDrawerProps {
+  open: boolean;
+  onClose: () => void;
+  items?: TOCItem[];
+}
+
+function TOCDrawer({ open, onClose, items = [] }: TOCDrawerProps) {
   return (
     <>
       <div onClick={onClose} style={{
@@ -110,7 +132,7 @@ function TOCDrawer({ open, onClose, items = [] }) {
           {items.map((it, i) => (
             <li key={i} style={{ marginBottom: 4 }}>
               <a href={`#${it.id}`} onClick={onClose} style={{
-                color: "#2a2a2a", textDecoration: "none", display: "block",
+                textDecoration: "none", display: "block",
                 paddingLeft: it.depth === 2 ? 16 : 0,
                 fontWeight: it.depth === 1 ? 500 : 400,
                 fontSize: it.depth === 2 ? 13 : 14,
@@ -149,4 +171,4 @@ function ArticleFooter() {
   );
 }
 
-Object.assign(window, { ArticleNav, ArticleHeader, TOCDrawer, ArticleFooter });
+Object.assign(window as any, { ArticleNav, ArticleHeader, TOCDrawer, ArticleFooter });

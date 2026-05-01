@@ -1,13 +1,6 @@
-/* global React, TensorVector, Arrow, OperatorNode, SubNetBlock, PointerGlyph, Citation, Figure, MathBlock */
-
-// ============================================================
-// Diagram scenes — recreated from the FiLM article uploads
-// ============================================================
-
 function ConcatDiagram() {
   return (
     <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16, padding: "24px 0", flexWrap: "nowrap" }}>
-      {/* conditioning column */}
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
         <div style={{ fontFamily: "Libre Franklin", fontSize: 13, color: "#4a4a4a", textAlign: "center", maxWidth: 100 }}>
           conditioning<br/>representation
@@ -22,7 +15,6 @@ function ConcatDiagram() {
       <Arrow length={50} />
       <SubNetBlock label="concatenate" color="salmon" height={140} />
       <Arrow length={50} />
-      {/* concatenated vector */}
       <svg width="32" height="240" viewBox="0 0 32 240">
         <rect x="2" y="2"   width="28" height="30" fill="#a8c8e8" stroke="#356aa8" strokeWidth="1"/>
         <rect x="2" y="34"  width="28" height="30" fill="#bdd2ec" stroke="#356aa8" strokeWidth="1"/>
@@ -44,7 +36,6 @@ function ConcatDiagram() {
 function BiasDiagram() {
   return (
     <div style={{ position: "relative", padding: "20px 0" }}>
-      {/* top row: conditioning -> linear -> bias vector */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16, marginBottom: 28 }}>
         <div style={{ fontFamily: "Libre Franklin", fontSize: 13, color: "#4a4a4a", maxWidth: 110, textAlign: "right", fontWeight: 600 }}>
           conditioning<br/>representation
@@ -57,7 +48,6 @@ function BiasDiagram() {
           <strong>Conditional biasing</strong> first maps the <strong>conditioning representation</strong> to a bias vector.
         </div>
       </div>
-      {/* bottom row: input -> + -> output */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>
         <div style={{ fontFamily: "Libre Franklin", fontSize: 13, color: "#4a4a4a" }}>input</div>
         <TensorVector cells={4} color="salmon" />
@@ -102,7 +92,6 @@ function ScalingDiagram() {
 function FiLMNetworkDiagram() {
   return (
     <div style={{ display: "flex", alignItems: "stretch", justifyContent: "center", gap: 60, padding: "20px 0" }}>
-      {/* left: FiLM generator */}
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", maxWidth: 280 }}>
         <div style={{ fontFamily: "Libre Franklin", fontSize: 13, color: "#4a4a4a", lineHeight: 1.5, marginBottom: 24, textAlign: "center" }}>
           The <strong>FiLM generator</strong> processes the conditioning information and produces parameters that describe how the target network should alter its computation.
@@ -117,7 +106,6 @@ function FiLMNetworkDiagram() {
         </div>
       </div>
       <div style={{ borderLeft: "1px dashed #c4c4c0" }} />
-      {/* right: FiLM-ed network */}
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4, maxWidth: 240 }}>
         <div style={{ fontFamily: "Libre Franklin", fontSize: 13, color: "#4a4a4a" }}>input</div>
         <div style={{ width: 1, height: 12, background: "#888" }} />
@@ -137,14 +125,13 @@ function FiLMNetworkDiagram() {
   );
 }
 
-// Interactive scrubber — γ/β params control a tiny visualization
 function FiLMScrubber() {
   const [gamma, setGamma] = React.useState(1.2);
   const [beta, setBeta] = React.useState(-0.4);
   const inputs = [0.3, 0.7, 0.5, 0.2, 0.8];
   const out = inputs.map((v) => v * gamma + beta);
 
-  const cell = (v, i) => {
+  const cell = (v: number, i: number) => {
     const clamped = Math.max(-1, Math.min(1, v));
     const isPos = clamped >= 0;
     const intensity = Math.abs(clamped);
@@ -191,4 +178,4 @@ function FiLMScrubber() {
   );
 }
 
-Object.assign(window, { ConcatDiagram, BiasDiagram, ScalingDiagram, FiLMNetworkDiagram, FiLMScrubber });
+Object.assign(window as any, { ConcatDiagram, BiasDiagram, ScalingDiagram, FiLMNetworkDiagram, FiLMScrubber });

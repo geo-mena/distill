@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["DOM", "DOM.Iterable", "ES2020"],
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "allowJs": false,
+    "skipLibCheck": true,
+    "strict": false,
+    "isolatedModules": false,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
+  },
+  "include": [
+    "**/*.tsx",
+    "**/*.ts",
+    "globals.d.ts"
+  ],
+  "exclude": [
+    "uploads",
+    "preview"
+  ]
+}

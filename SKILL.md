@@ -19,11 +19,11 @@ Distill's visual language is **diagrammatic-editorial**: warm-paper backgrounds,
 - `README.md` — full design system documentation (voice, visual foundations, iconography)
 - `colors_and_type.css` — drop-in CSS variables and element defaults
 - `assets/` — pointer-finger glyph SVG, wordmark SVG, iconography doc
-- `ui_kits/article/` — JSX components for the article reader (Primitives, Chrome, Diagrams) and a fully-assembled `index.html`
+- `ui_kits/article/` — TSX components for the article reader (Primitives, Chrome, Diagrams) and a fully-assembled `index.html`
 - `preview/` — small HTML preview cards used in the Design System tab
 
 ## When to use what
 
 - **Building a long-form ML/AI explainer page** → start from `ui_kits/article/index.html` and substitute prose + diagrams.
-- **Building a diagram from scratch** → use `TensorVector`, `Arrow`, `OperatorNode`, `SubNetBlock` from `ui_kits/article/Primitives.jsx`.
+- **Building a diagram from scratch** → use `TensorVector`, `Arrow`, `OperatorNode`, `SubNetBlock` from `ui_kits/article/Primitives.tsx`.
 - **Just need the tokens** → import `colors_and_type.css` and use the CSS vars directly.

@@ -41,13 +41,21 @@ The cream-coloured "Import" screenshot (`1.42.22 PM.png`) is from a different pr
 Root manifest:
 
 - `README.md` — this file
-- `colors_and_type.css` — CSS variables for color, type, spacing, shadows
 - `SKILL.md` — agent skill manifest
-- `fonts/` — webfont files (or Google Fonts substitutes — see below)
+- `colors_and_type.css` — CSS variables for color, type, spacing, shadows
+- `tsconfig.json` — TypeScript configuration for the .tsx files in this Skill
+- `globals.d.ts` — ambient type declarations for `React` and cross-file component globals
+- `fonts/` — webfont files (Geist Pixel Square for mono/code; Libre Franklin and Crimson Text load from Google Fonts)
 - `assets/` — logos and reference imagery
 - `preview/` — small HTML cards rendered in the Design System tab
-- `ui_kits/article/` — long-form article UI kit (the canonical Distill surface)
-- `slides/` — sample slide layouts using Distill's visual language
+- `ui_kits/article/` — long-form article UI kit (the canonical Distill surface), TSX components + assembled `index.html`
+- `design-canvas.tsx` — author tool: Figma-ish canvas wrapper (sections, artboards, post-its); not part of the Distill brand surface, used to lay out variants during design exploration
+- `tweaks-panel.tsx` — author tool: floating panel with sliders/toggles/colors for live-tweaking prototype values; speaks the `__edit_mode_*` postMessage protocol so a host can persist edits back to disk
+- `uploads/` — source screenshots used to reconstruct the system
+
+## TypeScript
+
+All React components in this Skill are `.tsx` with prop interfaces. They're loaded into `index.html` via Babel standalone with `data-presets="typescript,react"` — no build step, no `node_modules`. Types are stripped at runtime; the IDE picks them up via `tsconfig.json` + `globals.d.ts`.
 
 ## Font substitution flag
 

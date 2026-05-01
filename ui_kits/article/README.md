@@ -5,20 +5,11 @@ A high-fidelity recreation of the Distill article surface. The single product Di
 ## Files
 
 - `index.html` — fully assembled sample article ("FiLM: A General-Purpose Conditioning Layer") that demonstrates the full reading surface end-to-end with interactive scrubber, citation popovers, and TOC drawer.
-- `ArticleHeader.jsx` — title block (title, byline, journal name, publication date, read time)
-- `ArticleNav.jsx` — sticky-on-hover top bar + TOC drawer trigger
-- `TOCDrawer.jsx` — left-side table-of-contents drawer
-- `Figure.jsx` — figure container with FIGURE-N label and caption
-- `Citation.jsx` — `[N]` inline reference with hover popover
-- `Footnote.jsx` — sidenote
-- `DiagramScrubber.jsx` — horizontal play/pause/scrub control for animated diagrams
-- `TensorVector.jsx` — vector-as-rectangle column primitive
-- `SubNetworkChain.jsx` — stacked sub-network blocks with vertical labels
-- `OperatorNode.jsx` — ⊕/⊙/⊗ circle nodes
-- `Arrow.jsx` — slim arrow with triangular head
-- `MathBlock.jsx` — display equation with optional ref number
-- `Bibliography.jsx` — end-of-article references list
-- `ArticleFooter.jsx` — citation, acknowledgments, license
+- `Primitives.tsx` — diagram primitives: `TensorVector`, `Arrow`, `OperatorNode`, `SubNetBlock`, `PointerGlyph`, plus prose-level building blocks `Citation`, `Figure`, `MathBlock`.
+- `Chrome.tsx` — article shell: `ArticleNav` (sticky top bar), `ArticleHeader` (title block + byline + DOI), `TOCDrawer`, `ArticleFooter`.
+- `Diagrams.tsx` — assembled diagram scenes from the FiLM article: `ConcatDiagram`, `BiasDiagram`, `ScalingDiagram`, `FiLMNetworkDiagram`, plus the interactive `FiLMScrubber`.
+
+All three files are loaded by `index.html` via Babel standalone with `data-presets="typescript,react"`. They use `React.useState` / `React.useRef` directly (no destructuring at module scope) and assign their components onto `window` so the inline app script in `index.html` can pick them up. Type definitions for cross-file globals live in `../../globals.d.ts`.
 
 ## Design fidelity notes
 
