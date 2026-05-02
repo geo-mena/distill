@@ -185,6 +185,36 @@ All sizes/weights below are confirmed via DOM audit on distill.pub.
 - **One reused glyph**: an orange-yellow circle with a pointer-finger 👆 representing "draggable / interactive" in figures. We render this as a 16px filled circle in `#f5b942` with a small white pointing-hand SVG.
 - For UI scaffolding (article TOC, share button, etc.), we substitute **Lucide** at 1.5px stroke — closest match to the editorial line weight. **This is a substitution.** The original Distill site does not use Lucide; it has bespoke per-feature icons. See [assets/ICONOGRAPHY.md](assets/ICONOGRAPHY.md) for the full table.
 
+### Service icons for architecture diagrams
+
+Cloud architecture diagrams (AWS, GCP, Azure) require service glyphs — DNS, CDN, load balancer, compute, database, function, observability components. **Vendor-official icon sets are never imported.** AWS, GCP, and Azure ship multi-color filled marks with brand-specific orange / blue / red category colors. They violate Distill's no-multi-color rule, the no-fill diagram rule, and the low-saturation neutral-grey stroke convention. Lucide and Material substitutes are also rejected — they read as product-UI glyphs, not editorial diagram marks.
+
+Instead, service icons are **drawn fresh** in the same hand-built line-art style as the rest of the diagram language. Specs:
+
+- viewBox `0 0 24 24` (every symbol)
+- stroke `#666`, 1.5px default (range 1.0–2.0 allowed for legibility)
+- `stroke-linecap="round"`, `stroke-linejoin="round"`
+- `fill="none"` unless intentional (the only filled accent allowed is the highlight `#f5b942` on PointerGlyph-class affordances)
+- no gradients, no filters, no shadows, no multi-color
+- rendered at ~20px inside container blocks
+
+The canonical library is [resources/diagrams/_service-icons.svg](resources/diagrams/_service-icons.svg) — a single sprite of `<symbol>` definitions, alphabetized inside categorical sections (EDGE & DNS / COMPUTE / DATA / MESSAGING / OBSERVABILITY / EXTERNAL SINKS).
+
+**Naming convention**: `service-<slug>`. Vendor-agnostic where the visual maps cleanly across providers (`service-load-balancer` covers AWS ALB, GCP Cloud Load Balancing, nginx, Traefik). Vendor-specific only when the icon shape is brand-recognizable (`service-slack` for the # mark). A flat `i-<slug>` namespace was rejected because it collides with generic UI icons; an `aws-<slug>` namespace was rejected because it forces duplication across vendors for identical concepts.
+
+**Color is applied to the enclosing block, not the stroke.** Category palette:
+
+- **Edge / CDN / compute / orchestration** (DNS, CDN, load balancer, autoscaler, compute, function) → powder-blue block fill `#d6e4f3`, stroke `#356aa8`
+- **Data / endpoints** (database, pub/sub, email, external sinks) → salmon block fill `#fdecea` / `#fbd9d4`, stroke `#c44a3f`
+- **Observability** (metrics, logs, alarms, events, dashboard) → lavender block fill `#ddd9ee`, stroke `#b8a8d8`
+- **Region / VPC / account boundaries** → paper fill `#fdfdfd` with `#d8d8d4` 1px hairline, label in 12px uppercase `#6a6a6a` letter-spacing 0.1em
+
+Icon stroke stays `#666` regardless of block color — the block carries the semantic, the icon carries the identity.
+
+**Cross-file `<use href>` is unreliable** for portable SVGs. GitHub renders SVGs via `<img src>` (sandboxed; external refs blocked). `file://` blocks cross-document refs. For diagrams meant to embed in markdown READMEs or open standalone, **inline-copy** the needed `<symbol>` blocks from `_service-icons.svg` into the consumer SVG's own `<defs>` block. Cross-file references stay available for inline-SVG-in-HTML contexts where they do work, but inline-copy is the default.
+
+**To extend the library**: when a diagram needs a service not yet present, draw it in the 24×24 thin-stroke convention, add a new `<symbol id="service-<slug>">` to `_service-icons.svg` (in the appropriate categorical section), update the index comment at the top of the file, then inline-copy into the consumer diagram. Reference [resources/diagrams/multi-region-observability.svg](resources/diagrams/multi-region-observability.svg) as a canonical consumer example using all 17 current icons.
+
 ### Layout transparency / blur
 - **Not used.** No backdrop blur, no glassmorphism, no semi-transparent overlays. The aesthetic is opaque-paper; everything is either there or not there.
 

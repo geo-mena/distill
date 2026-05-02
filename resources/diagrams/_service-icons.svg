@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true">
+  <!--
+    Distill design system — service icon library
+    ─────────────────────────────────────────────
+
+    Hand-drawn line-art icons for cloud-architecture diagrams. The library is
+    canonical: when adding a new service icon, add it here first.
+
+    Style invariants (do not break):
+      - viewBox 0 0 24 24
+      - stroke #666 (mid-grey, matches diagram strokes), 1.5px default
+      - stroke-linecap "round", stroke-linejoin "round"
+      - fill="none" unless intentional (only filled accent: highlight #f5b942)
+      - no gradients, no filters, no shadows, no multi-color
+      - stroke widths in [1.0, 2.0]; deviate only when needed for legibility
+
+    Naming convention: service-<slug>
+      - vendor-agnostic where the visual maps cleanly across providers
+        (`service-load-balancer` covers AWS ALB, GCP Cloud LB, nginx, Traefik)
+      - vendor-specific only when the icon shape is brand-recognizable
+        (`service-slack` for the # mark)
+
+    Usage in a consumer diagram:
+      Cross-file <use href> works in HTML-embedded SVGs (same-origin) but
+      NOT in markdown-rendered SVGs (GitHub serves via raw.githubusercontent.com
+      and sandboxes external refs) nor in file:// contexts. For portable
+      diagrams (README embeds, exported assets), copy the <symbol> blocks
+      you need into the consumer SVG's own <defs>. For inline-SVG-in-HTML,
+      reference cross-file: <use href="_service-icons.svg#service-dns" />.
+
+    Index of symbols (alphabetical within category):
+
+      EDGE & DNS              service-cdn, service-dns, service-health-check, service-users
+      COMPUTE                 service-autoscaler, service-compute, service-load-balancer
+      DATA                    service-database
+      MESSAGING / FUNCTIONS   service-email, service-function, service-pubsub
+      OBSERVABILITY           service-alarms, service-dashboard, service-events,
+                              service-logs, service-metrics
+      EXTERNAL SINKS          service-slack
+  -->
+
+  <defs>
+
+    <!-- ─── EDGE & DNS ─── -->
+
+    <symbol id="service-users" viewBox="0 0 24 24">
+      <circle cx="9" cy="8" r="3" fill="none" stroke="#666" stroke-width="1.5"/>
+      <path d="M3.5 19 C 3.5 14.5 6 13.5 9 13.5 C 12 13.5 14.5 14.5 14.5 19" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="16" cy="9" r="2.3" fill="none" stroke="#666" stroke-width="1.2"/>
+      <path d="M14 18 C 14 15 16 14 17.8 14 C 19.6 14 21.5 15 21.5 18" fill="none" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="service-dns" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8.5" fill="none" stroke="#666" stroke-width="1.5"/>
+      <ellipse cx="12" cy="12" rx="8.5" ry="3.5" fill="none" stroke="#666" stroke-width="1"/>
+      <line x1="12" y1="3.5" x2="12" y2="20.5" stroke="#666" stroke-width="1"/>
+      <line x1="3.5" y1="12" x2="20.5" y2="12" stroke="#666" stroke-width="1"/>
+    </symbol>
+
+    <symbol id="service-cdn" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="6" fill="none" stroke="#666" stroke-width="1.5"/>
+      <line x1="12" y1="6" x2="12" y2="2.5" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <polyline points="10,4.5 12,2.5 14,4.5" fill="none" stroke="#666" stroke-width="1.2" stroke-linejoin="round"/>
+      <line x1="12" y1="18" x2="12" y2="21.5" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <polyline points="10,19.5 12,21.5 14,19.5" fill="none" stroke="#666" stroke-width="1.2" stroke-linejoin="round"/>
+      <line x1="6" y1="12" x2="2.5" y2="12" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <polyline points="4.5,10 2.5,12 4.5,14" fill="none" stroke="#666" stroke-width="1.2" stroke-linejoin="round"/>
+      <line x1="18" y1="12" x2="21.5" y2="12" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <polyline points="19.5,10 21.5,12 19.5,14" fill="none" stroke="#666" stroke-width="1.2" stroke-linejoin="round"/>
+    </symbol>
+
+    <symbol id="service-health-check" viewBox="0 0 24 24">
+      <polyline points="2,12 7,12 9.5,5 13.5,19 16,12 22,12" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+
+    <!-- ─── COMPUTE ─── -->
+
+    <symbol id="service-load-balancer" viewBox="0 0 24 24">
+      <line x1="6" y1="3" x2="6" y2="21" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+      <line x1="6" y1="6" x2="18" y2="6" stroke="#666" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="6" y1="12" x2="18" y2="12" stroke="#666" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="6" y1="18" x2="18" y2="18" stroke="#666" stroke-width="1.4" stroke-linecap="round"/>
+      <polygon points="18,4 21,6 18,8" fill="#666"/>
+      <polygon points="18,10 21,12 18,14" fill="#666"/>
+      <polygon points="18,16 21,18 18,20" fill="#666"/>
+    </symbol>
+
+    <symbol id="service-autoscaler" viewBox="0 0 24 24">
+      <rect x="3" y="5" width="18" height="3.5" rx="0.5" fill="none" stroke="#666" stroke-width="1.2"/>
+      <rect x="3" y="10.25" width="18" height="3.5" rx="0.5" fill="none" stroke="#666" stroke-width="1.2"/>
+      <rect x="3" y="15.5" width="18" height="3.5" rx="0.5" fill="none" stroke="#666" stroke-width="1.2"/>
+      <circle cx="6" cy="6.75" r="0.6" fill="#666"/>
+      <circle cx="6" cy="12" r="0.6" fill="#666"/>
+      <circle cx="6" cy="17.25" r="0.6" fill="#666"/>
+    </symbol>
+
+    <symbol id="service-compute" viewBox="0 0 24 24">
+      <rect x="4" y="4" width="16" height="16" rx="1" fill="none" stroke="#666" stroke-width="1.5"/>
+      <line x1="4" y1="9" x2="20" y2="9" stroke="#666" stroke-width="1"/>
+      <line x1="4" y1="14" x2="20" y2="14" stroke="#666" stroke-width="1"/>
+      <circle cx="7" cy="6.5" r="0.6" fill="#666"/>
+      <circle cx="7" cy="11.5" r="0.6" fill="#666"/>
+      <circle cx="7" cy="16.5" r="0.6" fill="#666"/>
+    </symbol>
+
+    <!-- ─── DATA ─── -->
+
+    <symbol id="service-database" viewBox="0 0 24 24">
+      <ellipse cx="12" cy="6" rx="7" ry="2.5" fill="none" stroke="#666" stroke-width="1.5"/>
+      <path d="M5 6 V 18 C 5 19.4 8 20.5 12 20.5 C 16 20.5 19 19.4 19 18 V 6" fill="none" stroke="#666" stroke-width="1.5"/>
+      <path d="M5 11 C 5 12.4 8 13.5 12 13.5 C 16 13.5 19 12.4 19 11" fill="none" stroke="#666" stroke-width="1"/>
+      <path d="M5 14.5 C 5 15.9 8 17 12 17 C 16 17 19 15.9 19 14.5" fill="none" stroke="#666" stroke-width="1"/>
+    </symbol>
+
+    <!-- ─── MESSAGING / FUNCTIONS ─── -->
+
+    <symbol id="service-pubsub" viewBox="0 0 24 24">
+      <circle cx="6" cy="12" r="2.2" fill="none" stroke="#666" stroke-width="1.5"/>
+      <line x1="8.2" y1="12" x2="17" y2="6" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="8.2" y1="12" x2="17" y2="12" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="8.2" y1="12" x2="17" y2="18" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <circle cx="18.5" cy="6" r="1.6" fill="none" stroke="#666" stroke-width="1.2"/>
+      <circle cx="18.5" cy="12" r="1.6" fill="none" stroke="#666" stroke-width="1.2"/>
+      <circle cx="18.5" cy="18" r="1.6" fill="none" stroke="#666" stroke-width="1.2"/>
+    </symbol>
+
+    <symbol id="service-function" viewBox="0 0 24 24">
+      <text x="12" y="20" font-family="Cambria, Georgia, serif" font-size="22" font-weight="500" font-style="italic" fill="#666" text-anchor="middle">λ</text>
+    </symbol>
+
+    <symbol id="service-email" viewBox="0 0 24 24">
+      <rect x="3" y="6" width="18" height="13" rx="1" fill="none" stroke="#666" stroke-width="1.5"/>
+      <polyline points="3.5,7 12,14 20.5,7" fill="none" stroke="#666" stroke-width="1.2" stroke-linejoin="round"/>
+    </symbol>
+
+    <!-- ─── OBSERVABILITY ─── -->
+
+    <symbol id="service-metrics" viewBox="0 0 24 24">
+      <line x1="3" y1="20" x2="21" y2="20" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <rect x="5" y="14" width="3.5" height="6" fill="none" stroke="#666" stroke-width="1.2"/>
+      <rect x="10.25" y="9" width="3.5" height="11" fill="none" stroke="#666" stroke-width="1.2"/>
+      <rect x="15.5" y="5" width="3.5" height="15" fill="none" stroke="#666" stroke-width="1.2"/>
+    </symbol>
+
+    <symbol id="service-logs" viewBox="0 0 24 24">
+      <rect x="5" y="3" width="14" height="18" rx="1" fill="none" stroke="#666" stroke-width="1.5"/>
+      <line x1="8" y1="8" x2="16" y2="8" stroke="#666" stroke-width="1"/>
+      <line x1="8" y1="11.5" x2="16" y2="11.5" stroke="#666" stroke-width="1"/>
+      <line x1="8" y1="15" x2="16" y2="15" stroke="#666" stroke-width="1"/>
+      <line x1="8" y1="18.5" x2="13" y2="18.5" stroke="#666" stroke-width="1"/>
+    </symbol>
+
+    <symbol id="service-alarms" viewBox="0 0 24 24">
+      <path d="M12 4 C 16 4 16.5 9 16.5 13 L 18.5 16 H 5.5 L 7.5 13 C 7.5 9 8 4 12 4 Z" fill="none" stroke="#666" stroke-width="1.5" stroke-linejoin="round"/>
+      <line x1="9.5" y1="18" x2="14.5" y2="18" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M10.5 19 C 10.5 20.5 13.5 20.5 13.5 19" fill="none" stroke="#666" stroke-width="1.2"/>
+      <line x1="12" y1="2" x2="12" y2="4" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="service-events" viewBox="0 0 24 24">
+      <circle cx="6" cy="12" r="2" fill="none" stroke="#666" stroke-width="1.5"/>
+      <line x1="8" y1="12" x2="17" y2="6" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="8" y1="12" x2="17" y2="12" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="8" y1="12" x2="17" y2="18" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <circle cx="18" cy="6" r="1.6" fill="none" stroke="#666" stroke-width="1.2"/>
+      <circle cx="18" cy="12" r="1.6" fill="none" stroke="#666" stroke-width="1.2"/>
+      <circle cx="18" cy="18" r="1.6" fill="none" stroke="#666" stroke-width="1.2"/>
+    </symbol>
+
+    <symbol id="service-dashboard" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="8.5" height="6" rx="0.5" fill="none" stroke="#666" stroke-width="1.2"/>
+      <rect x="12.5" y="3" width="8.5" height="10" rx="0.5" fill="none" stroke="#666" stroke-width="1.2"/>
+      <rect x="3" y="11" width="8.5" height="10" rx="0.5" fill="none" stroke="#666" stroke-width="1.2"/>
+      <rect x="12.5" y="15" width="8.5" height="6" rx="0.5" fill="none" stroke="#666" stroke-width="1.2"/>
+      <line x1="5" y1="13.5" x2="9.5" y2="13.5" stroke="#666" stroke-width="1"/>
+      <line x1="5" y1="16.5" x2="9.5" y2="16.5" stroke="#666" stroke-width="1"/>
+    </symbol>
+
+    <!-- ─── EXTERNAL SINKS ─── -->
+
+    <symbol id="service-slack" viewBox="0 0 24 24">
+      <line x1="9" y1="3" x2="6" y2="21" stroke="#666" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="18" y1="3" x2="15" y2="21" stroke="#666" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="3.5" y1="9" x2="21.5" y2="9" stroke="#666" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="2.5" y1="15" x2="20.5" y2="15" stroke="#666" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+
+  </defs>
+</svg>
