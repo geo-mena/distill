@@ -1,0 +1,39 @@
+<svg id="collapse_output" style="width:94.5%;padding-left:1.15vw" viewBox="0 0 670 170">
+    <g id="merge_g" transform="translate(0, 40)">
+      <rect fill="#f0f0f0" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="42" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="84" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="126" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="168" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="210" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="252" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="294" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="336" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="378" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="420" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="462" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="504" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="546" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="588" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="630" width="40" height="40"></rect>
+    </g>
+    <g id="final_g" transform="translate(0, 120)">
+      <rect fill="#f0f0f0" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="42" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="84" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="126" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="168" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="210" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="252" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="294" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="336" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="378" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="420" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="462" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="504" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="546" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="588" width="40" height="40"></rect>
+      <rect fill="#f0f0f0" x="630" width="40" height="40"></rect>
+    </g>
+    <g id="paths"></g>
+  </svg>

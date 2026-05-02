@@ -12,7 +12,7 @@ If the user invokes this skill without any other guidance, ask them what they wa
 
 ## Quick orientation
 
-Distill's visual language is **diagrammatic-editorial**: warm-paper backgrounds, two pastel accent hues (salmon = data, powder-blue = conditioning), Libre Franklin display + Crimson Text body, hand-built SVG diagrams with thin strokes. No emoji, no gradients, no shadows on body content. See `README.md` for the full system.
+Distill's visual language is **diagrammatic-editorial**: warm-paper backgrounds, two pastel accent hues (salmon = data, powder-blue = conditioning), system sans-serif throughout (display + body), hand-built SVG diagrams with thin strokes. No emoji, no gradients, no shadows on body content. See `README.md` for the full system.
 
 ## Files in this skill
 

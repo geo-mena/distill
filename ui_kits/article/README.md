@@ -15,7 +15,7 @@ All three files are loaded by `index.html` via Babel standalone with `data-prese
 
 - Reading column: 684px, centered, generous vertical rhythm.
 - Figures break out to ~984px.
-- Body in Crimson Text 18/1.7. Heads/UI in Libre Franklin.
+- Typography is system sans-serif (`-apple-system, system-ui, "Segoe UI", Roboto, ...`) for everything: body, headings, captions, byline. Body 17/1.7. h1 50/1.1 weight 700. h2 36/1.25 weight 600. h3 20/1.4 weight 700.
 - Two-color diagram language (salmon = input/data; powder-blue = conditioning/structure).
 - One reused interactive glyph: orange pointer-finger dot.
 - No emoji, no fixed elements, no gradients, no drop shadows on body content.

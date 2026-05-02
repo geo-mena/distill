@@ -25,12 +25,28 @@ These source screenshots informed the system. They are **diagram clippings from 
 | `sources/film-06-gamma-beta-scaling.png` | FiLM γ/β scaling+shifting on FC and conv |
 | `sources/film-07-visual-reasoning.png` | FiLM in visual reasoning (Perez et al.) |
 | `sources/film-08-style-transfer.png` | FiLM in artistic style transfer (Ghiasi et al.) |
-| `sources/ai-safety-01-debate-tree.png` | AI Safety via Debate — debate tree |
-| `sources/ntm-01-memory-read-write.png` | Neural Turing Machine — memory + read/write |
-| `sources/ntm-02-attention-mechanism.png` | NTM attention mechanism (softmax→interpolate→convolve→sharpen) |
-| `sources/attention-01-weighted-sum.png` | Attention as weighted sum over memory |
-| `sources/attention-02-rnn-overview.png` | RNN attention — Network B attends to A |
-| `sources/attention-03-rnn-internals.png` | RNN attention — query/softmax internals |
+| `sources/film-09-debate-tree.png` | AI Safety via Debate — debate tree (referenced inside FiLM) |
+| `sources/film-10-ntm-memory-read-write.png` | Neural Turing Machine — memory + read/write |
+| `sources/film-11-ntm-attention-mechanism.png` | NTM attention mechanism (softmax→interpolate→convolve→sharpen) |
+| `sources/film-12-attention-weighted-sum.png` | Attention as weighted sum over memory |
+| `sources/film-13-attention-rnn-overview.png` | RNN attention — Network B attends to A |
+| `sources/film-14-attention-rnn-internals.png` | RNN attention — query/softmax internals |
+
+**Additional sources from corpus audit.** A second pass scraped 9 more Distill articles (2016–2021) — figures saved as inline SVGs (preserving vector data) or downloaded image assets. Filenames follow `<article-slug>-NN-<descriptor>.<ext>`.
+
+| Article | Files | Range |
+|---|---|---|
+| `paths-perspective-on-value-learning-*` | 28 | RL paths, MC vs TD, cliffworld variants |
+| `augmented-rnns-*` | 24 | NTM, attention, ACT, neural programmers (2016 article — older template) |
+| `ctc-*` | 20 | alignment, dynamic programming, beam search, HMM |
+| `understanding-gnns-*` | 11 | GCN/GAT/GIN, molecular graphs, Laplacian |
+| `aia-*` | 10 | latent space, generative model interfaces |
+| `building-blocks-*` | 9 | saliency, channel attribution, semantic dictionaries |
+| `computing-receptive-fields-*` | 8 | receptive field computation diagrams |
+| `memorization-in-rnns-*` | 4 | LSTM/GRU webs + 1 fullpage reference |
+| `safety-needs-social-scientists-*` | 3 | debate trees |
+
+**Total**: 131 source files across 10 articles. ~12MB. The FiLM 14 are originals provided by the user; the rest were scraped from `distill.pub`.
 
 ---
 
@@ -43,7 +59,7 @@ Root manifest:
 - `colors_and_type.css` — CSS variables for color, type, spacing, shadows
 - `tsconfig.json` — TypeScript configuration for the .tsx files in this Skill
 - `globals.d.ts` — ambient type declarations for `React` and cross-file component globals
-- `fonts/` — webfont files (Geist Pixel Square for mono/code; Libre Franklin and Crimson Text load from Google Fonts)
+- `fonts/` — self-hosted Geist Pixel Square (mono/code only); body and display use the OS system sans stack — no webfont needed
 - `assets/` — logos and reference imagery
 - `preview/` — small HTML cards rendered in the Design System tab
 - `ui_kits/article/` — long-form article UI kit (the canonical Distill surface), TSX components + assembled `index.html`
@@ -55,13 +71,18 @@ Root manifest:
 
 All React components in this Skill are `.tsx` with prop interfaces. They're loaded into `index.html` via Babel standalone with `data-presets="typescript,react"` — no build step, no `node_modules`. Types are stripped at runtime; the IDE picks them up via `tsconfig.json` + `globals.d.ts`.
 
-## Font substitution flag
+## Fonts
 
-Distill historically uses **Libre Franklin** (display/headings) and **Libre Baskerville** / **Crimson Text**-family serifs (body) plus a system mono. We load Libre Franklin and Crimson Text from **Google Fonts** as substitutes — they are the originals, just CDN-hosted rather than self-hosted.
+Distill renders **everything** — body, headings, captions, byline — in the platform system sans stack:
 
-**One flagged substitution: mono.** Code/mono is set to **Geist Pixel Square** (self-hosted from `fonts/GeistPixel-Square.woff2`), with the system mono stack as fallback. This is an intentional departure from Distill's original system-mono — it gives code blocks a distinctive pixel-grid character that complements the diagrammatic visual language. If you want to revert to the original behavior, remove "Geist Pixel Square" from `--font-mono` in `colors_and_type.css`.
+```
+-apple-system, "system-ui", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+"Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif
+```
 
-If you have access to the original Distill display/serif webfonts (woff2), drop them into `fonts/` and update the `@font-face` blocks at the top of `colors_and_type.css`.
+There is no webfont download for prose or display. This was confirmed by computed-style audit on `distill.pub` (San Francisco on macOS, Segoe UI on Windows, Roboto on Android). Earlier drafts of this system claimed Libre Franklin / Crimson Text — that was incorrect and has been corrected.
+
+**One flagged substitution: mono.** Code/mono is set to **Geist Pixel Square** (self-hosted from `fonts/GeistPixel-Square.woff2`), with the system mono stack as fallback. This is an intentional additive — Distill itself uses the platform mono stack. The pixel-grid character complements the diagrammatic visual language without conflicting with the editorial body. To revert, remove `"Geist Pixel Square"` from `--font-mono` in `colors_and_type.css`.
 
 ---
 
@@ -115,23 +136,28 @@ Distill's visual language is **diagrammatic-editorial**. Every page is a long-sc
 ### Color
 - **Background is paper, not sheet-white.** `#fdfdfd` to `#fbfbfb`. Pure `#ffffff` reads as harsh.
 - **Two pastel accent hues** carry the diagram language:
-  - **Salmon-coral** (`#f5a39b`-ish) — represents *inputs / data / source vectors*.
-  - **Powder-blue** (`#a8c8e8`-ish) — represents *conditioning / parameters / generated structure*.
-- **Lavender / soft purple** (`#b8a8d8`-ish) — third accent, used for *attention, memory, and recurrence diagrams* specifically.
-- **Neutrals are warm grey**, never cool. Body text is `#2a2a2a` (not pure black). Secondary text is `~#6a6a6a`. Hairlines are `~#d8d8d4`.
+  - **Salmon-coral** (`#e49381`) — represents *inputs / data / source vectors*. Confirmed via DOM audit on distill.pub.
+  - **Powder-blue** (`#81bee4`) — represents *conditioning / parameters / generated structure*. Confirmed via DOM audit.
+- **Lavender / soft purple** (`#b8a8d8`) — third accent, used for *attention, memory, and recurrence diagrams* specifically.
+- **Neutrals are warm grey**, never cool. Body text is `#333` ≈ `rgba(0,0,0,0.8)` (softened, not pure black). Secondary text is `~#6a6a6a`. Hairlines are `~#d8d8d4`.
 - **Saturation is always low.** No fully-saturated primaries. If you'd describe a swatch as "bold," it's wrong for Distill.
 - **Highlight orange-yellow** (`#f5b942`) appears as a single accent color — only on interactive-affordance pointer-finger glyphs.
 
 ### Typography
-- **Display & headings**: Libre Franklin, weights 400 / 600 / 700. Tight tracking on h1; default elsewhere.
-- **Body prose**: serif (Crimson Text or Libre Baskerville), 18–20px, 1.7 line-height, max line length ~62ch.
-- **UI / labels / figure annotations**: Libre Franklin sans-serif, 14–15px, ~1.5 line-height.
-- **Mono / code**: **Geist Pixel Square** (self-hosted, see `fonts/`) with system mono stack as fallback, at 0.92em. Pixel-grid character; flagged substitution from Distill's original system-mono.
-- **Math**: KaTeX / Computer Modern via MathJax — italicized variables, upright operators.
-- **Headline weight is restrained**: h1 uses 700, h2/h3 use 600. Nothing heavier than 700; nothing lighter than 400 in display.
+All sizes/weights below are confirmed via DOM audit on distill.pub.
+
+- **Family**: system sans (see "Fonts" section above) for body, display, captions — everything except code.
+- **Body prose**: 17px / 1.7 line-height (≈ 28.8px), weight 400, color `rgba(0,0,0,0.8)`. Reading column ~704px wide.
+- **h1**: 50px / 1.1 line-height, weight 700, letter-spacing `-0.015em`, color pure black (the only place black goes pure).
+- **h2**: 36px / 1.25 line-height, weight 600.
+- **h3**: 20px / 1.4 line-height, weight 700 (note: heavier than h2, not lighter — Distill's h3 is bolder-but-smaller).
+- **UI / labels / figure annotations**: same system sans, 14–15px, ~1.5 line-height.
+- **Mono / code**: **Geist Pixel Square** (self-hosted, see `fonts/`) with system mono stack as fallback, at 0.92em. Pixel-grid character; flagged additive (Distill itself uses system mono).
+- **Math**: KaTeX / Computer Modern via MathJax — italicized variables, upright operators. Greek letters used freely.
+- **Headline weight ladder**: h1 700 → h2 600 → h3 700. Nothing heavier than 700; nothing lighter than 400 in display.
 
 ### Spacing & rhythm
-- **Reading column** is fixed at ~684px (the article body). Figures break out wider — up to ~984px, sometimes full-bleed.
+- **Reading column** is ~704px (the article body, confirmed via DOM audit). Figures break out wider — up to ~984px, sometimes full-bleed.
 - **Vertical rhythm** is generous — paragraph spacing equals one line-height, section breaks are 2-3 line-heights.
 - **8px base grid**, but figures don't snap to it; diagrams float in their own layout. UI elements (buttons, inputs) snap.
 - **Section margins** are very wide — articles feel like they're floating in air.
@@ -144,7 +170,7 @@ Distill's visual language is **diagrammatic-editorial**. Every page is a long-sc
 
 ### Diagrams (the soul of the brand)
 - **Hand-built SVG illustrations**, not stock or icon-library.
-- **Strokes are thin**: 1.5–2px black or `#333`, rounded line caps.
+- **Strokes are thin**: 1.5–2px in `#666` (mid-grey, confirmed via SVG audit — the most-used stroke color across articles), rounded line caps.
 - **Arrows are slim with small triangular heads** — not chunky chevrons.
 - **Vectors-as-rectangles** is a recurring motif: a column of small colored squares represents a tensor; lighter/darker squares within suggest values.
 - **Dashed lines** indicate optional or attention pathways.
@@ -163,7 +189,7 @@ Distill's visual language is **diagrammatic-editorial**. Every page is a long-sc
 - **No "elevation" system** in the Material sense. Distill is two layers: paper, and ink.
 
 ### Hover, press, focus
-- **Links** (in body): underline appears on hover; color shifts subtly toward salmon/red `#c44`. No color change on inactive links.
+- **Links** (in body): same color as body text (`rgba(0,0,0,0.8)`), with a permanent subtle underline (`border-bottom: 1px solid rgba(0,0,0,0.4)`). Hover darkens the underline. No color shift toward red — links are quiet and rely on the underline to signal affordance.
 - **Buttons**: bg lightens ~5% on hover; no transform on press, just `opacity: 0.85`.
 - **Focus rings**: 2px outline in powder-blue `#a8c8e8`, offset 2px. Visible on keyboard focus only.
 - **Citation popovers**: appear on hover (delay ~150ms), fade in 100ms.
@@ -206,8 +232,9 @@ See `assets/ICONOGRAPHY.md` for full details. Summary:
 
 ## Caveats & open questions
 
-- **Source material was screenshots only.** No code or Figma access; CSS values (exact hex, line-heights) are reconstructed by eye plus close knowledge of distill.pub's published style. Verify against any internal source-of-truth before shipping production work.
-- **Webfonts**: Libre Franklin and Crimson Text are loaded from Google Fonts (originals, just CDN-hosted). **Mono is flagged**: substituted with self-hosted Geist Pixel Square (`fonts/GeistPixel-Square.woff2`) instead of the system mono stack. If you have the original Distill display/serif woff2 files, drop them in `fonts/` and update `colors_and_type.css`.
+- **Tokens validated against live distill.pub.** Color hex, font sizes, line-heights, and stroke colors in this system were verified by computed-style and SVG audits across 10 articles (2017 CTC, AIA → 2018 Building Blocks, FiLM → 2019 Safety/Social-Scientists, Memorization in RNNs, Paths Perspective, Receptive Fields → 2021 Understanding GNNs) plus the homepage. **9 of 10 articles plus the homepage match identically** (system sans, body 17/1.7/`rgba(0,0,0,0.8)`, h1 50/700, h2 36/600, h3 20/700, link `rgba(0,0,0,0.4)` border-bottom). Earlier drafts that called body "Crimson Text serif" were wrong; corrected.
+- **One historical outlier**: `distill.pub/2016/augmented-rnns/` uses an older template (custom `<dt-article>` element, Georgia serif body at 20px, h1/h2 at weight 400). Distill rebuilt around the modern `<d-article>` template in 2017 and stuck with it through 2021. This system targets the canonical 2017+ template — the 2016 outlier is not represented.
+- **Fonts**: body and display use the platform system sans stack — no webfont download. Mono is **flagged additive**: Geist Pixel Square (`fonts/GeistPixel-Square.woff2`) instead of system mono.
 - **UI scaffolding icons substituted with Lucide.** Distill never had bespoke product chrome at scale; for nav/share/copy we use Lucide @ 1.5px stroke. See `assets/ICONOGRAPHY.md`.
 - **Pointer-finger glyph reconstructed** as a typographic stand-in; it captures the orange-circle + white-pointing-hand intent but isn't a pixel lift of the original.
 - **One UI kit only** (article reader). Distill never shipped a second product surface — no app shell, no dashboard, no settings UI to recreate. If you need slide layouts for talks, ask and we can add a `slides/` folder using the same visual language.

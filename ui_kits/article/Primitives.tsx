@@ -38,7 +38,7 @@ interface ArrowProps {
 function Arrow({ length = 80, dashed = false, color = "#555", label }: ArrowProps) {
   return (
     <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "center" }}>
-      {label && <div style={{ fontFamily: "Libre Franklin", fontSize: 13, color: "#4a4a4a", marginBottom: 4 }}>{label}</div>}
+      {label && <div style={{ fontFamily: "var(--font-sans)", fontSize: 13, color: "#4a4a4a", marginBottom: 4 }}>{label}</div>}
       <svg width={length} height={20} viewBox={`0 0 ${length} 20`}>
         <line x1="2" y1="10" x2={length - 10} y2="10" stroke={color} strokeWidth="1.5"
               strokeDasharray={dashed ? "3 3" : "none"} />
@@ -84,7 +84,7 @@ function SubNetBlock({ label, color = "salmon", height = 100, width = 36 }: SubN
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ flexShrink: 0 }}>
       <rect x="2" y="2" width={width - 4} height={height - 4} rx="3" fill={bg} stroke={stroke} strokeWidth="1" />
-      <text x={width / 2} y={height / 2} fontFamily="Libre Franklin" fontSize="12" fill="#6a6a6a"
+      <text x={width / 2} y={height / 2} fontFamily="var(--font-sans)" fontSize="12" fill="#6a6a6a"
             textAnchor="middle" transform={`rotate(-90 ${width / 2} ${height / 2})`}>{label}</text>
     </svg>
   );
@@ -123,7 +123,7 @@ function Citation({ refs = [1], bib = {} }: CitationProps) {
     <span style={{ position: "relative", display: "inline-block" }} onMouseEnter={onEnter} onMouseLeave={onLeave}>
       <sup style={{
         background: "#fdfdfd", border: "1px solid #d8d8d4", borderRadius: 3,
-        padding: "0 4px", fontFamily: "Libre Franklin", fontSize: 11, color: "#c44a3f",
+        padding: "0 4px", fontFamily: "var(--font-sans)", fontSize: 11, color: "#c44a3f",
         cursor: "pointer", marginLeft: 2, fontWeight: 500
       }}>[{refs.join(", ")}]</sup>
       {open && (
@@ -131,11 +131,11 @@ function Citation({ refs = [1], bib = {} }: CitationProps) {
           position: "absolute", top: "100%", left: 0, marginTop: 6, zIndex: 10,
           background: "#fdfdfd", border: "1px solid #d8d8d4", borderRadius: 6,
           padding: "12px 14px", boxShadow: "0 2px 8px rgba(20,20,20,0.06)",
-          width: 380, fontFamily: "Crimson Text", fontSize: 14, lineHeight: 1.55, color: "#2a2a2a"
+          width: 380, fontFamily: "var(--font-sans)", fontSize: 14, lineHeight: 1.55, color: "#2a2a2a"
         }}>
           {refs.map((n) => bib[n] && (
             <span key={n} style={{ display: "block", marginBottom: 8 }}>
-              <span style={{ fontFamily: "Libre Franklin", fontSize: 11, fontWeight: 500, letterSpacing: "0.08em",
+              <span style={{ fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 500, letterSpacing: "0.08em",
                              textTransform: "uppercase", color: "#6a6a6a", marginRight: 6 }}>[{n}]</span>
               {bib[n].authors}. <em>{bib[n].title}</em>. {bib[n].venue}.
             </span>
@@ -162,7 +162,7 @@ function Figure({ n, breakout = false, children, caption }: FigureProps) {
       <div style={{ background: "#fdfdfd", padding: "8px 0" }}>{children}</div>
       {caption && (
         <figcaption style={{
-          fontFamily: "Libre Franklin", fontSize: 14, lineHeight: 1.5,
+          fontFamily: "var(--font-sans)", fontSize: 14, lineHeight: 1.5,
           color: "#6a6a6a", marginTop: 14, maxWidth: 684, marginLeft: "auto", marginRight: "auto"
         }}>
           {n != null && (
@@ -187,13 +187,13 @@ function MathBlock({ children, eqRef }: MathBlockProps) {
   return (
     <div style={{
       margin: "32px auto", maxWidth: 684, textAlign: "center",
-      fontFamily: "Cambria Math, Cambria, 'Latin Modern Math', Georgia, serif",
+      fontFamily: "var(--font-sans)",
       fontSize: 18, fontStyle: "italic", color: "#2a2a2a", position: "relative"
     }}>
       <span>{children}</span>
       {eqRef && <span style={{
         position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)",
-        fontFamily: "Libre Franklin", fontSize: 13, fontStyle: "normal", color: "#6a6a6a"
+        fontFamily: "var(--font-sans)", fontSize: 13, fontStyle: "normal", color: "#6a6a6a"
       }}>({eqRef})</span>}
     </div>
   );

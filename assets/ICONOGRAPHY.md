@@ -75,7 +75,8 @@ These are typed directly in body prose, treated as typography rather than icons:
 | Share / copy-link | Bespoke SVG | Lucide `share-2`, `link` | No accessible original |
 | Theme toggle | None (Distill is light-only) | Lucide `sun` / `moon` | New affordance; flagged as additive |
 | Search | None on article pages | Lucide `search` | New affordance; flagged as additive |
-| Webfonts | Self-hosted Libre Franklin / Crimson | Google Fonts CDN | Convenience |
+| Webfonts | None — system sans stack everywhere | Same (no webfont needed for body/display) | Distill uses native system fonts |
+| Mono / code | System mono stack | Self-hosted Geist Pixel Square (`fonts/`) | Pixel-grid character; flagged additive |
 
 ---
 

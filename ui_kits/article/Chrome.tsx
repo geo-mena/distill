@@ -11,12 +11,12 @@ function ArticleNav({ onOpenTOC }: ArticleNavProps) {
     }}>
       <div style={{
         maxWidth: 1280, margin: "0 auto", padding: "12px 24px",
-        display: "flex", alignItems: "center", gap: 16, fontFamily: "Libre Franklin", fontSize: 14
+        display: "flex", alignItems: "center", gap: 16, fontFamily: "var(--font-sans)", fontSize: 14
       }}>
         <button onClick={onOpenTOC} aria-label="Open table of contents" style={{
           background: "transparent", border: "1px solid transparent", borderRadius: 4,
           padding: "6px 8px", cursor: "pointer", display: "flex", alignItems: "center", gap: 8,
-          fontFamily: "Libre Franklin", fontSize: 14, color: "#2a2a2a"
+          fontFamily: "var(--font-sans)", fontSize: 14, color: "#2a2a2a"
         }}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
             <line x1="4" y1="7" x2="20" y2="7" /><line x1="4" y1="12" x2="20" y2="12" /><line x1="4" y1="17" x2="14" y2="17" />
@@ -25,17 +25,17 @@ function ArticleNav({ onOpenTOC }: ArticleNavProps) {
         </button>
         <div style={{ flex: 1 }} />
         <a href="#" style={{
-          fontFamily: "Libre Franklin", fontWeight: 700, fontSize: 18, color: "#2a2a2a",
+          fontFamily: "var(--font-sans)", fontWeight: 700, fontSize: 18, color: "#2a2a2a",
           letterSpacing: "-0.01em", textDecoration: "none", borderBottom: "none"
         }}>Distill</a>
         <div style={{ flex: 1 }} />
         <button style={{
           background: "transparent", border: "1px solid transparent", borderRadius: 4,
-          padding: "6px 10px", cursor: "pointer", fontFamily: "Libre Franklin", fontSize: 14, color: "#2a2a2a"
+          padding: "6px 10px", cursor: "pointer", fontFamily: "var(--font-sans)", fontSize: 14, color: "#2a2a2a"
         }}>Cite</button>
         <button style={{
           background: "transparent", border: "1px solid transparent", borderRadius: 4,
-          padding: "6px 10px", cursor: "pointer", fontFamily: "Libre Franklin", fontSize: 14, color: "#2a2a2a"
+          padding: "6px 10px", cursor: "pointer", fontFamily: "var(--font-sans)", fontSize: 14, color: "#2a2a2a"
         }}>Share</button>
       </div>
     </nav>
@@ -55,18 +55,18 @@ function ArticleHeader({ title, subtitle, authors, affiliation, date, journal = 
   return (
     <header style={{
       maxWidth: 684, margin: "0 auto", padding: "96px 24px 40px",
-      fontFamily: "Libre Franklin"
+      fontFamily: "var(--font-sans)"
     }}>
       <div style={{
         fontSize: 11, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase",
         color: "#6a6a6a", marginBottom: 24
       }}>{journal}</div>
       <h1 style={{
-        fontFamily: "Libre Franklin", fontSize: 52, fontWeight: 700, lineHeight: 1.1,
+        fontFamily: "var(--font-sans)", fontSize: 52, fontWeight: 700, lineHeight: 1.1,
         letterSpacing: "-0.02em", color: "#2a2a2a", margin: 0, textWrap: "balance"
       } as React.CSSProperties}>{title}</h1>
       {subtitle && <p style={{
-        fontFamily: "Crimson Text", fontStyle: "italic", fontSize: 22, lineHeight: 1.4,
+        fontFamily: "var(--font-sans)", fontStyle: "italic", fontSize: 22, lineHeight: 1.4,
         color: "#4a4a4a", marginTop: 18, marginBottom: 0
       }}>{subtitle}</p>}
       <div style={{
@@ -120,7 +120,7 @@ function TOCDrawer({ open, onClose, items = [] }: TOCDrawerProps) {
         padding: "24px 28px", overflowY: "auto"
       }}>
         <div style={{ display: "flex", alignItems: "center", marginBottom: 24 }}>
-          <div style={{ fontFamily: "Libre Franklin", fontSize: 11, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", color: "#6a6a6a" }}>Contents</div>
+          <div style={{ fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 500, letterSpacing: "0.12em", textTransform: "uppercase", color: "#6a6a6a" }}>Contents</div>
           <div style={{ flex: 1 }} />
           <button onClick={onClose} aria-label="Close" style={{ background: "transparent", border: "none", cursor: "pointer", padding: 4, color: "#6a6a6a" }}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
@@ -128,7 +128,7 @@ function TOCDrawer({ open, onClose, items = [] }: TOCDrawerProps) {
             </svg>
           </button>
         </div>
-        <ol style={{ listStyle: "none", padding: 0, margin: 0, fontFamily: "Libre Franklin", fontSize: 14, lineHeight: 1.85 }}>
+        <ol style={{ listStyle: "none", padding: 0, margin: 0, fontFamily: "var(--font-sans)", fontSize: 14, lineHeight: 1.85 }}>
           {items.map((it, i) => (
             <li key={i} style={{ marginBottom: 4 }}>
               <a href={`#${it.id}`} onClick={onClose} style={{
@@ -146,27 +146,60 @@ function TOCDrawer({ open, onClose, items = [] }: TOCDrawerProps) {
   );
 }
 
-function ArticleFooter() {
+interface ArticleFooterProps {
+  acknowledgments?: any;
+  authorContributions?: any;
+  reviewLinks?: { label: string; href: string }[];
+  references?: any;
+  updates?: any;
+  reuseNote?: any;
+  citation?: string;
+}
+
+function ArticleFooter({
+  acknowledgments = "This article is a recreation made for design-system reference. The original figures, prose, and ideas are credited to their authors.",
+  authorContributions,
+  reviewLinks,
+  references,
+  updates = "If you see mistakes or want to suggest changes, please create an issue on GitHub.",
+  reuseNote = "Diagrams and text are licensed under Creative Commons Attribution CC-BY 4.0 with the source available on GitHub, unless noted otherwise. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: \"Figure from …\".",
+  citation = `Dumoulin et al., "Feature-wise transformations", Distill, 2018.`,
+}: ArticleFooterProps) {
+  const labelStyle: React.CSSProperties = {
+    fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase",
+    marginBottom: 6, color: "#6a6a6a",
+  };
+  const Section = ({ label, children }: { label: string; children: any }) => (
+    <div style={{ marginBottom: 28 }}>
+      <div style={labelStyle}>{label}</div>
+      <div>{children}</div>
+    </div>
+  );
   return (
     <footer style={{
-      maxWidth: 684, margin: "0 auto", padding: "64px 24px 96px",
-      fontFamily: "Libre Franklin", fontSize: 13, color: "#6a6a6a", lineHeight: 1.6
+      maxWidth: 704, margin: "0 auto", padding: "64px 24px 96px",
+      fontFamily: "var(--font-sans)", fontSize: 13, color: "#6a6a6a", lineHeight: 1.6
     }}>
       <hr style={{ border: "none", borderTop: "1px solid #e8e8e4", margin: "0 0 32px" }} />
-      <div style={{ marginBottom: 24 }}>
-        <div style={{ fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6, color: "#6a6a6a" }}>Citation</div>
-        <div style={{ fontFamily: "ui-monospace, SF Mono, monospace", fontSize: 12, background: "#faf9f6", border: "1px solid #e8e8e4", borderRadius: 4, padding: "10px 12px", color: "#2a2a2a", overflowX: "auto", whiteSpace: "nowrap" }}>
-          Dumoulin et al., "Feature-wise transformations", Distill, 2018.
+      {acknowledgments && <Section label="Acknowledgments">{acknowledgments}</Section>}
+      {authorContributions && <Section label="Author Contributions">{authorContributions}</Section>}
+      {reviewLinks && reviewLinks.length > 0 && (
+        <Section label="Discussion and Review">
+          {reviewLinks.map((r, i) => (
+            <span key={i} style={{ display: "inline-block", marginRight: 16 }}>
+              <a href={r.href} style={{ color: "#2a2a2a", textDecoration: "none", borderBottom: "1px solid rgba(0,0,0,0.4)" }}>{r.label}</a>
+            </span>
+          ))}
+        </Section>
+      )}
+      {references && <Section label="References">{references}</Section>}
+      <Section label="Updates and Corrections">{updates}</Section>
+      <Section label="Reuse">{reuseNote}</Section>
+      <Section label="Citation">
+        <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, background: "#faf9f6", border: "1px solid #e8e8e4", borderRadius: 4, padding: "10px 12px", color: "#2a2a2a", overflowX: "auto", whiteSpace: "nowrap" }}>
+          {citation}
         </div>
-      </div>
-      <div style={{ marginBottom: 24 }}>
-        <div style={{ fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6, color: "#6a6a6a" }}>License</div>
-        <div>Article and figures licensed under CC-BY 4.0. Source code released under the MIT license.</div>
-      </div>
-      <div>
-        <div style={{ fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6, color: "#6a6a6a" }}>Acknowledgments</div>
-        <div>This article is a recreation made for design-system reference. The original figures, prose, and ideas are credited to their authors.</div>
-      </div>
+      </Section>
     </footer>
   );
 }
