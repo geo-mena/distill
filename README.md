@@ -8,28 +8,19 @@ Tokens, components, and voice rules are validated against live `distill.pub` (10
 
 ## What you can ask this skill to do
 
-### ✍️ Editorial content in Distill voice
-- **"Write a long-form on [topic] in Distill style"** — full article with TOC, citations with hover popovers, math, 7-section canonical footer
-- **"Rewrite this paragraph in Distill voice"** — applies first-person plural, no marketing superlatives, no exclamation points, math-verbs verbed
-
-### 🎨 Diagrams in the visual language
-- **"Diagram an attention mechanism over memory"** — composes `TensorVector`, `Arrow`, `OperatorNode`, `SubNetBlock`, `PointerGlyph` primitives with the salmon/blue/lavender palette
-- **"Visualize this model FiLM-style"** — pre-built scenes for concat / bias / scaling / FiLM-network / interactive scrubber
-
-### 📊 Slide decks for ML/AI talks
-- **"8-slide deck on [paper]"** — paper-warm bg, system sans, one idea per slide, breakouts to figures, citations at the foot
-
-### 🛠 Apply the system to your product
-- **"Style my dashboard like Distill"** — drop-in `colors_and_type.css` tokens + TSX components copy-paste-ready
-- **"Convert this brand to a scholarly-editorial system"** — maps your brand to tokens with diagram primitives
-
-### 🖼 Throwaway mockups & exploration
-- **"Quick mockup of [feature]"** — standalone HTML artifact, opens in a browser
-- **"Lay out 6 variants side-by-side"** — uses `design-canvas.tsx` (Figma-ish wrapper with pan/zoom, drag-reorder, focus mode)
-- **"Add a live tweaks panel for primary color and font size"** — uses `tweaks-panel.tsx` (floating, persisted via postMessage)
-
-### 📚 Visual reference
-- **"Show me how Distill diagrams [concept]"** — 131 source figures from 10 articles in `sources/`
+| Category | What to ask | What you get |
+|---|---|---|
+| **Editorial in Distill voice** | *"Write a long-form on [topic] in Distill style"* | Full article with TOC, citations with hover popovers, math, 7-section canonical footer |
+| **Editorial in Distill voice** | *"Rewrite this paragraph in Distill voice"* | First-person plural, no marketing superlatives, no exclamation points, math-verbs verbed |
+| **Diagrams** | *"Diagram an attention mechanism over memory"* | Composed primitives (`TensorVector`, `Arrow`, `OperatorNode`, `SubNetBlock`, `PointerGlyph`) with salmon/blue/lavender palette |
+| **Diagrams** | *"Visualize this model FiLM-style"* | Pre-built scenes: concat / bias / scaling / FiLM-network / interactive scrubber |
+| **Slide decks (ML/AI talks)** | *"8-slide deck on [paper]"* | Paper-warm bg, system sans, one idea per slide, breakouts to figures, citations at the foot |
+| **Apply to your product** | *"Style my dashboard like Distill"* | Drop-in `colors_and_type.css` tokens + TSX components copy-paste-ready |
+| **Apply to your product** | *"Convert this brand to a scholarly-editorial system"* | Brand-to-token mapping with diagram primitives |
+| **Throwaway mockups** | *"Quick mockup of [feature]"* | Standalone HTML artifact, opens in a browser |
+| **Throwaway mockups** | *"Lay out 6 variants side-by-side"* | Uses [design-canvas.tsx](design-canvas.tsx) — Figma-ish wrapper with pan/zoom, drag-reorder, focus mode |
+| **Throwaway mockups** | *"Add a live tweaks panel for primary color and font size"* | Uses [tweaks-panel.tsx](tweaks-panel.tsx) — floating panel, persisted via postMessage |
+| **Visual reference** | *"Show me how Distill diagrams [concept]"* | 131 source figures from 10 articles in [sources/](sources/) |
 
 ---
 
