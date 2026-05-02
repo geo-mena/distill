@@ -11,6 +11,20 @@ A high-fidelity recreation of the Distill article surface. The single product Di
 
 All three files are loaded by `index.html` via Babel standalone with `data-presets="typescript,react"`. They use `React.useState` / `React.useRef` directly (no destructuring at module scope) and assign their components onto `window` so the inline app script in `index.html` can pick them up. Type definitions for cross-file globals live in `../../globals.d.ts`.
 
+## Running the preview
+
+**Do not double-click `index.html`.** Babel standalone uses XHR to fetch the `.tsx` files for in-browser transpilation, and modern Chromium blocks XHR over `file://` (origin `null`) under CORS. You'll get a blank page and a console full of `ReferenceError: ArticleNav is not defined`.
+
+Serve over HTTP instead. From the repo root:
+
+```bash
+python3 -m http.server 8765
+```
+
+Then open `http://localhost:8765/ui_kits/article/index.html`. Any static server works (`npx serve`, `caddy file-server`, the VS Code Live Server extension, etc.) — the only requirement is HTTP, not file://.
+
+This is not specific to the TSX migration: the original `.jsx` version had the same constraint. The `favicon.ico 404` you may see in the console is harmless (browsers auto-request it; we don't ship one).
+
 ## Design fidelity notes
 
 - Reading column: 684px, centered, generous vertical rhythm.

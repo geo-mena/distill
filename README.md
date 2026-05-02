@@ -62,7 +62,7 @@ Root manifest:
 - `fonts/` — self-hosted Geist Pixel Square (mono/code only); body and display use the OS system sans stack — no webfont needed
 - `assets/` — logos and reference imagery
 - `preview/` — small HTML cards rendered in the Design System tab
-- `ui_kits/article/` — long-form article UI kit (the canonical Distill surface), TSX components + assembled `index.html`
+- `ui_kits/article/` — long-form article UI kit (the canonical Distill surface), TSX components + assembled `index.html`. **Serve via HTTP, not file://** — Babel standalone needs XHR access to the `.tsx` files. `python3 -m http.server` from this folder is enough; see `ui_kits/article/README.md`.
 - `design-canvas.tsx` — author tool: Figma-ish canvas wrapper (sections, artboards, post-its); not part of the Distill brand surface, used to lay out variants during design exploration
 - `tweaks-panel.tsx` — author tool: floating panel with sliders/toggles/colors for live-tweaking prototype values; speaks the `__edit_mode_*` postMessage protocol so a host can persist edits back to disk
 - `sources/` — source screenshots used to reconstruct the system (one per diagram, named by article + content)
