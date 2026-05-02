@@ -1,0 +1,355 @@
+<svg viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg" role="img">
+  <title>Complete Multi-Region Observability Architecture</title>
+  <desc>An AWS multi-region architecture with bespoke thin-stroke service icons. Organized in four bands. EDGE: Users → Route 53 (failover routing) → CloudFront, with health checks per region. COMPUTE: two regions (sa-east-1 PRIMARY, us-east-1 SECONDARY) each with ALB → ASG → 2 EC2 instances → RDS. CLOUDWATCH: Metrics, Logs, Alarms, EventBridge, Dashboard. NOTIFICATIONS: SNS fanning to Email and Lambda Slack notifier. Solid arrows for primary data flow; dashed for failover, monitoring, and observability bus.</desc>
+  <style>
+    text {
+      font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+      text-rendering: geometricPrecision;
+    }
+    .eyebrow      { font-size: 11px; font-weight: 500; letter-spacing: 1.1px; fill: #6a6a6a; }
+    .sub-eyebrow  { font-size: 10px; font-weight: 500; letter-spacing: 1px; fill: #6a6a6a; }
+    .block        { font-size: 13px; font-weight: 500; fill: #2a2a2a; }
+    .block-sub    { font-size: 10px; fill: #6a6a6a; }
+    .edge-label   { font-size: 10px; fill: #6a6a6a; font-style: italic; }
+  </style>
+
+  <defs>
+    <!-- bespoke line-art service icons, drawn in #666 1.5px stroke -->
+    <symbol id="i-users" viewBox="0 0 24 24">
+      <circle cx="9" cy="8" r="3" fill="none" stroke="#666" stroke-width="1.5"/>
+      <path d="M3.5 19 C 3.5 14.5 6 13.5 9 13.5 C 12 13.5 14.5 14.5 14.5 19" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="16" cy="9" r="2.3" fill="none" stroke="#666" stroke-width="1.2"/>
+      <path d="M14 18 C 14 15 16 14 17.8 14 C 19.6 14 21.5 15 21.5 18" fill="none" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-route53" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8.5" fill="none" stroke="#666" stroke-width="1.5"/>
+      <ellipse cx="12" cy="12" rx="8.5" ry="3.5" fill="none" stroke="#666" stroke-width="1"/>
+      <line x1="12" y1="3.5" x2="12" y2="20.5" stroke="#666" stroke-width="1"/>
+      <line x1="3.5" y1="12" x2="20.5" y2="12" stroke="#666" stroke-width="1"/>
+    </symbol>
+    <symbol id="i-cloudfront" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="6" fill="none" stroke="#666" stroke-width="1.5"/>
+      <line x1="12" y1="6" x2="12" y2="2.5" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <polyline points="10,4.5 12,2.5 14,4.5" fill="none" stroke="#666" stroke-width="1.2" stroke-linejoin="round"/>
+      <line x1="12" y1="18" x2="12" y2="21.5" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <polyline points="10,19.5 12,21.5 14,19.5" fill="none" stroke="#666" stroke-width="1.2" stroke-linejoin="round"/>
+      <line x1="6" y1="12" x2="2.5" y2="12" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <polyline points="4.5,10 2.5,12 4.5,14" fill="none" stroke="#666" stroke-width="1.2" stroke-linejoin="round"/>
+      <line x1="18" y1="12" x2="21.5" y2="12" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <polyline points="19.5,10 21.5,12 19.5,14" fill="none" stroke="#666" stroke-width="1.2" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-health" viewBox="0 0 24 24">
+      <polyline points="2,12 7,12 9.5,5 13.5,19 16,12 22,12" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-alb" viewBox="0 0 24 24">
+      <line x1="6" y1="3" x2="6" y2="21" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+      <line x1="6" y1="6" x2="18" y2="6" stroke="#666" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="6" y1="12" x2="18" y2="12" stroke="#666" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="6" y1="18" x2="18" y2="18" stroke="#666" stroke-width="1.4" stroke-linecap="round"/>
+      <polygon points="18,4 21,6 18,8" fill="#666"/>
+      <polygon points="18,10 21,12 18,14" fill="#666"/>
+      <polygon points="18,16 21,18 18,20" fill="#666"/>
+    </symbol>
+    <symbol id="i-asg" viewBox="0 0 24 24">
+      <rect x="3" y="5" width="18" height="3.5" rx="0.5" fill="none" stroke="#666" stroke-width="1.2"/>
+      <rect x="3" y="10.25" width="18" height="3.5" rx="0.5" fill="none" stroke="#666" stroke-width="1.2"/>
+      <rect x="3" y="15.5" width="18" height="3.5" rx="0.5" fill="none" stroke="#666" stroke-width="1.2"/>
+      <circle cx="6" cy="6.75" r="0.6" fill="#666"/>
+      <circle cx="6" cy="12" r="0.6" fill="#666"/>
+      <circle cx="6" cy="17.25" r="0.6" fill="#666"/>
+    </symbol>
+    <symbol id="i-ec2" viewBox="0 0 24 24">
+      <rect x="4" y="4" width="16" height="16" rx="1" fill="none" stroke="#666" stroke-width="1.5"/>
+      <line x1="4" y1="9" x2="20" y2="9" stroke="#666" stroke-width="1"/>
+      <line x1="4" y1="14" x2="20" y2="14" stroke="#666" stroke-width="1"/>
+      <circle cx="7" cy="6.5" r="0.6" fill="#666"/>
+      <circle cx="7" cy="11.5" r="0.6" fill="#666"/>
+      <circle cx="7" cy="16.5" r="0.6" fill="#666"/>
+    </symbol>
+    <symbol id="i-rds" viewBox="0 0 24 24">
+      <ellipse cx="12" cy="6" rx="7" ry="2.5" fill="none" stroke="#666" stroke-width="1.5"/>
+      <path d="M5 6 V 18 C 5 19.4 8 20.5 12 20.5 C 16 20.5 19 19.4 19 18 V 6" fill="none" stroke="#666" stroke-width="1.5"/>
+      <path d="M5 11 C 5 12.4 8 13.5 12 13.5 C 16 13.5 19 12.4 19 11" fill="none" stroke="#666" stroke-width="1"/>
+      <path d="M5 14.5 C 5 15.9 8 17 12 17 C 16 17 19 15.9 19 14.5" fill="none" stroke="#666" stroke-width="1"/>
+    </symbol>
+    <symbol id="i-metrics" viewBox="0 0 24 24">
+      <line x1="3" y1="20" x2="21" y2="20" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <rect x="5" y="14" width="3.5" height="6" fill="none" stroke="#666" stroke-width="1.2"/>
+      <rect x="10.25" y="9" width="3.5" height="11" fill="none" stroke="#666" stroke-width="1.2"/>
+      <rect x="15.5" y="5" width="3.5" height="15" fill="none" stroke="#666" stroke-width="1.2"/>
+    </symbol>
+    <symbol id="i-logs" viewBox="0 0 24 24">
+      <rect x="5" y="3" width="14" height="18" rx="1" fill="none" stroke="#666" stroke-width="1.5"/>
+      <line x1="8" y1="8" x2="16" y2="8" stroke="#666" stroke-width="1"/>
+      <line x1="8" y1="11.5" x2="16" y2="11.5" stroke="#666" stroke-width="1"/>
+      <line x1="8" y1="15" x2="16" y2="15" stroke="#666" stroke-width="1"/>
+      <line x1="8" y1="18.5" x2="13" y2="18.5" stroke="#666" stroke-width="1"/>
+    </symbol>
+    <symbol id="i-alarms" viewBox="0 0 24 24">
+      <path d="M12 4 C 16 4 16.5 9 16.5 13 L 18.5 16 H 5.5 L 7.5 13 C 7.5 9 8 4 12 4 Z" fill="none" stroke="#666" stroke-width="1.5" stroke-linejoin="round"/>
+      <line x1="9.5" y1="18" x2="14.5" y2="18" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M10.5 19 C 10.5 20.5 13.5 20.5 13.5 19" fill="none" stroke="#666" stroke-width="1.2"/>
+      <line x1="12" y1="2" x2="12" y2="4" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-events" viewBox="0 0 24 24">
+      <circle cx="6" cy="12" r="2" fill="none" stroke="#666" stroke-width="1.5"/>
+      <line x1="8" y1="12" x2="17" y2="6" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="8" y1="12" x2="17" y2="12" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="8" y1="12" x2="17" y2="18" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <circle cx="18" cy="6" r="1.6" fill="none" stroke="#666" stroke-width="1.2"/>
+      <circle cx="18" cy="12" r="1.6" fill="none" stroke="#666" stroke-width="1.2"/>
+      <circle cx="18" cy="18" r="1.6" fill="none" stroke="#666" stroke-width="1.2"/>
+    </symbol>
+    <symbol id="i-dashboard" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="8.5" height="6" rx="0.5" fill="none" stroke="#666" stroke-width="1.2"/>
+      <rect x="12.5" y="3" width="8.5" height="10" rx="0.5" fill="none" stroke="#666" stroke-width="1.2"/>
+      <rect x="3" y="11" width="8.5" height="10" rx="0.5" fill="none" stroke="#666" stroke-width="1.2"/>
+      <rect x="12.5" y="15" width="8.5" height="6" rx="0.5" fill="none" stroke="#666" stroke-width="1.2"/>
+      <line x1="5" y1="13.5" x2="9.5" y2="13.5" stroke="#666" stroke-width="1"/>
+      <line x1="5" y1="16.5" x2="9.5" y2="16.5" stroke="#666" stroke-width="1"/>
+    </symbol>
+    <symbol id="i-sns" viewBox="0 0 24 24">
+      <circle cx="6" cy="12" r="2.2" fill="none" stroke="#666" stroke-width="1.5"/>
+      <line x1="8.2" y1="12" x2="17" y2="6" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="8.2" y1="12" x2="17" y2="12" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="8.2" y1="12" x2="17" y2="18" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <circle cx="18.5" cy="6" r="1.6" fill="none" stroke="#666" stroke-width="1.2"/>
+      <circle cx="18.5" cy="12" r="1.6" fill="none" stroke="#666" stroke-width="1.2"/>
+      <circle cx="18.5" cy="18" r="1.6" fill="none" stroke="#666" stroke-width="1.2"/>
+    </symbol>
+    <symbol id="i-lambda" viewBox="0 0 24 24">
+      <text x="12" y="20" font-family="Cambria, Georgia, serif" font-size="22" font-weight="500" font-style="italic" fill="#666" text-anchor="middle">λ</text>
+    </symbol>
+    <symbol id="i-email" viewBox="0 0 24 24">
+      <rect x="3" y="6" width="18" height="13" rx="1" fill="none" stroke="#666" stroke-width="1.5"/>
+      <polyline points="3.5,7 12,14 20.5,7" fill="none" stroke="#666" stroke-width="1.2" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-slack" viewBox="0 0 24 24">
+      <line x1="9" y1="3" x2="6" y2="21" stroke="#666" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="18" y1="3" x2="15" y2="21" stroke="#666" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="3.5" y1="9" x2="21.5" y2="9" stroke="#666" stroke-width="1.8" stroke-linecap="round"/>
+      <line x1="2.5" y1="15" x2="20.5" y2="15" stroke="#666" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+
+  <rect width="1200" height="1200" fill="#fdfdfd"/>
+
+  <text x="80" y="32" class="eyebrow">EDGE — DNS &amp; CDN</text>
+
+  <rect x="60" y="48" width="120" height="44" rx="4" fill="#fdfdfd" stroke="#d8d8d4" stroke-width="1"/>
+  <use href="#i-users" x="68" y="58" width="20" height="20"/>
+  <text x="130" y="70" class="block" text-anchor="middle" dominant-baseline="middle">Users</text>
+
+  <line x1="180" y1="70" x2="232" y2="70" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <polygon points="232,66 240,70 232,74" fill="#666"/>
+
+  <rect x="240" y="42" width="160" height="56" rx="4" fill="#d6e4f3" stroke="#356aa8" stroke-width="1.2"/>
+  <use href="#i-route53" x="248" y="56" width="22" height="22"/>
+  <text x="334" y="64" class="block" text-anchor="middle">Route 53</text>
+  <text x="334" y="82" class="block-sub" text-anchor="middle">Failover routing</text>
+
+  <line x1="400" y1="70" x2="452" y2="70" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <polygon points="452,66 460,70 452,74" fill="#666"/>
+
+  <rect x="460" y="42" width="160" height="56" rx="4" fill="#d6e4f3" stroke="#356aa8" stroke-width="1.2"/>
+  <use href="#i-cloudfront" x="468" y="56" width="22" height="22"/>
+  <text x="554" y="64" class="block" text-anchor="middle">CloudFront</text>
+  <text x="554" y="82" class="block-sub" text-anchor="middle">Global CDN</text>
+
+  <line x1="320" y1="98" x2="320" y2="130" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="3 3"/>
+  <path d="M 320 130 H 200 V 152" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 3" fill="none"/>
+  <polygon points="196,152 204,152 200,160" fill="#666"/>
+  <path d="M 320 130 H 800 V 152" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 3" fill="none"/>
+  <polygon points="796,152 804,152 800,160" fill="#666"/>
+
+  <rect x="120" y="160" width="160" height="50" rx="4" fill="#fdfdfd" stroke="#b8a8d8" stroke-width="1"/>
+  <use href="#i-health" x="128" y="172" width="20" height="20"/>
+  <text x="214" y="181" class="block" text-anchor="middle">Health check</text>
+  <text x="214" y="198" class="block-sub" text-anchor="middle">sa-east-1</text>
+
+  <rect x="720" y="160" width="160" height="50" rx="4" fill="#fdfdfd" stroke="#b8a8d8" stroke-width="1"/>
+  <use href="#i-health" x="728" y="172" width="20" height="20"/>
+  <text x="814" y="181" class="block" text-anchor="middle">Health check</text>
+  <text x="814" y="198" class="block-sub" text-anchor="middle">us-east-1</text>
+
+  <line x1="540" y1="98" x2="540" y2="240" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 540 240 H 320 V 282" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <polygon points="316,282 324,282 320,290" fill="#666"/>
+  <path d="M 540 240 H 880 V 282" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 3" fill="none"/>
+  <polygon points="876,282 884,282 880,290" fill="#666"/>
+  <text x="700" y="234" class="edge-label">failover</text>
+
+  <path d="M 200 210 V 252 H 360 V 282" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 3" fill="none"/>
+  <polygon points="356,282 364,282 360,290" fill="#666"/>
+  <text x="218" y="246" class="edge-label">monitor</text>
+
+  <path d="M 800 210 V 252 H 920 V 282" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 3" fill="none"/>
+  <polygon points="916,282 924,282 920,290" fill="#666"/>
+  <text x="818" y="246" class="edge-label">monitor</text>
+
+  <text x="80" y="266" class="eyebrow">COMPUTE — MULTI-REGION</text>
+  <text x="160" y="284" class="sub-eyebrow">REGION sa-east-1 · PRIMARY</text>
+
+  <rect x="160" y="290" width="320" height="44" rx="4" fill="#d6e4f3" stroke="#356aa8" stroke-width="1.2"/>
+  <use href="#i-alb" x="168" y="302" width="20" height="20"/>
+  <text x="334" y="312" class="block" text-anchor="middle" dominant-baseline="middle">Application Load Balancer</text>
+
+  <line x1="320" y1="334" x2="320" y2="356" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <polygon points="316,356 324,356 320,364" fill="#666"/>
+
+  <rect x="160" y="364" width="320" height="44" rx="4" fill="#d6e4f3" stroke="#356aa8" stroke-width="1.2"/>
+  <use href="#i-asg" x="168" y="376" width="20" height="20"/>
+  <text x="334" y="386" class="block" text-anchor="middle" dominant-baseline="middle">Auto-Scaling Group</text>
+
+  <line x1="320" y1="408" x2="320" y2="438" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 320 438 H 200 V 460" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <polygon points="196,460 204,460 200,468" fill="#666"/>
+  <path d="M 320 438 H 440 V 460" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <polygon points="436,460 444,460 440,468" fill="#666"/>
+
+  <rect x="120" y="468" width="160" height="56" rx="4" fill="#fdecea" stroke="#c44a3f" stroke-width="1"/>
+  <use href="#i-ec2" x="128" y="478" width="22" height="22"/>
+  <text x="216" y="490" class="block" text-anchor="middle">EC2 Instance A</text>
+  <text x="216" y="508" class="block-sub" text-anchor="middle">CloudWatch agent</text>
+
+  <rect x="360" y="468" width="160" height="56" rx="4" fill="#fdecea" stroke="#c44a3f" stroke-width="1"/>
+  <use href="#i-ec2" x="368" y="478" width="22" height="22"/>
+  <text x="456" y="490" class="block" text-anchor="middle">EC2 Instance B</text>
+  <text x="456" y="508" class="block-sub" text-anchor="middle">CloudWatch agent</text>
+
+  <path d="M 200 524 V 558 H 308 V 580" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <polygon points="304,580 312,580 308,588" fill="#666"/>
+  <path d="M 440 524 V 558 H 332 V 580" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <polygon points="328,580 336,580 332,588" fill="#666"/>
+
+  <rect x="240" y="588" width="160" height="56" rx="8" fill="#fbd9d4" stroke="#c44a3f" stroke-width="1.2"/>
+  <use href="#i-rds" x="248" y="598" width="22" height="22"/>
+  <text x="332" y="610" class="block" text-anchor="middle">RDS</text>
+  <text x="332" y="628" class="block-sub" text-anchor="middle">Primary</text>
+
+  <text x="720" y="284" class="sub-eyebrow">REGION us-east-1 · SECONDARY</text>
+
+  <rect x="720" y="290" width="320" height="44" rx="4" fill="#d6e4f3" stroke="#356aa8" stroke-width="1.2"/>
+  <use href="#i-alb" x="728" y="302" width="20" height="20"/>
+  <text x="894" y="312" class="block" text-anchor="middle" dominant-baseline="middle">Application Load Balancer</text>
+
+  <line x1="880" y1="334" x2="880" y2="356" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <polygon points="876,356 884,356 880,364" fill="#666"/>
+
+  <rect x="720" y="364" width="320" height="44" rx="4" fill="#d6e4f3" stroke="#356aa8" stroke-width="1.2"/>
+  <use href="#i-asg" x="728" y="376" width="20" height="20"/>
+  <text x="894" y="386" class="block" text-anchor="middle" dominant-baseline="middle">Auto-Scaling Group</text>
+
+  <line x1="880" y1="408" x2="880" y2="438" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 880 438 H 760 V 460" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <polygon points="756,460 764,460 760,468" fill="#666"/>
+  <path d="M 880 438 H 1000 V 460" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <polygon points="996,460 1004,460 1000,468" fill="#666"/>
+
+  <rect x="680" y="468" width="160" height="56" rx="4" fill="#fdecea" stroke="#c44a3f" stroke-width="1"/>
+  <use href="#i-ec2" x="688" y="478" width="22" height="22"/>
+  <text x="776" y="490" class="block" text-anchor="middle">EC2 Instance A</text>
+  <text x="776" y="508" class="block-sub" text-anchor="middle">CloudWatch agent</text>
+
+  <rect x="920" y="468" width="160" height="56" rx="4" fill="#fdecea" stroke="#c44a3f" stroke-width="1"/>
+  <use href="#i-ec2" x="928" y="478" width="22" height="22"/>
+  <text x="1016" y="490" class="block" text-anchor="middle">EC2 Instance B</text>
+  <text x="1016" y="508" class="block-sub" text-anchor="middle">CloudWatch agent</text>
+
+  <path d="M 760 524 V 558 H 868 V 580" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <polygon points="864,580 872,580 868,588" fill="#666"/>
+  <path d="M 1000 524 V 558 H 892 V 580" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <polygon points="888,580 896,580 892,588" fill="#666"/>
+
+  <rect x="800" y="588" width="160" height="56" rx="8" fill="#fbd9d4" stroke="#c44a3f" stroke-width="1.2"/>
+  <use href="#i-rds" x="808" y="598" width="22" height="22"/>
+  <text x="892" y="610" class="block" text-anchor="middle">RDS</text>
+  <text x="892" y="628" class="block-sub" text-anchor="middle">Replica</text>
+
+  <line x1="600" y1="280" x2="600" y2="660" stroke="#c4c4c0" stroke-width="1" stroke-dasharray="3 3"/>
+
+  <path d="M 320 644 V 700 H 168 V 762" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 3" fill="none"/>
+  <polygon points="164,762 172,762 168,770" fill="#666"/>
+  <text x="220" y="694" class="edge-label">metrics, logs</text>
+
+  <path d="M 880 644 V 700 H 384 V 762" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 3" fill="none"/>
+  <polygon points="380,762 388,762 384,770" fill="#666"/>
+
+  <path d="M 480 386 H 540 V 720 H 832 V 762" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 3" fill="none"/>
+  <polygon points="828,762 836,762 832,770" fill="#666"/>
+  <text x="556" y="396" class="edge-label">events</text>
+
+  <path d="M 720 386 H 660 V 720 H 816 V 762" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 3" fill="none"/>
+  <polygon points="812,762 820,762 816,770" fill="#666"/>
+
+  <text x="80" y="754" class="eyebrow">CLOUDWATCH — OBSERVABILITY HUB</text>
+
+  <rect x="68" y="770" width="200" height="80" rx="4" fill="#ddd9ee" stroke="#b8a8d8" stroke-width="1.2"/>
+  <use href="#i-metrics" x="76" y="780" width="22" height="22"/>
+  <text x="180" y="794" class="block" text-anchor="middle">CloudWatch Metrics</text>
+  <text x="180" y="813" class="block-sub" text-anchor="middle">CPU, memory, requests</text>
+  <text x="180" y="828" class="block-sub" text-anchor="middle">latency, errors</text>
+
+  <rect x="284" y="770" width="200" height="80" rx="4" fill="#ddd9ee" stroke="#b8a8d8" stroke-width="1.2"/>
+  <use href="#i-logs" x="292" y="780" width="22" height="22"/>
+  <text x="396" y="794" class="block" text-anchor="middle">CloudWatch Logs</text>
+  <text x="396" y="813" class="block-sub" text-anchor="middle">/aws/ec2/myapp</text>
+  <text x="396" y="828" class="block-sub" text-anchor="middle">/aws/lambda/*</text>
+
+  <rect x="500" y="770" width="200" height="80" rx="4" fill="#ddd9ee" stroke="#b8a8d8" stroke-width="1.2"/>
+  <use href="#i-alarms" x="508" y="780" width="22" height="22"/>
+  <text x="612" y="794" class="block" text-anchor="middle">CloudWatch Alarms</text>
+  <text x="612" y="813" class="block-sub" text-anchor="middle">CPU &gt; 80%</text>
+  <text x="612" y="828" class="block-sub" text-anchor="middle">errors &gt; 100 / 5min</text>
+
+  <rect x="716" y="770" width="200" height="80" rx="4" fill="#ddd9ee" stroke="#b8a8d8" stroke-width="1.2"/>
+  <use href="#i-events" x="724" y="780" width="22" height="22"/>
+  <text x="828" y="794" class="block" text-anchor="middle">EventBridge</text>
+  <text x="828" y="813" class="block-sub" text-anchor="middle">EC2 state changes</text>
+  <text x="828" y="828" class="block-sub" text-anchor="middle">ASG scaling events</text>
+
+  <rect x="932" y="770" width="200" height="80" rx="4" fill="#ddd9ee" stroke="#b8a8d8" stroke-width="1.2"/>
+  <use href="#i-dashboard" x="940" y="780" width="22" height="22"/>
+  <text x="1044" y="794" class="block" text-anchor="middle">Dashboard</text>
+  <text x="1044" y="813" class="block-sub" text-anchor="middle">unified view</text>
+  <text x="1044" y="828" class="block-sub" text-anchor="middle">real-time metrics</text>
+
+  <line x1="600" y1="850" x2="600" y2="912" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <polygon points="596,912 604,912 600,920" fill="#666"/>
+
+  <path d="M 816 850 V 890 H 644 V 912" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <polygon points="640,912 648,912 644,920" fill="#666"/>
+
+  <text x="80" y="906" class="eyebrow">NOTIFICATIONS</text>
+
+  <rect x="500" y="920" width="200" height="60" rx="4" fill="#fdecea" stroke="#c44a3f" stroke-width="1.2"/>
+  <use href="#i-sns" x="508" y="934" width="22" height="22"/>
+  <text x="612" y="944" class="block" text-anchor="middle">SNS Topics</text>
+  <text x="612" y="962" class="block-sub" text-anchor="middle">Critical · Warning · Info</text>
+
+  <line x1="600" y1="980" x2="600" y2="1010" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+
+  <path d="M 600 1010 H 400 V 1032" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <polygon points="396,1032 404,1032 400,1040" fill="#666"/>
+
+  <path d="M 600 1010 H 800 V 1032" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <polygon points="796,1032 804,1032 800,1040" fill="#666"/>
+
+  <rect x="320" y="1040" width="160" height="56" rx="4" fill="#fdecea" stroke="#c44a3f" stroke-width="1"/>
+  <use href="#i-email" x="328" y="1050" width="22" height="22"/>
+  <text x="416" y="1062" class="block" text-anchor="middle">Email</text>
+  <text x="416" y="1080" class="block-sub" text-anchor="middle">Ops team</text>
+
+  <rect x="720" y="1040" width="160" height="56" rx="4" fill="#fdecea" stroke="#c44a3f" stroke-width="1"/>
+  <use href="#i-lambda" x="728" y="1050" width="22" height="22"/>
+  <text x="816" y="1062" class="block" text-anchor="middle">Lambda</text>
+  <text x="816" y="1080" class="block-sub" text-anchor="middle">Slack notifier</text>
+
+  <line x1="800" y1="1096" x2="800" y2="1124" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <polygon points="796,1124 804,1124 800,1132" fill="#666"/>
+
+  <rect x="720" y="1132" width="160" height="48" rx="4" fill="#fdfdfd" stroke="#d8d8d4" stroke-width="1"/>
+  <use href="#i-slack" x="728" y="1140" width="20" height="20"/>
+  <text x="814" y="1152" class="block" text-anchor="middle">Slack</text>
+  <text x="814" y="1168" class="block-sub" text-anchor="middle">#alerts channel</text>
+</svg>

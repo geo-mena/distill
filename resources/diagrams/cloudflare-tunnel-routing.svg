@@ -1,0 +1,97 @@
+<svg viewBox="0 0 1000 480" xmlns="http://www.w3.org/2000/svg" role="img">
+  <title>Cloudflare Tunnel routing patterns</title>
+  <desc>Side-by-side comparison of two routing strategies behind a Cloudflare Tunnel. Left panel "Direct Routing": Internet flows into the Cloudflare Tunnel, which forks directly to App 1 and App 2. Right panel "Reverse Proxy Routing": Internet flows into the Cloudflare Tunnel, which routes to a single ingress-nginx or Traefik reverse proxy, which then forks to App 1 and App 2.</desc>
+  <style>
+    text {
+      font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+      text-rendering: geometricPrecision;
+    }
+    .panel-label { font-size: 11px; font-weight: 500; letter-spacing: 1.1px; fill: #6a6a6a; }
+    .block       { font-size: 14px; font-weight: 500; fill: #2a2a2a; }
+    .block-sub   { font-size: 12px; fill: #6a6a6a; }
+  </style>
+
+  <rect width="1000" height="480" fill="#fdfdfd"/>
+
+  <!-- ─── LEFT PANEL: Direct Routing ─── -->
+
+  <text x="40" y="40" class="panel-label">DIRECT ROUTING</text>
+
+  <!-- Internet -->
+  <rect x="180" y="80" width="140" height="50" rx="4" fill="#fdfdfd" stroke="#d8d8d4" stroke-width="1"/>
+  <text x="250" y="105" class="block" text-anchor="middle" dominant-baseline="middle">Internet</text>
+
+  <!-- arrow Internet → CF -->
+  <line x1="250" y1="130" x2="250" y2="172" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <polygon points="246,172 254,172 250,180" fill="#666"/>
+
+  <!-- Cloudflare Tunnel -->
+  <rect x="180" y="180" width="140" height="50" rx="4" fill="#fbd9d4" stroke="#c44a3f" stroke-width="1.2"/>
+  <text x="250" y="205" class="block" text-anchor="middle" dominant-baseline="middle">Cloudflare Tunnel</text>
+
+  <!-- fork stem -->
+  <line x1="250" y1="230" x2="250" y2="290" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- fork left → App 1 -->
+  <path d="M 250 290 H 120 V 372" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <polygon points="116,372 124,372 120,380" fill="#666"/>
+
+  <!-- fork right → App 2 -->
+  <path d="M 250 290 H 380 V 372" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <polygon points="376,372 384,372 380,380" fill="#666"/>
+
+  <!-- App 1 -->
+  <rect x="50" y="380" width="140" height="50" rx="4" fill="#fdecea" stroke="#c44a3f" stroke-width="1"/>
+  <text x="120" y="405" class="block" text-anchor="middle" dominant-baseline="middle">App 1</text>
+
+  <!-- App 2 -->
+  <rect x="310" y="380" width="140" height="50" rx="4" fill="#fdecea" stroke="#c44a3f" stroke-width="1"/>
+  <text x="380" y="405" class="block" text-anchor="middle" dominant-baseline="middle">App 2</text>
+
+  <!-- ─── DIVIDER ─── -->
+  <line x1="500" y1="70" x2="500" y2="440" stroke="#c4c4c0" stroke-width="1" stroke-dasharray="3 3"/>
+
+  <!-- ─── RIGHT PANEL: Reverse Proxy Routing ─── -->
+
+  <text x="540" y="40" class="panel-label">REVERSE PROXY ROUTING</text>
+
+  <!-- Internet -->
+  <rect x="680" y="80" width="140" height="50" rx="4" fill="#fdfdfd" stroke="#d8d8d4" stroke-width="1"/>
+  <text x="750" y="105" class="block" text-anchor="middle" dominant-baseline="middle">Internet</text>
+
+  <!-- arrow Internet → CF -->
+  <line x1="750" y1="130" x2="750" y2="172" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <polygon points="746,172 754,172 750,180" fill="#666"/>
+
+  <!-- Cloudflare Tunnel -->
+  <rect x="680" y="180" width="140" height="50" rx="4" fill="#fbd9d4" stroke="#c44a3f" stroke-width="1.2"/>
+  <text x="750" y="205" class="block" text-anchor="middle" dominant-baseline="middle">Cloudflare Tunnel</text>
+
+  <!-- arrow CF → RP -->
+  <line x1="750" y1="230" x2="750" y2="262" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <polygon points="746,262 754,262 750,270" fill="#666"/>
+
+  <!-- ingress-nginx / Traefik -->
+  <rect x="680" y="270" width="140" height="50" rx="4" fill="#d6e4f3" stroke="#356aa8" stroke-width="1.2"/>
+  <text x="750" y="289" class="block" text-anchor="middle" dominant-baseline="middle">ingress-nginx</text>
+  <text x="750" y="307" class="block-sub" text-anchor="middle" dominant-baseline="middle">or Traefik</text>
+
+  <!-- fork stem -->
+  <line x1="750" y1="320" x2="750" y2="350" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- fork left → App 1 -->
+  <path d="M 750 350 H 620 V 372" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <polygon points="616,372 624,372 620,380" fill="#666"/>
+
+  <!-- fork right → App 2 -->
+  <path d="M 750 350 H 880 V 372" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <polygon points="876,372 884,372 880,380" fill="#666"/>
+
+  <!-- App 1 -->
+  <rect x="550" y="380" width="140" height="50" rx="4" fill="#fdecea" stroke="#c44a3f" stroke-width="1"/>
+  <text x="620" y="405" class="block" text-anchor="middle" dominant-baseline="middle">App 1</text>
+
+  <!-- App 2 -->
+  <rect x="810" y="380" width="140" height="50" rx="4" fill="#fdecea" stroke="#c44a3f" stroke-width="1"/>
+  <text x="880" y="405" class="block" text-anchor="middle" dominant-baseline="middle">App 2</text>
+</svg>
