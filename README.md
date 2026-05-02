@@ -6,8 +6,6 @@ A Claude Skill that codifies the visual and editorial conventions of [Distill.pu
 
 The system targets the modern article template, in use 2017–2021. Tokens, component sizes, link styling, and stroke palette were validated against live `distill.pub` via a 10-article DOM audit. The 2016 outlier — Georgia serif body, custom `<dt-article>` element — is out of scope.
 
----
-
 ## Capabilities
 
 | Category | Prompt | Output |
@@ -24,8 +22,6 @@ The system targets the modern article template, in use 2017–2021. Tokens, comp
 | Mockups | *"Add a live tweaks panel for primary color and font size"* | Uses [tweaks-panel.tsx](tweaks-panel.tsx): floating panel, postMessage-persisted |
 | Visual reference | *"Show me how Distill diagrams [concept]"* | 131 source figures from 10 articles in [sources/](sources/) |
 | Cover banner | *"Generate a README cover for [project name]"* | 1600×500 SVG with system-sans typography stack, mini-equation diagram (`TensorVector` → `SubNetBlock` → `OperatorNode` → `TensorVector` → `PointerGlyph`), saved to [covers/](covers/) |
-
----
 
 ## Usage modes
 
@@ -47,15 +43,13 @@ Invoke with `/distill-design` in any Claude Code session, or describe an editori
 | Source figures (131) | [sources/](sources/) |
 | Voice, color, typography, iconography rules | [DESIGN-SYSTEM.md](DESIGN-SYSTEM.md) |
 
-### As a live demo
+<!-- ### As a live demo
 
 ```bash
 python3 -m http.server 8765
 ```
 
-Open [http://localhost:8765/ui_kits/article/index.html](http://localhost:8765/ui_kits/article/index.html). The article kit requires HTTP. Babel standalone fetches the `.tsx` files via XHR, and Chromium blocks XHR over `file://` under CORS. See [ui_kits/article/README.md](ui_kits/article/README.md).
-
----
+Open [http://localhost:8765/ui_kits/article/index.html](http://localhost:8765/ui_kits/article/index.html). The article kit requires HTTP. Babel standalone fetches the `.tsx` files via XHR, and Chromium blocks XHR over `file://` under CORS. See [ui_kits/article/README.md](ui_kits/article/README.md). -->
 
 ## Repository map
 
@@ -73,8 +67,6 @@ Open [http://localhost:8765/ui_kits/article/index.html](http://localhost:8765/ui
 | [sources/](sources/) | 131 source figures from 10 Distill articles |
 | [covers/](covers/) | Generated GitHub cover banners. See [covers/distill-design-system.svg](covers/distill-design-system.svg) as canonical example |
 | [tsconfig.json](tsconfig.json), [globals.d.ts](globals.d.ts) | TypeScript config and ambient types. No `node_modules` |
-
----
 
 ## Out of scope
 
