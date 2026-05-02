@@ -1,0 +1,70 @@
+<svg viewBox="0 0 1600 500" xmlns="http://www.w3.org/2000/svg" role="img">
+  <title>Distill Design System</title>
+  <desc>Editorial and diagrammatic conventions of distill.pub, codified for Claude. A salmon input vector flows through a distill-primitives block, then through an addition operator, into a blue output vector. An orange pointer glyph anchors the right edge.</desc>
+  <style>
+    text {
+      font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+      text-rendering: geometricPrecision;
+    }
+    .eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 0.96px; fill: #6a6a6a; }
+    .h1      { font-size: 64px; font-weight: 700; letter-spacing: -0.96px; fill: #000; }
+    .sub     { font-size: 22px; font-weight: 400; letter-spacing: -0.11px; fill: #333; }
+    .pill    { font-size: 12px; font-weight: 500; letter-spacing: 0.96px; fill: #6a6a6a; }
+    .label   { font-size: 13px; fill: #4a4a4a; }
+    .vlabel  { font-size: 12px; fill: #6a6a6a; }
+  </style>
+
+  <rect width="1600" height="500" fill="#fdfdfd"/>
+
+  <!-- left column: typography stack -->
+  <text x="96" y="168" class="eyebrow">CLAUDE SKILL · v1.0</text>
+  <text x="96" y="232" class="h1">Distill Design System</text>
+  <text x="96" y="292" class="sub">Editorial and diagrammatic conventions of distill.pub, codified for Claude.</text>
+  <rect x="96" y="328" width="72" height="24" rx="3" fill="#fdfdfd" stroke="#d8d8d4" stroke-width="1"/>
+  <text x="132" y="346" class="pill" text-anchor="middle">ML / AI</text>
+
+  <!-- right column: input → distill primitives → ⊕ → output → pointer -->
+
+  <!-- input: salmon TensorVector (5 cells, vertically centered) -->
+  <rect x="1052" y="176" width="28" height="28" fill="#fdecea" stroke="#c44a3f" stroke-width="1"/>
+  <rect x="1052" y="206" width="28" height="28" fill="#f8c2bb" stroke="#c44a3f" stroke-width="1"/>
+  <rect x="1052" y="236" width="28" height="28" fill="#f5a39b" stroke="#c44a3f" stroke-width="1"/>
+  <rect x="1052" y="266" width="28" height="28" fill="#f8c2bb" stroke="#c44a3f" stroke-width="1"/>
+  <rect x="1052" y="296" width="28" height="28" fill="#fbd9d4" stroke="#c44a3f" stroke-width="1"/>
+  <text x="1066" y="345" class="label" text-anchor="middle">input</text>
+
+  <!-- arrow 1 -->
+  <line x1="1098" y1="251" x2="1148" y2="251" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <polygon points="1148,247 1156,251 1148,255" fill="#666"/>
+
+  <!-- distill primitives: lavender SubNetBlock with vertical-rl label -->
+  <rect x="1166" y="181" width="56" height="140" rx="3" fill="#ddd9ee" stroke="#b8a8d8" stroke-width="1"/>
+  <text x="1194" y="255" class="vlabel" text-anchor="middle" transform="rotate(-90 1194 251)">distill primitives</text>
+
+  <!-- arrow 2 -->
+  <line x1="1232" y1="251" x2="1278" y2="251" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <polygon points="1278,247 1286,251 1278,255" fill="#666"/>
+
+  <!-- ⊕ OperatorNode -->
+  <circle cx="1310" cy="251" r="16" fill="#fdfdfd" stroke="#333" stroke-width="1.5"/>
+  <line x1="1310" y1="238" x2="1310" y2="264" stroke="#333" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="1297" y1="251" x2="1323" y2="251" stroke="#333" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- arrow 3 -->
+  <line x1="1334" y1="251" x2="1380" y2="251" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <polygon points="1380,247 1388,251 1380,255" fill="#666"/>
+
+  <!-- output: blue TensorVector (5 cells, vertically centered) -->
+  <rect x="1396" y="176" width="28" height="28" fill="#ecf3fa" stroke="#356aa8" stroke-width="1"/>
+  <rect x="1396" y="206" width="28" height="28" fill="#bdd2ec" stroke="#356aa8" stroke-width="1"/>
+  <rect x="1396" y="236" width="28" height="28" fill="#a8c8e8" stroke="#356aa8" stroke-width="1"/>
+  <rect x="1396" y="266" width="28" height="28" fill="#bdd2ec" stroke="#356aa8" stroke-width="1"/>
+  <rect x="1396" y="296" width="28" height="28" fill="#d6e4f3" stroke="#356aa8" stroke-width="1"/>
+  <text x="1410" y="345" class="label" text-anchor="middle">output</text>
+
+  <!-- PointerGlyph: orange end-stop / interactive affordance -->
+  <g transform="translate(1490 230) scale(0.833)">
+    <circle cx="12" cy="12" r="11" fill="#f5b942"/>
+    <path d="M10.5 7.4c0-.55.45-1 1-1s1 .45 1 1v3.4h.55V7.0c0-.55.45-1 1-1s1 .45 1 1v3.8h.55V7.7c0-.55.45-1 1-1s1 .45 1 1v3.6h.4c.55 0 1 .45 1 1v3c0 1.93-1.57 3.5-3.5 3.5h-2.6c-.95 0-1.85-.38-2.52-1.05l-2.7-2.7c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0l1.4 1.4V7.4z" fill="#fff"/>
+  </g>
+</svg>

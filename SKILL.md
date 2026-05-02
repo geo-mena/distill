@@ -40,6 +40,7 @@ Tokens validated by DOM audit on 10 articles (2017–2021). For deep rules, read
 | Style a product/dashboard | Map brand to tokens; lean on flat layers, hairlines, no shadows. Reuse existing primitives (`Citation`, `Figure`, `MathBlock`) before creating new components |
 | Build a card / panel / sidebar | Distill has no first-class card or app-shell primitive. Push back: offer a figure-container instead (hairline border, no shadow) or an article excerpt block |
 | Build a multi-column layout | Distill is single-column reading. Push back unless user explicitly overrides — propose breakouts or sequential figures instead |
+| Cover banner for a project README | Output 1600×500 SVG to `covers/<project-slug>.svg`. Editorial layout: eyebrow (uppercase 12px tracked), h1 (system sans 700, 64px, letter-spacing -0.015em, color `#000`), subtitle (22px italic, `#333`), small uppercase pill in `#fdfdfd` with hairline border. Right column: mini-equation reading `input TensorVector → SubNetBlock (vertical-rl label) → OperatorNode → TensorVector → PointerGlyph`, vertically centered on canvas mid-line. See `covers/distill-design-system.svg` as canonical reference |
 | Multi-variant exploration | Embed `design-canvas.tsx` with `DCSection` + `DCArtboard` |
 | Live-editable prototype | Wrap with `useTweaks` + `TweaksPanel` |
 | Voice transform / caption rewriting | Read `DESIGN-SYSTEM.md` § "Content fundamentals" first |

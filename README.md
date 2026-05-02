@@ -1,5 +1,7 @@
 # Distill Design System
 
+![Distill Design System cover](covers/distill-design-system.svg)
+
 A Claude Skill that codifies the visual and editorial conventions of [Distill.pub](https://distill.pub), the now-archived web-native ML research journal.
 
 The system targets the modern article template, in use 2017–2021. Tokens, component sizes, link styling, and stroke palette were validated against live `distill.pub` via a 10-article DOM audit. The 2016 outlier — Georgia serif body, custom `<dt-article>` element — is out of scope.
@@ -21,6 +23,7 @@ The system targets the modern article template, in use 2017–2021. Tokens, comp
 | Mockups | *"Lay out 6 variants side-by-side"* | Uses [design-canvas.tsx](design-canvas.tsx): pan/zoom, drag-reorder, focus mode |
 | Mockups | *"Add a live tweaks panel for primary color and font size"* | Uses [tweaks-panel.tsx](tweaks-panel.tsx): floating panel, postMessage-persisted |
 | Visual reference | *"Show me how Distill diagrams [concept]"* | 131 source figures from 10 articles in [sources/](sources/) |
+| Cover banner | *"Generate a README cover for [project name]"* | 1600×500 SVG with system-sans typography stack, mini-equation diagram (`TensorVector` → `SubNetBlock` → `OperatorNode` → `TensorVector` → `PointerGlyph`), saved to [covers/](covers/) |
 
 ---
 
@@ -68,6 +71,7 @@ Open [http://localhost:8765/ui_kits/article/index.html](http://localhost:8765/ui
 | [tweaks-panel.tsx](tweaks-panel.tsx) | Author tool: floating live-tweak panel |
 | [preview/](preview/) | 30 reference cards, one per token or component |
 | [sources/](sources/) | 131 source figures from 10 Distill articles |
+| [covers/](covers/) | Generated GitHub cover banners. See [covers/distill-design-system.svg](covers/distill-design-system.svg) as canonical example |
 | [tsconfig.json](tsconfig.json), [globals.d.ts](globals.d.ts) | TypeScript config and ambient types. No `node_modules` |
 
 ---
