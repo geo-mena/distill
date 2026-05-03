@@ -117,3 +117,13 @@ Per-tool adapters under [configs/](configs/): [Codex](configs/codex/AGENTS.md), 
 - Simplification of math notation. Density is part of the identity.
 - Multi-color or filled icons.
 - Earlier Distill template, predating the current `<d-article>` reader.
+
+## Community
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines and how to submit PRs.
+
+AI / vibe-coded PRs welcome.
+
+Thanks to all contributors:
+
+[![Contributors](https://contrib.rocks/image?repo=geo-mena/distill)](https://github.com/geo-mena/distill/graphs/contributors)
