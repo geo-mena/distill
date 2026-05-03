@@ -1,0 +1,43 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Components · Beam search tree</title><link rel="stylesheet" href="_card.css"></head>
+<body><div class="card">
+  <div style="font-family:var(--font-sans);font-size:14px;color:#6a6a6a;font-style:italic;margin-bottom:14px;">Beam search — three layers, two hypotheses each, one path active.</div>
+  <div class="row" style="justify-content:center;">
+
+    <svg width="560" height="220" viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg">
+      <!-- Edges (drawn first so nodes overlay) -->
+      <!-- Layer 0 -> Layer 1 -->
+      <g opacity="0.85"><path d="M 60 70 L 280 70" fill="none" stroke="#666" stroke-width="2.5" stroke-linecap="round"/></g>
+      <g opacity="0.4"><path d="M 60 70 L 280 150" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round"/></g>
+      <g opacity="0.4"><path d="M 60 150 L 280 70" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round"/></g>
+      <g opacity="0.4"><path d="M 60 150 L 280 150" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round"/></g>
+      <!-- Layer 1 -> Layer 2 -->
+      <g opacity="0.85"><path d="M 280 70 L 500 70" fill="none" stroke="#666" stroke-width="2.5" stroke-linecap="round"/></g>
+      <g opacity="0.4"><path d="M 280 70 L 500 150" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round"/></g>
+      <g opacity="0.4"><path d="M 280 150 L 500 70" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round"/></g>
+      <g opacity="0.4"><path d="M 280 150 L 500 150" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round"/></g>
+
+      <!-- Layer 0 -->
+      <g><circle cx="60" cy="70" r="14" fill="#a8c8e8" stroke="#356aa8" stroke-width="1.5"/>
+         <text x="60" y="70" font-family="var(--font-sans)" font-size="16" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">a</text></g>
+      <g><circle cx="60" cy="150" r="14" fill="#e8e8e4" stroke="#c4c4c0" stroke-width="1.5"/>
+         <text x="60" y="150" font-family="var(--font-sans)" font-size="16" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">b</text></g>
+
+      <!-- Layer 1 -->
+      <g><circle cx="280" cy="70" r="14" fill="#a8c8e8" stroke="#356aa8" stroke-width="1.5"/>
+         <text x="280" y="70" font-family="var(--font-sans)" font-size="16" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">c</text></g>
+      <g><circle cx="280" cy="150" r="14" fill="#e8e8e4" stroke="#c4c4c0" stroke-width="1.5"/>
+         <text x="280" y="150" font-family="var(--font-sans)" font-size="16" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">d</text></g>
+
+      <!-- Layer 2 -->
+      <g><circle cx="500" cy="70" r="14" fill="#fbd9d4" stroke="#c44a3f" stroke-width="1.5"/>
+         <text x="500" y="70" font-family="var(--font-sans)" font-size="16" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">e</text></g>
+      <g><circle cx="500" cy="150" r="14" fill="#e8e8e4" stroke="#c4c4c0" stroke-width="1.5"/>
+         <text x="500" y="150" font-family="var(--font-sans)" font-size="16" fill="#2a2a2a" text-anchor="middle" dominant-baseline="central">f</text></g>
+    </svg>
+
+  </div>
+  <div class="row gap-6" style="justify-content:center;margin-top:8px;">
+    <div class="label">a → c → e&nbsp;&nbsp;highlighted path</div>
+  </div>
+</div></body></html>

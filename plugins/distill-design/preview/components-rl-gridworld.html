@@ -1,0 +1,139 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Components · RL GridWorld</title><link rel="stylesheet" href="_card.css"></head>
+<body><div class="card">
+  <div style="font-family:var(--font-sans);font-size:14px;color:#6a6a6a;font-style:italic;margin-bottom:14px;">Cliffworld grids — agents, goals, penalty strips, and trajectories.</div>
+  <div class="row gap-8" style="align-items:flex-start;">
+    <!-- empty grid with agent + goal -->
+    <div class="col gap-2">
+      <div class="label">empty</div>
+      <svg width="176" height="148" viewBox="0 0 176 148" xmlns="http://www.w3.org/2000/svg">
+        <g>
+          <rect x="5" y="5"   width="26" height="26" fill="#e7ebe8"/>
+          <rect x="33" y="5"  width="26" height="26" fill="#e7ebe8"/>
+          <rect x="61" y="5"  width="26" height="26" fill="#e7ebe8"/>
+          <rect x="89" y="5"  width="26" height="26" fill="#e7ebe8"/>
+          <rect x="117" y="5" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="145" y="5" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="5" y="33"  width="26" height="26" fill="#e7ebe8"/>
+          <rect x="33" y="33" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="61" y="33" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="89" y="33" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="117" y="33" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="145" y="33" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="5" y="61"  width="26" height="26" fill="#e7ebe8"/>
+          <rect x="33" y="61" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="61" y="61" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="89" y="61" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="117" y="61" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="145" y="61" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="5" y="89"  width="26" height="26" fill="#e7ebe8"/>
+          <rect x="33" y="89" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="61" y="89" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="89" y="89" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="117" y="89" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="145" y="89" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="5" y="117"  width="26" height="26" fill="#e7ebe8"/>
+          <rect x="33" y="117" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="61" y="117" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="89" y="117" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="117" y="117" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="145" y="117" width="26" height="26" fill="#e7ebe8"/>
+        </g>
+        <rect x="153" y="13" width="12" height="12" fill="#333"/>
+        <circle cx="18" cy="130" r="4" fill="#333"/>
+      </svg>
+      <div class="mono">5 × 6</div>
+    </div>
+
+    <!-- single optimal navy path -->
+    <div class="col gap-2">
+      <div class="label">optimal path</div>
+      <svg width="176" height="148" viewBox="0 0 176 148" xmlns="http://www.w3.org/2000/svg">
+        <g>
+          <rect x="5" y="5"   width="26" height="26" fill="#e7ebe8"/>
+          <rect x="33" y="5"  width="26" height="26" fill="#e7ebe8"/>
+          <rect x="61" y="5"  width="26" height="26" fill="#e7ebe8"/>
+          <rect x="89" y="5"  width="26" height="26" fill="#e7ebe8"/>
+          <rect x="117" y="5" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="145" y="5" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="5" y="33"  width="26" height="26" fill="#e7ebe8"/>
+          <rect x="33" y="33" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="61" y="33" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="89" y="33" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="117" y="33" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="145" y="33" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="5" y="61"  width="26" height="26" fill="#e7ebe8"/>
+          <rect x="33" y="61" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="61" y="61" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="89" y="61" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="117" y="61" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="145" y="61" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="5" y="89"  width="26" height="26" fill="#e7ebe8"/>
+          <rect x="33" y="89" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="61" y="89" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="89" y="89" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="117" y="89" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="145" y="89" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="5" y="117"  width="26" height="26" fill="#bd5f36"/>
+          <rect x="33" y="117" width="26" height="26" fill="#bd5f36"/>
+          <rect x="61" y="117" width="26" height="26" fill="#bd5f36"/>
+          <rect x="89" y="117" width="26" height="26" fill="#bd5f36"/>
+          <rect x="117" y="117" width="26" height="26" fill="#bd5f36"/>
+          <rect x="145" y="117" width="26" height="26" fill="#bd5f36"/>
+        </g>
+        <rect x="153" y="13" width="12" height="12" fill="#333"/>
+        <path d="M18 130 L18 102 L46 102 L74 102 L102 102 L130 102 L158 102 L158 74 L158 46 L158 18"
+              fill="none" stroke="#2a2d7c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="18" cy="130" r="4" fill="#333"/>
+      </svg>
+      <div class="mono">navy · cliffworld</div>
+    </div>
+
+    <!-- two competing paths: navy optimal, penalty risky -->
+    <div class="col gap-2">
+      <div class="label">two policies</div>
+      <svg width="176" height="148" viewBox="0 0 176 148" xmlns="http://www.w3.org/2000/svg">
+        <g>
+          <rect x="5" y="5"   width="26" height="26" fill="#e7ebe8"/>
+          <rect x="33" y="5"  width="26" height="26" fill="#e7ebe8"/>
+          <rect x="61" y="5"  width="26" height="26" fill="#e7ebe8"/>
+          <rect x="89" y="5"  width="26" height="26" fill="#e7ebe8"/>
+          <rect x="117" y="5" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="145" y="5" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="5" y="33"  width="26" height="26" fill="#e7ebe8"/>
+          <rect x="33" y="33" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="61" y="33" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="89" y="33" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="117" y="33" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="145" y="33" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="5" y="61"  width="26" height="26" fill="#e7ebe8"/>
+          <rect x="33" y="61" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="61" y="61" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="89" y="61" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="117" y="61" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="145" y="61" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="5" y="89"  width="26" height="26" fill="#e7ebe8"/>
+          <rect x="33" y="89" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="61" y="89" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="89" y="89" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="117" y="89" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="145" y="89" width="26" height="26" fill="#e7ebe8"/>
+          <rect x="5" y="117"  width="26" height="26" fill="#bd5f36"/>
+          <rect x="33" y="117" width="26" height="26" fill="#bd5f36"/>
+          <rect x="61" y="117" width="26" height="26" fill="#bd5f36"/>
+          <rect x="89" y="117" width="26" height="26" fill="#bd5f36"/>
+          <rect x="117" y="117" width="26" height="26" fill="#bd5f36"/>
+          <rect x="145" y="117" width="26" height="26" fill="#bd5f36"/>
+        </g>
+        <rect x="153" y="13" width="12" height="12" fill="#333"/>
+        <path d="M18 130 L18 102 L18 74 L18 46 L46 46 L74 46 L102 46 L130 46 L158 46 L158 18"
+              fill="none" stroke="#2a2d7c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M18 130 L18 102 L46 102 L74 102 L102 102 L130 102 L158 102 L158 74 L158 46 L158 18"
+              fill="none" stroke="#bd5f36" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+              stroke-dasharray="4 4"/>
+        <circle cx="18" cy="130" r="4" fill="#333"/>
+      </svg>
+      <div class="mono">navy + penalty</div>
+    </div>
+  </div>
+</div></body></html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Components · Variable tensor</title><link rel="stylesheet" href="_card.css"></head>
+<body><div class="card">
+  <div style="font-family:var(--font-sans);font-size:14px;color:#6a6a6a;font-style:italic;margin-bottom:14px;">Per-cell variable extents — for CTC collapses and ragged sequences.</div>
+  <div class="row gap-8" style="align-items:flex-start;">
+
+    <!-- horizontal variable-width row: "h ϵ e-l-l ϵ o" -->
+    <div class="col gap-2" style="align-items:flex-start;">
+      <svg width="332" height="40" viewBox="0 0 332 40" xmlns="http://www.w3.org/2000/svg">
+        <!-- h (24) -->
+        <rect x="2"   y="2" width="24" height="30" fill="#a8c8e8" stroke="#356aa8" stroke-width="1"/>
+        <text x="14"  y="17" font-family="var(--font-sans)" font-size="13" fill="#333" text-anchor="middle" dominant-baseline="central">h</text>
+        <!-- ϵ (16, neutral) -->
+        <rect x="28"  y="2" width="16" height="30" fill="#e8e8e4" stroke="#c4c4c0" stroke-width="1"/>
+        <text x="36"  y="17" font-family="var(--font-sans)" font-size="13" fill="#333" text-anchor="middle" dominant-baseline="central">ϵ</text>
+        <!-- e (24) -->
+        <rect x="46"  y="2" width="24" height="30" fill="#a8c8e8" stroke="#356aa8" stroke-width="1"/>
+        <text x="58"  y="17" font-family="var(--font-sans)" font-size="13" fill="#333" text-anchor="middle" dominant-baseline="central">e</text>
+        <!-- l (44, wide) -->
+        <rect x="72"  y="2" width="44" height="30" fill="#a8c8e8" stroke="#356aa8" stroke-width="1"/>
+        <text x="94"  y="17" font-family="var(--font-sans)" font-size="13" fill="#333" text-anchor="middle" dominant-baseline="central">l</text>
+        <!-- l (32) -->
+        <rect x="118" y="2" width="32" height="30" fill="#a8c8e8" stroke="#356aa8" stroke-width="1"/>
+        <text x="134" y="17" font-family="var(--font-sans)" font-size="13" fill="#333" text-anchor="middle" dominant-baseline="central">l</text>
+        <!-- ϵ (16, neutral) -->
+        <rect x="152" y="2" width="16" height="30" fill="#e8e8e4" stroke="#c4c4c0" stroke-width="1"/>
+        <text x="160" y="17" font-family="var(--font-sans)" font-size="13" fill="#333" text-anchor="middle" dominant-baseline="central">ϵ</text>
+        <!-- o (60, very wide) -->
+        <rect x="170" y="2" width="60" height="30" fill="#a8c8e8" stroke="#356aa8" stroke-width="1"/>
+        <text x="200" y="17" font-family="var(--font-sans)" font-size="13" fill="#333" text-anchor="middle" dominant-baseline="central">o</text>
+      </svg>
+      <div class="label">CTC alignment "h ϵ e-l-l ϵ o"</div>
+      <div class="mono">horizontal · variable width</div>
+    </div>
+
+    <!-- vertical variable-height column (uneven tensor) -->
+    <div class="col gap-2" style="align-items:flex-start;">
+      <svg width="40" height="280" viewBox="0 0 40 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- short salmon -->
+        <rect x="2"   y="2" width="28" height="22" fill="#f5a39b" stroke="#c44a3f" stroke-width="1"/>
+        <text x="16"  y="13" font-family="var(--font-sans)" font-size="13" fill="#333" text-anchor="middle" dominant-baseline="central">x₁</text>
+        <!-- mid blue -->
+        <rect x="2"  y="26" width="28" height="36" fill="#a8c8e8" stroke="#356aa8" stroke-width="1"/>
+        <text x="16" y="44" font-family="var(--font-sans)" font-size="13" fill="#333" text-anchor="middle" dominant-baseline="central">x₂</text>
+        <!-- tall lavender -->
+        <rect x="2"  y="64" width="28" height="60" fill="#b8a8d8" stroke="#4f3d80" stroke-width="1"/>
+        <text x="16" y="94" font-family="var(--font-sans)" font-size="13" fill="#333" text-anchor="middle" dominant-baseline="central">x₃</text>
+        <!-- short neutral -->
+        <rect x="2"  y="126" width="28" height="20" fill="#e8e8e4" stroke="#c4c4c0" stroke-width="1"/>
+        <text x="16" y="136" font-family="var(--font-sans)" font-size="13" fill="#333" text-anchor="middle" dominant-baseline="central">·</text>
+        <!-- mid lavender faded -->
+        <rect x="2"  y="148" width="28" height="44" fill="#b8a8d8" fill-opacity="0.4" stroke="#4f3d80" stroke-width="1"/>
+        <text x="16" y="170" font-family="var(--font-sans)" font-size="13" fill="#333" text-anchor="middle" dominant-baseline="central">x₄</text>
+        <!-- mid salmon -->
+        <rect x="2"  y="194" width="28" height="32" fill="#f5a39b" stroke="#c44a3f" stroke-width="1"/>
+        <text x="16" y="210" font-family="var(--font-sans)" font-size="13" fill="#333" text-anchor="middle" dominant-baseline="central">x₅</text>
+        <!-- tall blue -->
+        <rect x="2"  y="228" width="28" height="50" fill="#a8c8e8" stroke="#356aa8" stroke-width="1"/>
+        <text x="16" y="253" font-family="var(--font-sans)" font-size="13" fill="#333" text-anchor="middle" dominant-baseline="central">x₆</text>
+      </svg>
+      <div class="label">uneven tensor</div>
+      <div class="mono">vertical · variable height</div>
+    </div>
+
+  </div>
+</div></body></html>

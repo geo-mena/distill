@@ -1,0 +1,74 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Components · Distill boxplot</title><link rel="stylesheet" href="_card.css"></head>
+<body><div class="card">
+  <div style="font-family:var(--font-sans);font-size:14px;color:#6a6a6a;font-style:italic;margin-bottom:14px;">Per-architecture validation accuracy — box, whiskers, outliers in palette accent.</div>
+  <div class="row gap-3" style="align-items:flex-start;">
+    <div class="col gap-2">
+      <div class="label">GNN architectures · accuracy</div>
+      <!-- width=480 height=280, padL=56 padR=12 padT=16 padB=36 -->
+      <!-- plotW = 412, plotH = 228 -->
+      <!-- yDomain [0.60, 0.95], range 0.35 -->
+      <!-- yScale(v) = 16 + 228 - ((v-0.60)/0.35)*228 = 244 - (v-0.60)*651.43 -->
+      <!-- ticks: 0.60, 0.70, 0.80, 0.90 -->
+      <!--   y(0.60)=244, y(0.70)=178.86, y(0.80)=113.71, y(0.90)=48.57 -->
+      <!-- 3 groups, slotW = 412/3 = 137.33, boxW = min(137.33*0.55, 60) = 60, half=30 -->
+      <!-- centers: cx0 = 56 + 137.33*0.5 = 124.67, cx1 = 56 + 137.33*1.5 = 262, cx2 = 56 + 137.33*2.5 = 399.33 -->
+      <svg width="480" height="280" viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- grid lines -->
+        <g>
+          <line x1="56" y1="244"    x2="468" y2="244"    stroke="#e8e8e4" stroke-width="1"/>
+          <line x1="56" y1="178.86" x2="468" y2="178.86" stroke="#e8e8e4" stroke-width="1"/>
+          <line x1="56" y1="113.71" x2="468" y2="113.71" stroke="#e8e8e4" stroke-width="1"/>
+          <line x1="56" y1="48.57"  x2="468" y2="48.57"  stroke="#e8e8e4" stroke-width="1"/>
+        </g>
+        <!-- y tick labels -->
+        <g font-family="var(--font-sans)" font-size="12" fill="#9a9a98" text-anchor="end">
+          <text x="48" y="248">0.6</text>
+          <text x="48" y="183">0.7</text>
+          <text x="48" y="118">0.8</text>
+          <text x="48" y="53">0.9</text>
+        </g>
+        <!-- y label rotated -->
+        <text x="14" y="130" font-family="var(--font-sans)" font-size="12" fill="#6a6a6a" text-anchor="middle"
+              transform="rotate(-90 14 130)">Accuracy</text>
+
+        <!-- Group 1: GCN (blue), q1=.72 med=.76 q3=.80 min=.66 max=.84, 1 outlier .62 -->
+        <!-- y(.66)=205.43, y(.72)=166.34, y(.76)=140.29, y(.80)=113.71, y(.84)=87.66, y(.62)=231.43 -->
+        <g>
+          <line x1="124.67" y1="87.66"  x2="124.67" y2="205.43" stroke="#666" stroke-width="1" stroke-linecap="round"/>
+          <line x1="109.67" y1="87.66"  x2="139.67" y2="87.66"  stroke="#666" stroke-width="1" stroke-linecap="round"/>
+          <line x1="109.67" y1="205.43" x2="139.67" y2="205.43" stroke="#666" stroke-width="1" stroke-linecap="round"/>
+          <rect x="94.67" y="113.71" width="60" height="52.63" fill="#c8e0f1" stroke="#356aa8" stroke-width="1"/>
+          <line x1="94.67" y1="140.29" x2="154.67" y2="140.29" stroke="#356aa8" stroke-width="1.5"/>
+          <circle cx="124.67" cy="231.43" r="3" fill="none" stroke="#356aa8" stroke-width="1"/>
+          <text x="124.67" y="264" text-anchor="middle" font-family="var(--font-sans)" font-size="12" fill="#4a4a4a">GCN</text>
+        </g>
+
+        <!-- Group 2: GAT (salmon), q1=.78 med=.82 q3=.86 min=.74 max=.90 -->
+        <!-- y(.74)=153.31, y(.78)=127.26, y(.82)=101.20, y(.86)=75.14, y(.90)=49.09 -->
+        <g>
+          <line x1="262" y1="49.09"  x2="262" y2="153.31" stroke="#666" stroke-width="1" stroke-linecap="round"/>
+          <line x1="247" y1="49.09"  x2="277" y2="49.09"  stroke="#666" stroke-width="1" stroke-linecap="round"/>
+          <line x1="247" y1="153.31" x2="277" y2="153.31" stroke="#666" stroke-width="1" stroke-linecap="round"/>
+          <rect x="232" y="75.14" width="60" height="52.12" fill="#fbd9d4" stroke="#c44a3f" stroke-width="1"/>
+          <line x1="232" y1="101.20" x2="292" y2="101.20" stroke="#c44a3f" stroke-width="1.5"/>
+          <text x="262" y="264" text-anchor="middle" font-family="var(--font-sans)" font-size="12" fill="#4a4a4a">GAT</text>
+        </g>
+
+        <!-- Group 3: GIN (lavender), q1=.80 med=.85 q3=.88 min=.72 max=.92, 2 outliers .68 .94 -->
+        <!-- y(.72)=166.34, y(.80)=113.71, y(.85)=81.14, y(.88)=61.60, y(.92)=35.54, y(.68)=192.40, y(.94)=22.51 -->
+        <g>
+          <line x1="399.33" y1="35.54"  x2="399.33" y2="166.34" stroke="#666" stroke-width="1" stroke-linecap="round"/>
+          <line x1="384.33" y1="35.54"  x2="414.33" y2="35.54"  stroke="#666" stroke-width="1" stroke-linecap="round"/>
+          <line x1="384.33" y1="166.34" x2="414.33" y2="166.34" stroke="#666" stroke-width="1" stroke-linecap="round"/>
+          <rect x="369.33" y="61.60" width="60" height="52.11" fill="#ddd9ee" stroke="#4f3d80" stroke-width="1"/>
+          <line x1="369.33" y1="81.14" x2="429.33" y2="81.14" stroke="#4f3d80" stroke-width="1.5"/>
+          <circle cx="399.33" cy="192.40" r="3" fill="none" stroke="#4f3d80" stroke-width="1"/>
+          <circle cx="399.33" cy="22.51"  r="3" fill="none" stroke="#4f3d80" stroke-width="1"/>
+          <text x="399.33" y="264" text-anchor="middle" font-family="var(--font-sans)" font-size="12" fill="#4a4a4a">GIN</text>
+        </g>
+      </svg>
+      <div class="mono">3 groups · q1/median/q3 + whiskers + outliers</div>
+    </div>
+  </div>
+</div></body></html>
