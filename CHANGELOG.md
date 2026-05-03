@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.3.0] - 2026-05-03
+
+### Slash commands
+
+Six explicit slash commands wrap the most common workflows. Each is a Markdown prompt template under `plugins/distill-design/commands/` that loads the Skill and adds focused instructions plus the relevant hard constraints (no emoji, no superlatives, no year literals, English-only, palette and stroke rules).
+
+| Command | What it does |
+|---|---|
+| `/distill-design:article` | Long-form article scaffold — TOC, hover citations, math, 7-section canonical footer |
+| `/distill-design:diagram` | Single SVG diagram, with primitive-file selection guidance baked in |
+| `/distill-design:cloud-arch` | Vendor-agnostic cloud architecture SVG using the `service-<slug>` icon library |
+| `/distill-design:cover` | 1600×500 README cover banner in the article-hero pattern |
+| `/distill-design:rewrite` | Text rewrite in Distill voice — first-person plural, no superlatives, sentence case |
+| `/distill-design:slides` | 16:9 slide deck — one idea per slide, paper background, system sans |
+
+The plugin manifest auto-discovers the `commands/` directory; no `plugin.json` change required.
+
+### Documentation
+
+- `SKILL.md` adds a "Six explicit slash commands" section above the decision tree, mapping each command to its purpose and noting that freeform requests still work via the decision tree below.
+
 ## [0.2.2] - 2026-05-03
 
 ### Coherence pass

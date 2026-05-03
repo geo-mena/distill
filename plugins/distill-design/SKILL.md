@@ -6,6 +6,19 @@ user-invocable: true
 
 When invoked: if the user has not given a specific request, ask what they want to build (article, diagram, slide deck, mockup, dashboard styling, voice transform) and act as an expert Distill designer. Output either HTML artifacts (for throwaway/preview work) or production-ready code (TSX + CSS) depending on the target.
 
+Six explicit slash commands wrap the most common workflows — they all load this Skill and add a focused prompt:
+
+| Command | What it does |
+|---|---|
+| `/distill-design:article` | Generate a long-form article (TOC, citations, math, 7-section footer) |
+| `/distill-design:diagram` | Generate one SVG diagram, picking the right primitive file from the topic |
+| `/distill-design:cloud-arch` | Generate a vendor-agnostic cloud architecture SVG using the `service-<slug>` icon library |
+| `/distill-design:cover` | Generate a 1600×500 README cover banner in the article-hero pattern |
+| `/distill-design:rewrite` | Rewrite text in Distill voice — first-person plural, no superlatives, sentence case |
+| `/distill-design:slides` | Generate a 16:9 slide deck — one idea per slide, paper background, system sans |
+
+Use the commands when the user's intent maps cleanly to one of these tasks. For freeform requests outside those buckets, work directly from the decision tree below.
+
 ## Quick orientation
 
 Distill's visual language is **diagrammatic-editorial**: warm-paper background, system sans-serif throughout (body + display), two pastel diagram hues (salmon `#e49381` = data, powder-blue `#81bee4` = conditioning) plus lavender `#b8a8d8` for attention/memory. Hand-built thin-stroke SVG illustrations (1.5–2px in `#666`, rounded caps). Reading column ~704px. **No emoji, no gradients, no fixed elements, no shadows on body content.** Body color is `rgba(0,0,0,0.8)`; pure black is reserved for h1 only.
