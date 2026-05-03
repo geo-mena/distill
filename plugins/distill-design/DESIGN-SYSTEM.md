@@ -292,6 +292,7 @@ Beyond the core `Primitives.tsx` (TensorVector, Arrow, OperatorNode, SubNetBlock
 | `CellGrid` | Generic 2D grid (square=binary like Game of Life, circle=continuous like CTC DP) | `ctc-13-ctc-cost.svg`, `understanding-gnns-08-game-of-life-example.svg` |
 | `RecurrentArrow` | Curved bezier feedback arc for LSTM/GRU recurrence (default lavender stroke) | `memorization-in-rnns-02-lstm-web.svg` |
 | `VariableTensor` | TensorVector variant with per-cell width override (CTC variable-length runs) | `ctc-08-full-collapse-from-audio.svg` |
+| `ConvGrid` | Convolutional input grid + kernel overlay, with optional padding ring (dashed hairline) and optional output grid linked via dashed connector. Auto-computes output size from kernel/stride/padding | `computing-receptive-fields-01..08.svg` |
 
 ### `Specialized.tsx` — Domain-specific
 

@@ -24,7 +24,7 @@ Tokens validated by DOM audit on 10 articles (2017–2021). For deep rules, read
 | `ui_kits/article/Diagrams.tsx` | `ConcatDiagram`, `BiasDiagram`, `ScalingDiagram`, `FiLMNetworkDiagram`, `FiLMScrubber` |
 | `ui_kits/article/RL.tsx` | `GridWorld`, `ValueHeatmap`, `PolicyArrows` — cliffworld grids, value-function heatmaps, stochastic policy arrows |
 | `ui_kits/article/Graph.tsx` | `GraphNode`, `GraphEdge`, `BeamSearchTree`, `DebateTree`, `HMMState` — generic node/edge primitives, beam-search lattices, debate trees, HMM state circles |
-| `ui_kits/article/Heatmap.tsx` | `AttentionHeatmap`, `CellGrid`, `RecurrentArrow`, `VariableTensor` — opacity-modulated weights, CTC DP / Game of Life grids, LSTM/GRU recurrence arcs, variable-width tensor cells |
+| `ui_kits/article/Heatmap.tsx` | `AttentionHeatmap`, `CellGrid`, `RecurrentArrow`, `VariableTensor`, `ConvGrid` — opacity-modulated weights, CTC DP / Game of Life grids, LSTM/GRU recurrence arcs, variable-width tensor cells, convolutional kernel-stride-padding visualization |
 | `ui_kits/article/Specialized.tsx` | `MoleculeViewer`, `AutomataGrid`, `FeynmanDiagram`, `ImageWithAnnotations`, `DistillBoxplot` — chemistry, cellular automata, particle-physics, raster overlays, statistical boxplots |
 | `ui_kits/article/index.html` | Fully-assembled FiLM article — serve via HTTP (`python3 -m http.server`), not `file://` |
 | `templates/design-canvas.tsx` | Author tool: Figma-ish canvas wrapper for laying out variants |
@@ -47,6 +47,7 @@ Tokens validated by DOM audit on 10 articles (2017–2021). For deep rules, read
 | CTC alignment / DP matrix / Game of Life grids | Use `Heatmap.tsx` `CellGrid` (circle shape for CTC DP cost matrix, square for binary cellular automata). Source: `ctc-13-ctc-cost.svg`, `understanding-gnns-08-game-of-life-example.svg` |
 | LSTM/GRU recurrent feedback arrow | Use `Heatmap.tsx` `RecurrentArrow` (curved bezier feedback, default lavender stroke `#8359b2`). Source: `memorization-in-rnns-02-lstm-web.svg`, `augmented-rnns-15-diagram.svg` |
 | CTC variable-length character runs | Use `Heatmap.tsx` `VariableTensor` (TensorVector variant with per-cell width override). Source: `ctc-08-full-collapse-from-audio.svg` |
+| Convolutional receptive field / kernel sweep | Use `Heatmap.tsx` `ConvGrid` (input grid + kernel overlay, optional padding ring with dashed hairline, optional output grid linked back via dashed line, auto-computed output size from `(input + 2*padding − kernel) / stride + 1`). Source: `computing-receptive-fields-01..08.svg` |
 | Molecular structure (atoms + bonds) | Use `Specialized.tsx` `MoleculeViewer`. Element auto-color: O salmon, N blue, S olive, C grey, H faint. Bond order 1/2/3 + aromatic ring style. Source: `understanding-gnns-02-trigalloyl-glucose-molecule.svg` |
 | Cellular automata (Game of Life, etc.) | Use `Specialized.tsx` `AutomataGrid` (multi-generation horizontal/vertical sequence with arrows between steps). Source: `understanding-gnns-08-game-of-life-example.svg` |
 | Particle-physics Feynman diagram | Use `Specialized.tsx` `FeynmanDiagram` (fermion solid, photon sinusoid, gluon helix). Source: `aia-01-feynmann-diagram.svg` |

@@ -1,0 +1,145 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Components · Conv grid</title><link rel="stylesheet" href="_card.css"></head>
+<body><div class="card">
+  <div style="font-family:var(--font-sans);font-size:14px;color:#6a6a6a;font-style:italic;margin-bottom:14px;">Convolutional kernel sweeping an input — stride and padding made explicit, with the activated output cell linked back to its receptive field.</div>
+  <div class="row gap-8" style="align-items:flex-start;">
+
+    <!-- Variant 1: stride 1, no padding, input 5×5, kernel 3×3 → output 3×3 -->
+    <div class="col gap-2" style="align-items:flex-start;">
+      <svg width="232" height="150" viewBox="0 0 232 150" xmlns="http://www.w3.org/2000/svg">
+        <!-- input grid 5×5, cellSize 24 -->
+        <g>
+          <rect x="2"  y="2"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="26" y="2"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="50" y="2"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="74" y="2"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="98" y="2"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="2"  y="26" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="26" y="26" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="50" y="26" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="74" y="26" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="98" y="26" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="2"  y="50" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="26" y="50" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="50" y="50" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="74" y="50" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="98" y="50" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="2"  y="74" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="26" y="74" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="50" y="74" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="74" y="74" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="98" y="74" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="2"  y="98" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="26" y="98" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="50" y="98" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="74" y="98" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="98" y="98" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+        </g>
+        <!-- kernel 3×3 over [1,1] -->
+        <rect x="25" y="25" width="73" height="73" fill="#e49381" fill-opacity="0.45" stroke="#c44a3f" stroke-width="2"/>
+        <!-- output 3×3 to the right (gap 32, x = 124+32 = 156) -->
+        <g>
+          <rect x="156" y="2"  width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4"/>
+          <rect x="180" y="2"  width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4"/>
+          <rect x="204" y="2"  width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4"/>
+          <rect x="156" y="26" width="23" height="23" fill="#e49381" fill-opacity="0.85" stroke="#c44a3f" stroke-width="2"/>
+          <rect x="180" y="26" width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4"/>
+          <rect x="204" y="26" width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4"/>
+          <rect x="156" y="50" width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4"/>
+          <rect x="180" y="50" width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4"/>
+          <rect x="204" y="50" width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4"/>
+        </g>
+        <!-- linkage: kernel center (25+36, 25+36) → output cell center (156+12, 26+12) -->
+        <line x1="61" y1="61" x2="168" y2="38" stroke="#666" stroke-width="1" stroke-dasharray="3 3"/>
+        <text x="2" y="144" font-family="var(--font-sans)" font-size="12" fill="#6a6a6a">input 5×5 · kernel 3×3 · stride 1 · padding 0 → 3×3</text>
+      </svg>
+      <div class="label">stride 1 · no padding</div>
+      <div class="mono">5×5 → 3×3</div>
+    </div>
+
+    <!-- Variant 2: stride 2, padding 1, input 5×5 padded to 7×7, kernel 3×3 → output 3×3 -->
+    <div class="col gap-2" style="align-items:flex-start;">
+      <svg width="280" height="198" viewBox="0 0 280 198" xmlns="http://www.w3.org/2000/svg">
+        <!-- padded grid 7×7. Padding ring (r/c == 0 or 6) uses dashed hairline + paper fill. -->
+        <g>
+          <!-- row 0 (padding) -->
+          <rect x="2"   y="2"   width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4" stroke-dasharray="2 2" opacity="0.6"/>
+          <rect x="26"  y="2"   width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4" stroke-dasharray="2 2" opacity="0.6"/>
+          <rect x="50"  y="2"   width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4" stroke-dasharray="2 2" opacity="0.6"/>
+          <rect x="74"  y="2"   width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4" stroke-dasharray="2 2" opacity="0.6"/>
+          <rect x="98"  y="2"   width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4" stroke-dasharray="2 2" opacity="0.6"/>
+          <rect x="122" y="2"   width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4" stroke-dasharray="2 2" opacity="0.6"/>
+          <rect x="146" y="2"   width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4" stroke-dasharray="2 2" opacity="0.6"/>
+          <!-- row 1 -->
+          <rect x="2"   y="26"  width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4" stroke-dasharray="2 2" opacity="0.6"/>
+          <rect x="26"  y="26"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="50"  y="26"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="74"  y="26"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="98"  y="26"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="122" y="26"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="146" y="26"  width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4" stroke-dasharray="2 2" opacity="0.6"/>
+          <!-- row 2 -->
+          <rect x="2"   y="50"  width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4" stroke-dasharray="2 2" opacity="0.6"/>
+          <rect x="26"  y="50"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="50"  y="50"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="74"  y="50"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="98"  y="50"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="122" y="50"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="146" y="50"  width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4" stroke-dasharray="2 2" opacity="0.6"/>
+          <!-- row 3 -->
+          <rect x="2"   y="74"  width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4" stroke-dasharray="2 2" opacity="0.6"/>
+          <rect x="26"  y="74"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="50"  y="74"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="74"  y="74"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="98"  y="74"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="122" y="74"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="146" y="74"  width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4" stroke-dasharray="2 2" opacity="0.6"/>
+          <!-- row 4 -->
+          <rect x="2"   y="98"  width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4" stroke-dasharray="2 2" opacity="0.6"/>
+          <rect x="26"  y="98"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="50"  y="98"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="74"  y="98"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="98"  y="98"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="122" y="98"  width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="146" y="98"  width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4" stroke-dasharray="2 2" opacity="0.6"/>
+          <!-- row 5 -->
+          <rect x="2"   y="122" width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4" stroke-dasharray="2 2" opacity="0.6"/>
+          <rect x="26"  y="122" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="50"  y="122" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="74"  y="122" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="98"  y="122" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="122" y="122" width="23" height="23" fill="#a8c8e8" fill-opacity="0.55" stroke="#356aa8"/>
+          <rect x="146" y="122" width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4" stroke-dasharray="2 2" opacity="0.6"/>
+          <!-- row 6 (padding) -->
+          <rect x="2"   y="146" width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4" stroke-dasharray="2 2" opacity="0.6"/>
+          <rect x="26"  y="146" width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4" stroke-dasharray="2 2" opacity="0.6"/>
+          <rect x="50"  y="146" width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4" stroke-dasharray="2 2" opacity="0.6"/>
+          <rect x="74"  y="146" width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4" stroke-dasharray="2 2" opacity="0.6"/>
+          <rect x="98"  y="146" width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4" stroke-dasharray="2 2" opacity="0.6"/>
+          <rect x="122" y="146" width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4" stroke-dasharray="2 2" opacity="0.6"/>
+          <rect x="146" y="146" width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4" stroke-dasharray="2 2" opacity="0.6"/>
+        </g>
+        <!-- kernel 3×3 at stride-2 position [1,0] in output coords → top-left at (2*24, 0*24) = (48, 0) -->
+        <rect x="49" y="49" width="73" height="73" fill="#e49381" fill-opacity="0.45" stroke="#c44a3f" stroke-width="2"/>
+        <!-- output 3×3 (172+32 = 204) -->
+        <g>
+          <rect x="204" y="2"  width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4"/>
+          <rect x="228" y="2"  width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4"/>
+          <rect x="252" y="2"  width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4"/>
+          <rect x="204" y="26" width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4"/>
+          <rect x="228" y="26" width="23" height="23" fill="#e49381" fill-opacity="0.85" stroke="#c44a3f" stroke-width="2"/>
+          <rect x="252" y="26" width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4"/>
+          <rect x="204" y="50" width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4"/>
+          <rect x="228" y="50" width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4"/>
+          <rect x="252" y="50" width="23" height="23" fill="#fdfdfd" stroke="#d8d8d4"/>
+        </g>
+        <!-- linkage -->
+        <line x1="85" y1="85" x2="240" y2="38" stroke="#666" stroke-width="1" stroke-dasharray="3 3"/>
+        <text x="2" y="192" font-family="var(--font-sans)" font-size="12" fill="#6a6a6a">input 5×5 · kernel 3×3 · stride 2 · padding 1 → 3×3</text>
+      </svg>
+      <div class="label">stride 2 · padding 1</div>
+      <div class="mono">5×5 (padded 7×7) → 3×3</div>
+    </div>
+
+  </div>
+</div></body></html>

@@ -1,6 +1,6 @@
 {
   "name": "distill-design",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Distill.pub design system as a Claude Skill: tokens, TSX primitives, line-art service icons, voice rules, and author tools (canvas + tweaks panel) for editorial-diagrammatic interfaces",
   "license": "MIT",
   "homepage": "https://github.com/geo-mena/distill#readme",

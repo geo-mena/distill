@@ -250,4 +250,109 @@ function VariableTensor({
   );
 }
 
-Object.assign(window as any, { AttentionHeatmap, CellGrid, RecurrentArrow, VariableTensor });
+interface ConvGridProps {
+  inputSize?: number;
+  kernelSize?: number;
+  stride?: number;
+  padding?: number;
+  cellSize?: number;
+  kernelAt?: [number, number];
+  outputAt?: [number, number];
+  showAnnotation?: boolean;
+  inputColor?: HeatmapAccent;
+  kernelColor?: HeatmapAccent;
+}
+
+function ConvGrid({
+  inputSize = 7,
+  kernelSize = 3,
+  stride = 1,
+  padding = 0,
+  cellSize = 24,
+  kernelAt = [0, 0],
+  outputAt,
+  showAnnotation = true,
+  inputColor = "blue",
+  kernelColor = "salmon",
+}: ConvGridProps) {
+  const fills: Record<HeatmapAccent, string> = { blue: "#a8c8e8", lavender: "#b8a8d8", salmon: "#e49381" };
+  const strokes: Record<HeatmapAccent, string> = { blue: "#356aa8", lavender: "#4f3d80", salmon: "#c44a3f" };
+  const inputFill = fills[inputColor] || fills.blue;
+  const inputStroke = strokes[inputColor] || strokes.blue;
+  const kernelStroke = strokes[kernelColor] || strokes.salmon;
+  const kernelFillFaint = fills[kernelColor] || fills.salmon;
+
+  const total = inputSize + 2 * padding;
+  const outputSize = Math.floor((total - kernelSize) / stride) + 1;
+  const [kCol, kRow] = kernelAt;
+  const annoH = showAnnotation ? 22 : 0;
+  const outputGap = outputAt ? 32 : 0;
+  const outputW = outputAt ? outputSize * cellSize + 4 : 0;
+  const w = total * cellSize + 4 + outputGap + outputW;
+  const h = total * cellSize + 4 + annoH;
+
+  return (
+    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={{ flexShrink: 0 }}>
+      {Array.from({ length: total }).map((_, r) =>
+        Array.from({ length: total }).map((__, c) => {
+          const isPad = r < padding || r >= padding + inputSize || c < padding || c >= padding + inputSize;
+          return (
+            <rect key={`i-${r}-${c}`}
+              x={2 + c * cellSize} y={2 + r * cellSize}
+              width={cellSize - 1} height={cellSize - 1}
+              fill={isPad ? "#fdfdfd" : inputFill}
+              stroke={isPad ? "#d8d8d4" : inputStroke}
+              strokeWidth="1"
+              strokeDasharray={isPad ? "2 2" : "none"}
+              opacity={isPad ? 0.6 : 0.55} />
+          );
+        })
+      )}
+      <rect
+        x={2 + kCol * stride * cellSize - 1}
+        y={2 + kRow * stride * cellSize - 1}
+        width={kernelSize * cellSize + 1}
+        height={kernelSize * cellSize + 1}
+        fill={kernelFillFaint}
+        fillOpacity="0.45"
+        stroke={kernelStroke}
+        strokeWidth="2" />
+      {outputAt && (() => {
+        const ox = total * cellSize + 4 + outputGap;
+        const oy = 2;
+        return (
+          <g>
+            {Array.from({ length: outputSize }).map((_, r) =>
+              Array.from({ length: outputSize }).map((__, c) => {
+                const active = r === outputAt[1] && c === outputAt[0];
+                return (
+                  <rect key={`o-${r}-${c}`}
+                    x={ox + c * cellSize} y={oy + r * cellSize}
+                    width={cellSize - 1} height={cellSize - 1}
+                    fill={active ? kernelFillFaint : "#fdfdfd"}
+                    fillOpacity={active ? 0.85 : 1}
+                    stroke={active ? kernelStroke : "#d8d8d4"}
+                    strokeWidth={active ? 2 : 1} />
+                );
+              })
+            )}
+            <line
+              x1={2 + kCol * stride * cellSize + (kernelSize * cellSize) / 2}
+              y1={2 + kRow * stride * cellSize + (kernelSize * cellSize) / 2}
+              x2={ox + outputAt[0] * cellSize + cellSize / 2}
+              y2={oy + outputAt[1] * cellSize + cellSize / 2}
+              stroke="#666" strokeWidth="1" strokeDasharray="3 3" />
+          </g>
+        );
+      })()}
+      {showAnnotation && (
+        <text x={2} y={h - 6}
+          fontFamily="var(--font-sans)" fontSize="12" fill="#6a6a6a">
+          input {inputSize}×{inputSize} · kernel {kernelSize}×{kernelSize} · stride {stride} · padding {padding} → {outputSize}×{outputSize}
+        </text>
+      )}
+    </svg>
+  );
+}
+
+Object.assign(window as any, { AttentionHeatmap, CellGrid, RecurrentArrow, VariableTensor, ConvGrid });

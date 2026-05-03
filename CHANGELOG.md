@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.1] - 2026-05-03
+
+### Added
+
+- **`ConvGrid`** primitive in `Heatmap.tsx` — convolutional kernel-stride-padding visualization. Renders an input grid (with optional dashed-hairline padding ring), an overlaid kernel rectangle, and an optional output grid linked back via a dashed connector. Auto-computes output size from `(input + 2·padding − kernel) / stride + 1`. Closes the receptive-field gap identified in the v0.2.0 corpus audit. Source: `computing-receptive-fields-01..08.svg`.
+- Preview card `preview/components-heatmap-conv-grid.html` — two variants (stride 1 no padding; stride 2 padding 1).
+
+### Documented
+
+- 3 remaining single-figure corpus gaps (`ScatterOverlay`, `PipelineTeaser`, animation framework) flagged in `CLAUDE.md` "Open gaps / future work" with cost estimates and rationale for deferring — only worth implementing if a real use case appears. Skill scope decision applies the project rule against speculative primitives.
+
 ## [0.2.0] - 2026-05-03
 
 ### Full corpus distillation
