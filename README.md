@@ -30,6 +30,22 @@ Coverage spans the full Distill corpus (10 articles, 131 source figures audited 
 | Mockups | *"Add a live tweaks panel for primary color and font size"* | Uses [templates/tweaks-panel.tsx](plugins/distill-design/templates/tweaks-panel.tsx): floating panel, postMessage-persisted |
 | Visual reference | *"Show me how Distill diagrams [concept]"* | 131 source figures from 10 articles in [sources/](plugins/distill-design/sources/) |
 
+## Examples
+
+Reference architecture diagrams in the system's visual language — vendor-agnostic, hand-drawn line art, paper-warm palette, dashed arrows for failover / replication / observability.
+
+### Multi-region observability
+
+![Multi-region observability architecture](plugins/distill-design/resources/diagrams/multi-region-observability.svg)
+
+[`plugins/distill-design/resources/diagrams/multi-region-observability.svg`](plugins/distill-design/resources/diagrams/multi-region-observability.svg) — multi-region AWS architecture organized in four bands: EDGE (Route 53 failover routing + per-region health checks → CloudFront), COMPUTE (sa-east-1 PRIMARY + us-east-1 SECONDARY, each with ALB → Auto-Scaling Group → 2 EC2 → RDS), CLOUDWATCH (metrics, logs, alarms, EventBridge, dashboard), NOTIFICATIONS (SNS fanning to email + Lambda Slack notifier).
+
+### Multi-tier app with RDS
+
+![Multi-tier app with RDS Multi-AZ and read replica](plugins/distill-design/resources/diagrams/multi-tier-rds.svg)
+
+[`plugins/distill-design/resources/diagrams/multi-tier-rds.svg`](plugins/distill-design/resources/diagrams/multi-tier-rds.svg) — typical three-tier app on AWS with RDS Multi-AZ and Read Replica. Users → Route 53 → Application Load Balancer (public subnet) → EC2 A / B (private subnets) → RDS Primary (sa-east-1a, PostgreSQL). Multi-AZ Standby (sa-east-1b) via synchronous replication; Read Replica (sa-east-1c) via asynchronous replication. RDS Automated Backups (7-day retention) + S3 Manual Snapshots + CloudWatch metrics & alarms.
+
 ## Install
 
 ### Claude Code (plugin)
