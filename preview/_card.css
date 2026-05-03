@@ -1,8 +1,4 @@
-/* Shared styling for design-system preview cards.
-   Each card is ~700px wide; height varies. No card titles —
-   the asset name renders outside the card by the host. */
-
-@import url("../colors_and_type.css");
+@import url("../tokens/colors_and_type.css");
 
 html, body {
   margin: 0;

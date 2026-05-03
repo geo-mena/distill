@@ -15,11 +15,11 @@ The system targets the modern article template, in use 2017–2021. Tokens, comp
 | Diagrams | *"Diagram an attention mechanism over memory"* | Composed primitives, `TensorVector`, `Arrow`, `OperatorNode`, `SubNetBlock`, `PointerGlyph`, on the salmon/blue/lavender palette |
 | Diagrams | *"Visualize this model FiLM-style"* | Pre-built scenes: concat / bias / scaling / FiLM-network / interactive scrubber |
 | Slide decks | *"8-slide deck on [paper]"* | Paper-warm background, system sans, one idea per slide, figure breakouts, citations at the foot |
-| Product styling | *"Style my dashboard like Distill"* | Drop-in `colors_and_type.css` tokens, TSX components copy-paste-ready |
+| Product styling | *"Style my dashboard like Distill"* | Drop-in `tokens/colors_and_type.css` tokens, TSX components copy-paste-ready |
 | Product styling | *"Convert this brand to a scholarly-editorial system"* | Brand-to-token mapping with diagram primitives |
 | Mockups | *"Quick mockup of [feature]"* | Standalone HTML artifact |
-| Mockups | *"Lay out 6 variants side-by-side"* | Uses [design-canvas.tsx](design-canvas.tsx): pan/zoom, drag-reorder, focus mode |
-| Mockups | *"Add a live tweaks panel for primary color and font size"* | Uses [tweaks-panel.tsx](tweaks-panel.tsx): floating panel, postMessage-persisted |
+| Mockups | *"Lay out 6 variants side-by-side"* | Uses [templates/design-canvas.tsx](templates/design-canvas.tsx): pan/zoom, drag-reorder, focus mode |
+| Mockups | *"Add a live tweaks panel for primary color and font size"* | Uses [templates/tweaks-panel.tsx](templates/tweaks-panel.tsx): floating panel, postMessage-persisted |
 | Visual reference | *"Show me how Distill diagrams [concept]"* | 131 source figures from 10 articles in [sources/](sources/) |
 
 ## Usage modes
@@ -36,7 +36,7 @@ Invoke with `/distill-design` in any Claude Code session, or describe an editori
 
 | What | Where |
 |---|---|
-| CSS variables | [colors_and_type.css](colors_and_type.css) |
+| CSS variables | [tokens/colors_and_type.css](tokens/colors_and_type.css) |
 | TSX components with prop interfaces | [ui_kits/article/](ui_kits/article/) |
 | Per-token reference cards (30) | [preview/](preview/) |
 | Source figures (131) | [sources/](sources/) |
@@ -56,12 +56,12 @@ Open [http://localhost:8765/ui_kits/article/index.html](http://localhost:8765/ui
 |---|---|
 | [SKILL.md](SKILL.md) | Skill manifest, read by Claude on invocation |
 | [DESIGN-SYSTEM.md](DESIGN-SYSTEM.md) | Design rules: voice, color, typography, iconography, caveats |
-| [colors_and_type.css](colors_and_type.css) | CSS variables: 3 palettes, type scale, spacing, radii, shadows, motion |
+| [tokens/colors_and_type.css](tokens/colors_and_type.css) | CSS variables: 3 palettes, type scale, spacing, radii, shadows, motion |
 | [fonts/](fonts/) | Geist Pixel Square (mono only). Body and display use the OS system sans stack |
 | [assets/](assets/) | Pointer-glyph SVG, wordmark SVG, [iconography rules](assets/ICONOGRAPHY.md) |
 | [ui_kits/article/](ui_kits/article/) | Article reader: Primitives, Chrome, Diagrams (`.tsx`) and assembled `index.html` |
-| [design-canvas.tsx](design-canvas.tsx) | Author tool: Figma-style canvas wrapper |
-| [tweaks-panel.tsx](tweaks-panel.tsx) | Author tool: floating live-tweak panel |
+| [templates/design-canvas.tsx](templates/design-canvas.tsx) | Author tool: Figma-style canvas wrapper |
+| [templates/tweaks-panel.tsx](templates/tweaks-panel.tsx) | Author tool: floating live-tweak panel |
 | [preview/](preview/) | 30 reference cards, one per token or component |
 | [sources/](sources/) | 131 source figures from 10 Distill articles |
 | [tsconfig.json](tsconfig.json), [globals.d.ts](globals.d.ts) | TypeScript config and ambient types. No `node_modules` |

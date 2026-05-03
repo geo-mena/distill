@@ -54,7 +54,7 @@ Distill renders **everything** — body, headings, captions, byline — in the p
 
 There is no webfont download for prose or display. This was confirmed by computed-style audit on `distill.pub` (San Francisco on macOS, Segoe UI on Windows, Roboto on Android). Earlier drafts of this system claimed Libre Franklin / Crimson Text — that was incorrect and has been corrected.
 
-**One flagged substitution: mono.** Code/mono is set to **Geist Pixel Square** (self-hosted from `fonts/GeistPixel-Square.woff2`), with the system mono stack as fallback. This is an intentional additive — Distill itself uses the platform mono stack. The pixel-grid character complements the diagrammatic visual language without conflicting with the editorial body. To revert, remove `"Geist Pixel Square"` from `--font-mono` in `colors_and_type.css`.
+**One flagged substitution: mono.** Code/mono is set to **Geist Pixel Square** (self-hosted from `fonts/GeistPixel-Square.woff2`), with the system mono stack as fallback. This is an intentional additive — Distill itself uses the platform mono stack. The pixel-grid character complements the diagrammatic visual language without conflicting with the editorial body. To revert, remove `"Geist Pixel Square"` from `--font-mono` in `tokens/colors_and_type.css`.
 
 ---
 

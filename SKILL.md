@@ -16,15 +16,15 @@ Tokens validated by DOM audit on 10 articles (2017–2021). For deep rules, read
 
 | Path | Purpose |
 |---|---|
-| `colors_and_type.css` | Drop-in CSS variables (3 palettes, type scale 17/36/50, spacing, radii, shadows, motion) |
+| `tokens/colors_and_type.css` | Drop-in CSS variables (3 palettes, type scale 17/36/50, spacing, radii, shadows, motion) |
 | `fonts/GeistPixel-Square.woff2` | Pixel mono for `<code>`/`<pre>` (flagged additive) |
 | `assets/` | Pointer-glyph SVG + wordmark SVG + icon rules (`ICONOGRAPHY.md`) |
 | `ui_kits/article/Primitives.tsx` | `TensorVector`, `Arrow`, `OperatorNode`, `SubNetBlock`, `PointerGlyph`, `Citation`, `Figure`, `MathBlock` |
 | `ui_kits/article/Chrome.tsx` | `ArticleNav`, `ArticleHeader`, `TOCDrawer`, `ArticleFooter` (7 canonical sections) |
 | `ui_kits/article/Diagrams.tsx` | `ConcatDiagram`, `BiasDiagram`, `ScalingDiagram`, `FiLMNetworkDiagram`, `FiLMScrubber` |
 | `ui_kits/article/index.html` | Fully-assembled FiLM article — serve via HTTP (`python3 -m http.server`), not `file://` |
-| `design-canvas.tsx` | Author tool: Figma-ish canvas wrapper for laying out variants |
-| `tweaks-panel.tsx` | Author tool: floating live-tweak panel (sliders / toggles / colors) |
+| `templates/design-canvas.tsx` | Author tool: Figma-ish canvas wrapper for laying out variants |
+| `templates/tweaks-panel.tsx` | Author tool: floating live-tweak panel (sliders / toggles / colors) |
 | `preview/*.html` | 30 reference cards — one per token/component |
 | `sources/` | 131 source figures from 10 Distill articles |
 | `resources/diagrams/_service-icons.svg` | Canonical line-art icon library for cloud-architecture diagrams (17 symbols: `service-dns`, `service-cdn`, `service-load-balancer`, `service-compute`, `service-database`, `service-pubsub`, `service-function`, `service-metrics`, `service-logs`, `service-alarms`, `service-events`, `service-dashboard`, etc.). Vendor-agnostic naming. Each `<symbol>` is 24×24 viewBox, stroke `#666`, monochrome. Inline-copy into consumer SVG `<defs>` for portability |
@@ -38,12 +38,12 @@ Tokens validated by DOM audit on 10 articles (2017–2021). For deep rules, read
 | Diagram from scratch | Compose `Primitives.tsx` (TensorVector + Arrow + OperatorNode + SubNetBlock) |
 | Cloud architecture diagram (AWS / GCP / Azure / generic) | Output SVG to `resources/diagrams/<slug>.svg`. Service icons are 24×24 viewBox `<symbol>` blocks rendered at ~20px inside container blocks. **Inline-copy** the needed `<symbol>` definitions from `resources/diagrams/_service-icons.svg` into the consumer SVG's own `<defs>` (cross-file `<use href>` does not work in GitHub-rendered SVGs nor `file://` due to browser sandbox). Reference via `<use href="#service-<slug>" x=... y=... width="20" height="20"/>`. Apply category color to the **enclosing block**, never the icon: edge / CDN / compute → blue (`#d6e4f3` fill, `#356aa8` stroke), data / endpoints → salmon (`#fdecea` / `#c44a3f`), observability → lavender (`#ddd9ee` / `#b8a8d8`), region or VPC boundaries → paper (`#fdfdfd`) with hairline (`#d8d8d4`). Icon stroke stays `#666` regardless. Solid arrows for primary data flow; dashed (`stroke-dasharray="3 3"`) for failover, monitoring, and observability bus. Forks use 90°-bent paths, never diagonals. **If a required service icon is missing**, draw it in the same convention (24×24, stroke `#666` 1.5px, no fills, rounded caps), add a new `<symbol id="service-<slug>">` to `_service-icons.svg`, update the index comment, then inline-copy into the consumer. **Never import vendor-official icons** (AWS / GCP / Azure colored marks) — they break the no-multi-color and no-fill rules. See `DESIGN-SYSTEM.md` § "Service icons for architecture diagrams" |
 | Slide deck for a talk | Reuse `ArticleHeader` + `Figure` + diagram primitives, paginate |
-| Just need design tokens | Import `colors_and_type.css`; use `var(--ink)`, `var(--salmon-300)`, `var(--font-sans)` |
+| Just need design tokens | Import `tokens/colors_and_type.css`; use `var(--ink)`, `var(--salmon-300)`, `var(--font-sans)` |
 | Style a product/dashboard | Map brand to tokens; lean on flat layers, hairlines, no shadows. Reuse existing primitives (`Citation`, `Figure`, `MathBlock`) before creating new components |
 | Build a card / panel / sidebar | Distill has no first-class card or app-shell primitive. Push back: offer a figure-container instead (hairline border, no shadow) or an article excerpt block |
 | Build a multi-column layout | Distill is single-column reading. Push back unless user explicitly overrides — propose breakouts or sequential figures instead |
 | Cover banner for a project README | Output 1600×500 SVG to `resources/covers/<project-slug>.svg`. Mirror the article-hero pattern from `ui_kits/article/Chrome.tsx`: eyebrow (uppercase 12px, letter-spacing 0.12em, `#6a6a6a`), h1 (system sans 700, 56px, letter-spacing -0.015em, color `#000`), italic subtitle (22px, `#4a4a4a`), hairline rule (`#e8e8e4`), 3-col byline grid (label 10px uppercase 0.1em / value 14px `#2a2a2a` / italic affiliation 13px `#6a6a6a`). Right column: fan-out diagram in FiLM-style — input TensorVector → vertical-rl labeled SubNetBlock → orthogonal fork (90° bent paths, never diagonal) → 3 output blocks → PointerGlyph anchor. See `resources/covers/distill-design-system.svg` as canonical reference |
-| Multi-variant exploration | Embed `design-canvas.tsx` with `DCSection` + `DCArtboard` |
+| Multi-variant exploration | Embed `templates/design-canvas.tsx` with `DCSection` + `DCArtboard` |
 | Live-editable prototype | Wrap with `useTweaks` + `TweaksPanel` |
 | Voice transform / caption rewriting | Read `DESIGN-SYSTEM.md` § "Content fundamentals" first |
 | User uncertain | Ask 1–2 clarifying questions, then commit |
