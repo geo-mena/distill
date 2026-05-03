@@ -1,5 +1,32 @@
 # Changelog
 
+## [0.2.0] - 2026-05-03
+
+### Full corpus distillation
+
+Audit-driven expansion: the 131 source figures across the 10 Distill articles (2017–2021) were systematically catalogued and 17 new TSX primitives across 4 new files were added to capture the visual conventions that the FiLM-only initial release did not cover. The Skill now spans Reinforcement Learning, graphs/trees, attention/value heatmaps, recurrent feedback, chemistry, cellular automata, particle physics, raster overlays, and statistical charts.
+
+### New primitives
+
+- `RL.tsx` — `GridWorld` (cliffworld-style environment with cells, paths, agents, goal/penalty), `ValueHeatmap` (opacity-modulated V(s) / Q(s,a)), `PolicyArrows` (per-cell stochastic policy as 4 inward triangular arrows).
+- `Graph.tsx` — `GraphNode` (state-aware circle with label), `GraphEdge` (straight or quadratic-bezier curved), `BeamSearchTree` (layered lattice), `DebateTree` (two-sided argumentation with claim/counter coloring), `HMMState` (subscript-aware state circle).
+- `Heatmap.tsx` — `AttentionHeatmap` (1D opacity-encoded weights), `CellGrid` (2D grid for CTC DP / Game of Life), `RecurrentArrow` (curved bezier feedback for LSTM/GRU), `VariableTensor` (TensorVector with per-cell width).
+- `Specialized.tsx` — `MoleculeViewer` (atoms + bonds with element-keyed colors), `AutomataGrid` (multi-generation cellular automaton sequence), `FeynmanDiagram` (fermion/photon/gluon line styles), `ImageWithAnnotations` (raster overlay with annotation circles), `DistillBoxplot` (statistical boxplot in Distill palette).
+
+### Extended palette
+
+12 new color tokens added to `tokens/colors_and_type.css`:
+- `--navy-100/300/500/-stroke` (RL optimal-policy paths).
+- `--penalty-100/300/500/-stroke` (RL cliff/penalty zones).
+- `--debate-orange` `#ee4900` and `--debate-blue` `#008bee` (debate-tree adversarial sides; intentionally saturated).
+- `--olive-100/300/500`, `--burgundy-100/300/500`, `--slate-100/300/500` (categorical palette extension for Building Blocks attribution channels and `ImageWithAnnotations` overlays).
+
+### Documentation
+
+- `SKILL.md` decision tree expanded with 12 new task entries mapping use cases to the new primitives and source figures.
+- `DESIGN-SYSTEM.md` adds an "Extended palette" section (with the principled "opacity-modulation as encoding" exception to the no-gradient rule), and an "Extended primitives" section with per-file reference tables linking each primitive to its canonical source figure.
+- 17 new preview cards under `preview/components-{rl,graph,heatmap,specialized}-*.html`.
+
 ## [0.1.0] - 2026-05-03
 
 ### Initial public release

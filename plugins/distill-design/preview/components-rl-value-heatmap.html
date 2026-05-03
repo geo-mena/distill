@@ -1,0 +1,100 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Components · RL Value Heatmap</title><link rel="stylesheet" href="_card.css"></head>
+<body><div class="card">
+  <div style="font-family:var(--font-sans);font-size:14px;color:#6a6a6a;font-style:italic;margin-bottom:14px;">Scalar value functions — opacity encodes magnitude, hue encodes sign.</div>
+  <div class="row gap-8" style="align-items:flex-start;">
+    <!-- V(s) blue heatmap, no labels -->
+    <div class="col gap-2">
+      <div class="label">V(s)</div>
+      <svg width="176" height="148" viewBox="0 0 176 148" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="4"    width="28" height="28" fill="#a8c8e8" fill-opacity="0.25" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="32" y="4"   width="28" height="28" fill="#a8c8e8" fill-opacity="0.32" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="60" y="4"   width="28" height="28" fill="#a8c8e8" fill-opacity="0.41" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="88" y="4"   width="28" height="28" fill="#a8c8e8" fill-opacity="0.52" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="116" y="4"  width="28" height="28" fill="#a8c8e8" fill-opacity="0.65" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="144" y="4"  width="28" height="28" fill="#a8c8e8" fill-opacity="0.80" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="4" y="32"   width="28" height="28" fill="#a8c8e8" fill-opacity="0.30" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="32" y="32"  width="28" height="28" fill="#a8c8e8" fill-opacity="0.38" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="60" y="32"  width="28" height="28" fill="#a8c8e8" fill-opacity="0.47" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="88" y="32"  width="28" height="28" fill="#a8c8e8" fill-opacity="0.58" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="116" y="32" width="28" height="28" fill="#a8c8e8" fill-opacity="0.71" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="144" y="32" width="28" height="28" fill="#a8c8e8" fill-opacity="0.78" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="4" y="60"   width="28" height="28" fill="#a8c8e8" fill-opacity="0.25" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="32" y="60"  width="28" height="28" fill="#a8c8e8" fill-opacity="0.34" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="60" y="60"  width="28" height="28" fill="#a8c8e8" fill-opacity="0.42" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="88" y="60"  width="28" height="28" fill="#a8c8e8" fill-opacity="0.50" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="116" y="60" width="28" height="28" fill="#a8c8e8" fill-opacity="0.62" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="144" y="60" width="28" height="28" fill="#a8c8e8" fill-opacity="0.71" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="4" y="88"   width="28" height="28" fill="#a8c8e8" fill-opacity="0.20" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="32" y="88"  width="28" height="28" fill="#a8c8e8" fill-opacity="0.27" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="60" y="88"  width="28" height="28" fill="#a8c8e8" fill-opacity="0.36" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="88" y="88"  width="28" height="28" fill="#a8c8e8" fill-opacity="0.44" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="116" y="88" width="28" height="28" fill="#a8c8e8" fill-opacity="0.55" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="144" y="88" width="28" height="28" fill="#a8c8e8" fill-opacity="0.64" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="4" y="116"   width="28" height="28" fill="#e49381" fill-opacity="0.65" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="32" y="116"  width="28" height="28" fill="#e49381" fill-opacity="0.55" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="60" y="116"  width="28" height="28" fill="#e49381" fill-opacity="0.45" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="88" y="116"  width="28" height="28" fill="#e49381" fill-opacity="0.35" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="116" y="116" width="28" height="28" fill="#a8c8e8" fill-opacity="0.30" stroke="#e7ebe8" stroke-width="1"/>
+        <rect x="144" y="116" width="28" height="28" fill="#a8c8e8" fill-opacity="0.55" stroke="#e7ebe8" stroke-width="1"/>
+      </svg>
+      <div class="mono">blue · negative→salmon</div>
+    </div>
+
+    <!-- Q(s,a) lavender heatmap with values shown -->
+    <div class="col gap-2">
+      <div class="label">Q(s,a)</div>
+      <svg width="176" height="148" viewBox="0 0 176 148" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="4"    width="28" height="28" fill="#b8a8d8" fill-opacity="0.28" stroke="#e7ebe8" stroke-width="1"/>
+        <text x="18" y="22" font-family="var(--font-sans)" font-size="11" fill="#333" text-anchor="middle">0.20</text>
+        <rect x="32" y="4"   width="28" height="28" fill="#b8a8d8" fill-opacity="0.41" stroke="#e7ebe8" stroke-width="1"/>
+        <text x="46" y="22" font-family="var(--font-sans)" font-size="11" fill="#333" text-anchor="middle">0.40</text>
+        <rect x="60" y="4"   width="28" height="28" fill="#b8a8d8" fill-opacity="0.54" stroke="#e7ebe8" stroke-width="1"/>
+        <text x="74" y="22" font-family="var(--font-sans)" font-size="11" fill="#333" text-anchor="middle">0.60</text>
+        <rect x="88" y="4"   width="28" height="28" fill="#b8a8d8" fill-opacity="0.67" stroke="#e7ebe8" stroke-width="1"/>
+        <text x="102" y="22" font-family="var(--font-sans)" font-size="11" fill="#333" text-anchor="middle">0.80</text>
+        <rect x="116" y="4"  width="28" height="28" fill="#b8a8d8" fill-opacity="0.74" stroke="#e7ebe8" stroke-width="1"/>
+        <text x="130" y="22" font-family="var(--font-sans)" font-size="11" fill="#333" text-anchor="middle">0.91</text>
+        <rect x="144" y="4"  width="28" height="28" fill="#b8a8d8" fill-opacity="0.80" stroke="#e7ebe8" stroke-width="1"/>
+        <text x="158" y="22" font-family="var(--font-sans)" font-size="11" fill="#333" text-anchor="middle">1.00</text>
+        <rect x="4" y="32"   width="28" height="28" fill="#b8a8d8" fill-opacity="0.21" stroke="#e7ebe8" stroke-width="1"/>
+        <text x="18" y="50" font-family="var(--font-sans)" font-size="11" fill="#333" text-anchor="middle">0.10</text>
+        <rect x="32" y="32"  width="28" height="28" fill="#b8a8d8" fill-opacity="0.34" stroke="#e7ebe8" stroke-width="1"/>
+        <text x="46" y="50" font-family="var(--font-sans)" font-size="11" fill="#333" text-anchor="middle">0.30</text>
+        <rect x="60" y="32"  width="28" height="28" fill="#b8a8d8" fill-opacity="0.47" stroke="#e7ebe8" stroke-width="1"/>
+        <text x="74" y="50" font-family="var(--font-sans)" font-size="11" fill="#333" text-anchor="middle">0.50</text>
+        <rect x="88" y="32"  width="28" height="28" fill="#b8a8d8" fill-opacity="0.60" stroke="#e7ebe8" stroke-width="1"/>
+        <text x="102" y="50" font-family="var(--font-sans)" font-size="11" fill="#333" text-anchor="middle">0.70</text>
+        <rect x="116" y="32" width="28" height="28" fill="#b8a8d8" fill-opacity="0.73" stroke="#e7ebe8" stroke-width="1"/>
+        <text x="130" y="50" font-family="var(--font-sans)" font-size="11" fill="#333" text-anchor="middle">0.90</text>
+        <rect x="144" y="32" width="28" height="28" fill="#e49381" fill-opacity="0.41" stroke="#e7ebe8" stroke-width="1"/>
+        <text x="158" y="50" font-family="var(--font-sans)" font-size="11" fill="#333" text-anchor="middle">-0.40</text>
+        <rect x="4" y="60"   width="28" height="28" fill="#b8a8d8" fill-opacity="0.15" stroke="#e7ebe8" stroke-width="1"/>
+        <text x="18" y="78" font-family="var(--font-sans)" font-size="11" fill="#333" text-anchor="middle">0.00</text>
+        <rect x="32" y="60"  width="28" height="28" fill="#b8a8d8" fill-opacity="0.28" stroke="#e7ebe8" stroke-width="1"/>
+        <text x="46" y="78" font-family="var(--font-sans)" font-size="11" fill="#333" text-anchor="middle">0.20</text>
+        <rect x="60" y="60"  width="28" height="28" fill="#b8a8d8" fill-opacity="0.41" stroke="#e7ebe8" stroke-width="1"/>
+        <text x="74" y="78" font-family="var(--font-sans)" font-size="11" fill="#333" text-anchor="middle">0.40</text>
+        <rect x="88" y="60"  width="28" height="28" fill="#b8a8d8" fill-opacity="0.54" stroke="#e7ebe8" stroke-width="1"/>
+        <text x="102" y="78" font-family="var(--font-sans)" font-size="11" fill="#333" text-anchor="middle">0.60</text>
+        <rect x="116" y="60" width="28" height="28" fill="#e49381" fill-opacity="0.28" stroke="#e7ebe8" stroke-width="1"/>
+        <text x="130" y="78" font-family="var(--font-sans)" font-size="11" fill="#333" text-anchor="middle">-0.20</text>
+        <rect x="144" y="60" width="28" height="28" fill="#e49381" fill-opacity="0.67" stroke="#e7ebe8" stroke-width="1"/>
+        <text x="158" y="78" font-family="var(--font-sans)" font-size="11" fill="#333" text-anchor="middle">-0.80</text>
+        <rect x="4" y="88"   width="28" height="28" fill="#e49381" fill-opacity="0.21" stroke="#e7ebe8" stroke-width="1"/>
+        <text x="18" y="106" font-family="var(--font-sans)" font-size="11" fill="#333" text-anchor="middle">-0.10</text>
+        <rect x="32" y="88"  width="28" height="28" fill="#e49381" fill-opacity="0.41" stroke="#e7ebe8" stroke-width="1"/>
+        <text x="46" y="106" font-family="var(--font-sans)" font-size="11" fill="#333" text-anchor="middle">-0.40</text>
+        <rect x="60" y="88"  width="28" height="28" fill="#e49381" fill-opacity="0.60" stroke="#e7ebe8" stroke-width="1"/>
+        <text x="74" y="106" font-family="var(--font-sans)" font-size="11" fill="#333" text-anchor="middle">-0.70</text>
+        <rect x="88" y="88"  width="28" height="28" fill="#e49381" fill-opacity="0.74" stroke="#e7ebe8" stroke-width="1"/>
+        <text x="102" y="106" font-family="var(--font-sans)" font-size="11" fill="#333" text-anchor="middle">-0.90</text>
+        <rect x="116" y="88" width="28" height="28" fill="#e49381" fill-opacity="0.80" stroke="#e7ebe8" stroke-width="1"/>
+        <text x="130" y="106" font-family="var(--font-sans)" font-size="11" fill="#333" text-anchor="middle">-1.00</text>
+        <rect x="144" y="88" width="28" height="28" fill="#e49381" fill-opacity="0.74" stroke="#e7ebe8" stroke-width="1"/>
+        <text x="158" y="106" font-family="var(--font-sans)" font-size="11" fill="#333" text-anchor="middle">-0.90</text>
+      </svg>
+      <div class="mono">lavender · showValues</div>
+    </div>
+  </div>
+</div></body></html>

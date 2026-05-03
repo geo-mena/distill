@@ -1,0 +1,73 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Components · Molecule viewer</title><link rel="stylesheet" href="_card.css"></head>
+<body><div class="card">
+  <div style="font-family:var(--font-sans);font-size:14px;color:#6a6a6a;font-style:italic;margin-bottom:14px;">Skeletal-formula molecules with element-coded heteroatoms and bond-order glyphs.</div>
+  <div class="row gap-8" style="align-items:flex-start;">
+
+    <!-- benzene: aromatic 6-ring, all carbons unlabeled -->
+    <div class="col gap-2">
+      <div class="label">benzene</div>
+      <svg width="140" height="140" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+        <!-- bonds (aromatic: outer hexagon + inner dashed hexagon) -->
+        <g stroke="#666" stroke-width="1.5" fill="none">
+          <!-- outer ring -->
+          <line x1="70"  y1="20"  x2="113.3" y2="45"/>
+          <line x1="113.3" y1="45" x2="113.3" y2="95"/>
+          <line x1="113.3" y1="95" x2="70"   y2="120"/>
+          <line x1="70"   y1="120" x2="26.7" y2="95"/>
+          <line x1="26.7" y1="95"  x2="26.7" y2="45"/>
+          <line x1="26.7" y1="45"  x2="70"   y2="20"/>
+        </g>
+        <!-- inner dashed circle suggesting aromaticity -->
+        <circle cx="70" cy="70" r="28" fill="none" stroke="#666" stroke-width="1.5" stroke-dasharray="3 2"/>
+        <!-- vertex carbons (unlabeled, small dots) -->
+        <g fill="#666">
+          <circle cx="70"   cy="20"  r="2"/>
+          <circle cx="113.3" cy="45" r="2"/>
+          <circle cx="113.3" cy="95" r="2"/>
+          <circle cx="70"   cy="120" r="2"/>
+          <circle cx="26.7" cy="95"  r="2"/>
+          <circle cx="26.7" cy="45"  r="2"/>
+        </g>
+      </svg>
+      <div class="mono">aromatic ring</div>
+    </div>
+
+    <!-- acetic acid: CH3-C(=O)-O-H, mixed bond orders -->
+    <div class="col gap-2">
+      <div class="label">acetic acid</div>
+      <svg width="200" height="140" viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
+        <!-- bonds -->
+        <g stroke="#666" stroke-width="1.5" fill="none">
+          <!-- C(methyl) - C(carbonyl): single -->
+          <line x1="38" y1="78" x2="84" y2="62"/>
+          <!-- C(carbonyl) = O (double, two parallel) -->
+          <line x1="93.5" y1="56.5" x2="135.5" y2="33"/>
+          <line x1="90.5" y1="51.5" x2="132.5" y2="28"/>
+          <!-- C(carbonyl) - O (single hydroxyl) -->
+          <line x1="100" y1="68" x2="142" y2="92"/>
+          <!-- O - H -->
+          <line x1="158" y1="100" x2="178" y2="112"/>
+        </g>
+        <!-- atoms -->
+        <g>
+          <!-- methyl C: implicit, small dot -->
+          <circle cx="32" cy="80" r="2" fill="#666"/>
+          <!-- carbonyl C: implicit, small dot -->
+          <circle cx="92" cy="60" r="2" fill="#666"/>
+          <!-- O (carbonyl) -->
+          <circle cx="140" cy="28" r="9" fill="#fdfdfd"/>
+          <text x="140" y="32" text-anchor="middle" font-family="var(--font-sans)" font-size="13" font-weight="500" fill="#c45a44">O</text>
+          <!-- O (hydroxyl) -->
+          <circle cx="148" cy="96" r="9" fill="#fdfdfd"/>
+          <text x="148" y="100" text-anchor="middle" font-family="var(--font-sans)" font-size="13" font-weight="500" fill="#c45a44">O</text>
+          <!-- H -->
+          <circle cx="184" cy="116" r="8" fill="#fdfdfd"/>
+          <text x="184" y="120" text-anchor="middle" font-family="var(--font-sans)" font-size="13" font-weight="500" fill="#9a9a98">H</text>
+        </g>
+      </svg>
+      <div class="mono">CH<tspan style="font-size:10px">3</tspan>COOH · double + single</div>
+    </div>
+
+  </div>
+</div></body></html>

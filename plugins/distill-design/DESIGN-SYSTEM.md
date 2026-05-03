@@ -118,6 +118,32 @@ Distill's visual language is **diagrammatic-editorial**. Every page is a long-sc
 - **Saturation is always low.** No fully-saturated primaries. If you'd describe a swatch as "bold," it's wrong for Distill.
 - **Highlight orange-yellow** (`#f5b942`) appears as a single accent color — only on interactive-affordance pointer-finger glyphs.
 
+#### Extended palette (domain-specific)
+
+The 3-hue base palette (salmon / blue / lavender) covers the FiLM-style editorial-diagram core. Specific Distill articles introduce additional hues for semantic distinctions that don't fit the base palette. These are documented for fidelity, but should be used **only when the domain demands them** — a generic diagram should default to salmon/blue/lavender.
+
+| Token | Hex | Use | Source |
+|---|---|---|---|
+| `--navy-500` | `#2a2d7c` | RL optimal-policy paths (cliffworld) | `paths-perspective-on-value-learning-*.svg` |
+| `--penalty-500` | `#bd5f36` | RL cliff/penalty zones | `paths-perspective-on-value-learning-*.svg` |
+| `--debate-orange` | `#ee4900` | "Claim" side in debate trees | `safety-needs-social-scientists-*.svg`, `film-09-debate-tree.png` |
+| `--debate-blue` | `#008bee` | "Counter" side in debate trees | (same) |
+| `--olive-500` | `#8a8233` | 4th categorical (Building Blocks attribution channels) | `building-blocks-*.png` |
+| `--burgundy-500` | `#8c3a4a` | 5th categorical | (same) |
+| `--slate-500` | `#4f6470` | 6th categorical, also molecular S-atom variant | (same) |
+
+Each token also has `-100` (light fill) and `-300` (mid-tone) variants in `tokens/colors_and_type.css`. Debate orange/blue intentionally violate the "low saturation" rule — they encode adversarial semantic stance, where saturation IS the signal.
+
+#### Opacity-modulation as encoding
+
+Distill's "no gradient" rule has one principled exception: **a single hue with varying opacity is acceptable when the opacity itself encodes a scalar quantity.** Used in:
+
+- **Attention weights** (`AttentionHeatmap`): cell opacity `0.1 + weight * 0.85` over a single-hue fill.
+- **Value functions** (`ValueHeatmap`): same pattern for V(s) / Q(s,a) magnitude.
+- **CTC alignment cost** (`CellGrid` with `shape="circle"`): per-cell opacity from DP cost matrix.
+
+This is NOT a gradient — every cell is a flat fill. The opacity-as-value pattern is what enables Distill to visualize continuous quantities without breaking the flat-paper aesthetic.
+
 ### Typography
 All sizes/weights below are confirmed via DOM audit on distill.pub.
 
@@ -233,6 +259,51 @@ Every modern Distill **article** ends with this exact footer order. (Not applica
 7. **Citation** — suggested narrative form + BibTeX in mono block
 
 The `ArticleFooter` component in [ui_kits/article/Chrome.tsx](ui_kits/article/Chrome.tsx) accepts each section as an optional prop with sensible defaults.
+
+---
+
+## Extended primitives
+
+Beyond the core `Primitives.tsx` (TensorVector, Arrow, OperatorNode, SubNetBlock, PointerGlyph, Citation, Figure, MathBlock) and the FiLM-specific `Diagrams.tsx`, the system includes 4 domain-specific files added to capture the visual vocabulary of the full Distill 2017–2021 corpus.
+
+### `RL.tsx` — Reinforcement Learning
+
+| Primitive | Use | Source figure |
+|---|---|---|
+| `GridWorld` | Cliffworld-style discretised environment with cells, paths, agents, goal/penalty | `paths-perspective-on-value-learning-01-cliffworld-path1.svg` |
+| `ValueHeatmap` | Grid where opacity encodes scalar V(s) or Q(s,a) | `paths-perspective-on-value-learning-12-value.svg` |
+| `PolicyArrows` | Per-cell stochastic policy as 4 inward triangular arrows with length/opacity = action probability | `paths-perspective-on-value-learning-11-policy.svg` |
+
+### `Graph.tsx` — Graphs and Trees
+
+| Primitive | Use | Source figure |
+|---|---|---|
+| `GraphNode` | Single node primitive with state (active/pruned/neutral/highlight); composes inside parent SVG | `ctc-14-beam-search.svg` |
+| `GraphEdge` | Straight or quadratic-bezier curved edge between two points; supports highlighted/dashed/arrow | (same) |
+| `BeamSearchTree` | Layered lattice composed from GraphNode + GraphEdge | `ctc-14-beam-search.svg` |
+| `DebateTree` | Two-sided argumentation tree with side-coloring (claim=orange, counter=blue), pill or dot nodes | `safety-needs-social-scientists-01.svg`, `film-09-debate-tree.png` |
+| `HMMState` | State circle with subscript-aware label (xₜ, aₜ); italic symbol + upright subscript | `ctc-17-hmm.svg`, `ctc-20-ctc-hmm.svg` |
+
+### `Heatmap.tsx` — Heatmaps, Grids, Recurrent
+
+| Primitive | Use | Source figure |
+|---|---|---|
+| `AttentionHeatmap` | 1D vector with opacity-modulated fill (attention/memory address) | `augmented-rnns-07-diagram.svg` |
+| `CellGrid` | Generic 2D grid (square=binary like Game of Life, circle=continuous like CTC DP) | `ctc-13-ctc-cost.svg`, `understanding-gnns-08-game-of-life-example.svg` |
+| `RecurrentArrow` | Curved bezier feedback arc for LSTM/GRU recurrence (default lavender stroke) | `memorization-in-rnns-02-lstm-web.svg` |
+| `VariableTensor` | TensorVector variant with per-cell width override (CTC variable-length runs) | `ctc-08-full-collapse-from-audio.svg` |
+
+### `Specialized.tsx` — Domain-specific
+
+| Primitive | Use | Source figure |
+|---|---|---|
+| `MoleculeViewer` | Atoms + bonds (orders 1/2/3/aromatic), element-keyed colors | `understanding-gnns-02-trigalloyl-glucose-molecule.svg` |
+| `AutomataGrid` | Multi-generation cellular automaton sequence with arrows between steps | `understanding-gnns-08-game-of-life-example.svg` |
+| `FeynmanDiagram` | Particle-physics: fermion solid, photon sinusoid, gluon helix | `aia-01-feynmann-diagram.svg` |
+| `ImageWithAnnotations` | Raster image overlay with annotation circles + labels (uses extended categorical palette) | `aia-10-cycle.svg`, `building-blocks-01-activation-pca.png` |
+| `DistillBoxplot` | Statistical boxplot in Distill palette, replacing Matplotlib defaults | `understanding-gnns-10-validation-accuracy-boxplot.svg` |
+
+Each primitive has a corresponding preview card under `preview/components-<group>-<name>.html`.
 
 ---
 
