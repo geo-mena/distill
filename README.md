@@ -67,21 +67,42 @@ Per-tool adapters under [configs/](configs/): [Codex](configs/codex/AGENTS.md), 
 
 ## Repository map
 
-| Path | Purpose |
-|---|---|
-| [plugins/distill-design/SKILL.md](plugins/distill-design/SKILL.md) | Skill manifest, read by Claude on invocation |
-| [plugins/distill-design/DESIGN-SYSTEM.md](plugins/distill-design/DESIGN-SYSTEM.md) | Design rules — voice, color, typography, iconography, caveats |
-| [plugins/distill-design/tokens/colors_and_type.css](plugins/distill-design/tokens/colors_and_type.css) | CSS variables — three palettes, type scale, spacing, radii, shadows, motion |
-| [plugins/distill-design/fonts/](plugins/distill-design/fonts/) | Geist Pixel Square, mono only. Body and display use the OS system sans stack |
-| [plugins/distill-design/assets/](plugins/distill-design/assets/) | Pointer-glyph SVG, wordmark SVG, [iconography rules](plugins/distill-design/assets/ICONOGRAPHY.md) |
-| [plugins/distill-design/ui_kits/article/](plugins/distill-design/ui_kits/article/) | Article reader — `Primitives.tsx`, `Chrome.tsx`, `Diagrams.tsx`, `RL.tsx`, `Graph.tsx`, `Heatmap.tsx`, `Specialized.tsx`, plus the assembled `index.html` |
-| [plugins/distill-design/templates/](plugins/distill-design/templates/) | Author tools — `design-canvas.tsx`, `tweaks-panel.tsx` |
-| [plugins/distill-design/preview/](plugins/distill-design/preview/) | 48 reference cards, one per token or component |
-| [plugins/distill-design/sources/](plugins/distill-design/sources/) | 131 source figures from 10 Distill articles |
-| [plugins/distill-design/resources/diagrams/](plugins/distill-design/resources/diagrams/) | Output diagrams and the `_service-icons.svg` line-art icon library, 29 vendor-agnostic symbols |
-| [.claude-plugin/](.claude-plugin/) | Plugin manifest and marketplace metadata |
-| [configs/](configs/) | Per-agent adapters — Codex, Cursor, OpenCode, OpenClaw, Pi |
-| [scripts/](scripts/) | `install-claude.sh` for the Claude Code symlink, `bump-version.sh` for releases |
+```text
+.
+├── README.md, CHANGELOG.md, LICENSE
+├── package.json                            # Pi package metadata
+├── .claude-plugin/                         # marketplace.json + plugin.json
+├── configs/                                # per-agent adapters
+│   ├── codex/AGENTS.md
+│   ├── cursor/distill-design.mdc
+│   ├── opencode/AGENTS.md
+│   ├── openclaw/AGENTS.md
+│   └── pi/AGENTS.md
+├── scripts/
+│   ├── install-claude.sh                   # symlink to ~/.claude/skills/distill-design
+│   └── bump-version.sh                     # release helper, sync version across manifests
+└── plugins/distill-design/                 # canonical Skill
+    ├── SKILL.md                            # manifest, read by Claude on invocation
+    ├── DESIGN-SYSTEM.md                    # voice, color, typography, iconography, caveats
+    ├── tokens/colors_and_type.css          # three palettes, type scale, spacing, radii, motion
+    ├── fonts/                              # Geist Pixel Square, mono only
+    ├── assets/                             # pointer-glyph, wordmark, ICONOGRAPHY.md
+    ├── ui_kits/article/                    # 7 .tsx files + assembled index.html
+    │   ├── Primitives.tsx                  # TensorVector, Arrow, OperatorNode, SubNetBlock, ...
+    │   ├── Chrome.tsx                      # ArticleNav, ArticleHeader, TOCDrawer, ArticleFooter
+    │   ├── Diagrams.tsx                    # FiLM scenes — concat, bias, scaling, network, scrubber
+    │   ├── RL.tsx                          # GridWorld, ValueHeatmap, PolicyArrows
+    │   ├── Graph.tsx                       # GraphNode, GraphEdge, BeamSearchTree, DebateTree, HMMState
+    │   ├── Heatmap.tsx                     # AttentionHeatmap, CellGrid, RecurrentArrow, VariableTensor, ConvGrid
+    │   ├── Specialized.tsx                 # MoleculeViewer, AutomataGrid, FeynmanDiagram, ImageWithAnnotations, DistillBoxplot
+    │   └── index.html                      # serve via HTTP — Babel standalone fetches .tsx via XHR
+    ├── templates/                          # author tools
+    │   ├── design-canvas.tsx               # Figma-style canvas wrapper
+    │   └── tweaks-panel.tsx                # floating live-tweak panel
+    ├── preview/                            # 48 reference cards, one per token or component
+    ├── sources/                            # 131 source figures from 10 articles
+    └── resources/diagrams/                 # output diagrams + _service-icons.svg (29 symbols)
+```
 
 ## Out of scope
 
