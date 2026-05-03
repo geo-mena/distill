@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.2] - 2026-05-03
+
+### Coherence pass
+
+After a Principal-Engineer audit comparing public surface (README) ↔ skill manifest (SKILL.md) ↔ deep rules (DESIGN-SYSTEM.md), two desynchronizations were corrected.
+
+### Changed
+
+- **`README.md` Capabilities**: extended from 11 to 16 rows. Now surfaces every domain the Skill actually covers post-v0.2.1: Diagrams (RL — `GridWorld`/`ValueHeatmap`/`PolicyArrows`), Diagrams (graphs/trees — `BeamSearchTree`/`DebateTree`/`HMMState`), Diagrams (sequence/attention — `AttentionHeatmap`/`CellGrid`/`RecurrentArrow`/`VariableTensor`), Diagrams (CNN — `ConvGrid`), Diagrams (specialized — `MoleculeViewer`/`FeynmanDiagram`/`AutomataGrid`/`DistillBoxplot`/`ImageWithAnnotations`), and Cloud architecture (the `service-<slug>` icon library). Previous Capabilities table only mentioned FiLM-style and core primitives — clients had no way to know the Skill spans the full corpus.
+- **`SKILL.md` cloud-architecture decision-tree entry**: trimmed from ~280 words to ~80, delegating the full category→color mapping, missing-icon protocol, and rationale to `DESIGN-SYSTEM.md` § "Service icons for architecture diagrams" (which already has the canonical version). Saves ~140 tokens per Skill invocation; same information available on demand. Net SKILL.md size: 1468 → 1360 words.
+
 ## [0.2.1] - 2026-05-03
 
 ### Added

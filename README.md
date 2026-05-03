@@ -8,12 +8,20 @@ The system targets the modern article template, in use 2017–2021. Tokens, comp
 
 ## Capabilities
 
+Coverage spans the full Distill corpus (10 articles, 131 source figures audited and distilled into reusable primitives).
+
 | Category | Prompt | Output |
 |---|---|---|
 | Editorial in Distill voice | *"Write a long-form on [topic] in Distill style"* | Article with TOC, hover citations, math, 7-section canonical footer |
 | Editorial in Distill voice | *"Rewrite this paragraph in Distill voice"* | First-person plural, no marketing superlatives, no exclamation points, math-verbs verbed |
-| Diagrams | *"Diagram an attention mechanism over memory"* | Composed primitives, `TensorVector`, `Arrow`, `OperatorNode`, `SubNetBlock`, `PointerGlyph`, on the salmon/blue/lavender palette |
-| Diagrams | *"Visualize this model FiLM-style"* | Pre-built scenes: concat / bias / scaling / FiLM-network / interactive scrubber |
+| Diagrams (core) | *"Diagram an attention mechanism over memory"* | Composed primitives: `TensorVector`, `Arrow`, `OperatorNode`, `SubNetBlock`, `PointerGlyph`, on the salmon/blue/lavender palette |
+| Diagrams (FiLM) | *"Visualize this model FiLM-style"* | Pre-built scenes: concat / bias / scaling / FiLM-network / interactive scrubber |
+| Diagrams (RL) | *"Show a cliffworld with the optimal policy and value function"* | `GridWorld` (cells, paths, agents, goal/penalty), `ValueHeatmap` (opacity-encoded V(s)/Q(s,a)), `PolicyArrows` (4-direction stochastic policy) |
+| Diagrams (graphs / trees) | *"Beam search lattice for CTC"* / *"Argumentation tree"* | `GraphNode`, `GraphEdge`, `BeamSearchTree` (active/pruned/neutral states), `DebateTree` (claim/counter sides), `HMMState` (subscript-bearing) |
+| Diagrams (sequence / attention) | *"Attention heatmap over tokens"* / *"CTC alignment matrix"* | `AttentionHeatmap` (1D opacity-modulated), `CellGrid` (CTC DP / Game of Life), `RecurrentArrow` (LSTM/GRU feedback), `VariableTensor` (per-cell width) |
+| Diagrams (CNN) | *"Receptive field with stride 2 padding 1"* | `ConvGrid`: input + kernel overlay + padding ring + output cell linkage, auto-computed output size |
+| Diagrams (specialized) | *"Benzene molecule"* / *"e+ e− → q q̄ Feynman diagram"* / *"Game of Life evolution"* / *"GNN validation accuracy boxplot"* | `MoleculeViewer`, `FeynmanDiagram`, `AutomataGrid`, `DistillBoxplot`, `ImageWithAnnotations` (raster + categorical overlay circles) |
+| Cloud architecture | *"Multi-region observability diagram"* | Hand-drawn vendor-agnostic SVG using the `service-<slug>` line-art icon library (29 symbols across edge / compute / data / messaging / observability / networking / storage / identity) |
 | Slide decks | *"8-slide deck on [paper]"* | Paper-warm background, system sans, one idea per slide, figure breakouts, citations at the foot |
 | Product styling | *"Style my dashboard like Distill"* | Drop-in `tokens/colors_and_type.css` tokens, TSX components copy-paste-ready |
 | Product styling | *"Convert this brand to a scholarly-editorial system"* | Brand-to-token mapping with diagram primitives |
