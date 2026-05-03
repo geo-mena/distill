@@ -27,7 +27,7 @@ The system targets the modern article template, in use 2017–2021. Tokens, comp
 ### Claude Code (plugin)
 
 ```bash
-/plugin marketplace add geo-mena/distill-design-system
+/plugin marketplace add geo-mena/distill
 /plugin install distill-design@distill-design-marketplace
 ```
 
