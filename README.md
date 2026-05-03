@@ -34,6 +34,21 @@ Coverage spans the full Distill corpus — 10 articles, 131 source figures audit
 | Mockups | *"Add a live tweaks panel for primary color and font size"* | Uses [templates/tweaks-panel.tsx](plugins/distill-design/templates/tweaks-panel.tsx) — floating panel, postMessage-persisted |
 | Visual reference | *"Show me how Distill diagrams [concept]"* | 131 source figures from 10 articles in [sources/](plugins/distill-design/sources/) |
 
+## Commands
+
+Six slash commands wrap the most common workflows. Each one loads the skill and adds focused instructions plus the project's hard constraints — no emoji, no marketing superlatives, no year literals, English-only, palette and stroke rules.
+
+| Command | Args | What it does |
+|---|---|---|
+| `/distill-design:article` | topic / paper / brief | Long-form article scaffold — TOC, hover citations, math, 7-section canonical footer |
+| `/distill-design:diagram` | one-line topic | Single SVG diagram, with primitive-file selection guidance baked in |
+| `/distill-design:cloud-arch` | architecture brief | Vendor-agnostic cloud architecture SVG using the `service-<slug>` icon library |
+| `/distill-design:cover` | project name + pitch | 1600×500 README cover banner in the article-hero pattern |
+| `/distill-design:rewrite` | text to rewrite | Text in Distill voice — first-person plural, no superlatives, sentence case |
+| `/distill-design:slides` | topic / paper | 16:9 slide deck — one idea per slide, paper background, system sans |
+
+Source files live under [plugins/distill-design/commands/](plugins/distill-design/commands/) — each is a Markdown prompt template with a `description` frontmatter and a body that loads the skill before doing the task.
+
 ## Examples
 
 Reference architecture diagrams in the system's visual language — vendor-agnostic, hand-drawn line art, paper-warm palette, dashed arrows for failover, replication, and observability.
