@@ -1,7 +1,7 @@
 # Distill Design System
 
 <p align="center">
-  <a href="https://github.com/geo-mena/distill/actions/workflows/release.yml?query=branch%3Amain"><img src="https://img.shields.io/github/actions/workflow/status/geo-mena/distill/release.yml?branch=main&label=release&style=for-the-badge" alt="Release workflow status"></a>
+  <a href="https://github.com/geo-mena/distill/actions/workflows/release.yml?query=branch%3Amain"><img src="https://img.shields.io/github/actions/workflow/status/geo-mena/distill/release.yml?branch=main&label=build&style=for-the-badge" alt="Release workflow status"></a>
   <a href="https://github.com/geo-mena/distill/releases"><img src="https://img.shields.io/github/v/release/geo-mena/distill?include_prereleases&style=for-the-badge" alt="Latest release"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="MIT License"></a>
 </p>
