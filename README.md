@@ -2,13 +2,13 @@
 
 ![Distill Design System cover](plugins/distill-design/resources/covers/distill-design-system.svg)
 
-A Claude Skill that codifies the visual and editorial conventions of [Distill.pub](https://distill.pub), the web-native ML research journal archived in 2021.
+A Claude Skill that codifies the visual and editorial conventions of [Distill.pub](https://distill.pub), the now-archived web-native ML research journal.
 
-The system targets the modern article template in use 2017–2021. Tokens, component sizes, link styling, and stroke palette were validated against live `distill.pub` via a 10-article DOM audit. The 2016 outlier — Georgia serif body, custom `<dt-article>` element — is out of scope.
+The system targets the modern article template. Tokens, component sizes, link styling, and stroke palette were validated against live `distill.pub` via a 10-article DOM audit. The earlier outlier — Georgia serif body, custom `<dt-article>` element — is out of scope.
 
 ## Capabilities
 
-Coverage spans the full Distill 2017–2021 corpus — 10 articles, 131 source figures audited and distilled into reusable primitives.
+Coverage spans the full Distill corpus — 10 articles, 131 source figures audited and distilled into reusable primitives.
 
 | Category | Prompt | Output |
 |---|---|---|
@@ -95,4 +95,4 @@ Per-tool adapters under [configs/](configs/): [Codex](configs/codex/AGENTS.md), 
 - Gradients, glassmorphism, fixed or sticky elements in articles.
 - Simplification of math notation. Density is part of the identity.
 - Multi-color or filled icons.
-- 2016 Distill template.
+- Earlier Distill template, predating the current `<d-article>` reader.
