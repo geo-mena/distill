@@ -1,0 +1,13 @@
+---
+description: Use distill-design to generate Distill.pub-style editorial articles, diagrams, slide decks, and product styling
+globs: **/*
+alwaysApply: false
+---
+
+Use the canonical `distill-design` skill from `plugins/distill-design/`. Cursor support is rules-based guidance, not native Agent Skills support.
+
+When the user asks for a long-form ML/AI explainer, a hand-drawn diagram, a cloud-architecture SVG, a slide deck, or product styling in Distill voice, read `plugins/distill-design/SKILL.md` and follow its decision tree. For deep design rules (color values, typography, voice samples, iconography), read `plugins/distill-design/DESIGN-SYSTEM.md`.
+
+Hard constraints: no emoji, no marketing superlatives, no exclamation points in body, no gradients, body color `rgba(0,0,0,0.8)`, pure `#000` reserved for h1, strokes 1.5–2px in `#666` with rounded caps. Pull design tokens from `plugins/distill-design/tokens/colors_and_type.css`; reuse TSX primitives from `plugins/distill-design/ui_kits/article/`; copy service icons from `plugins/distill-design/resources/diagrams/_service-icons.svg` inline into consumer SVGs.
+
+The article kit needs HTTP serving (`python3 -m http.server` from the plugin root) — `file://` blocks Babel standalone XHR.

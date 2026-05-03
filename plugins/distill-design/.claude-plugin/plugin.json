@@ -1,0 +1,11 @@
+{
+  "name": "distill-design",
+  "description": "Distill.pub design system: tokens, TSX primitives, line-art service icons, voice rules, and author tools",
+  "version": "0.1.0",
+  "author": {
+    "name": "geo-mena"
+  },
+  "repository": "https://github.com/geo-mena/distill-design-system",
+  "license": "MIT",
+  "skills": ["./"]
+}

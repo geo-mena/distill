@@ -1,6 +1,6 @@
 # Distill Design System
 
-![Distill Design System cover](resources/covers/distill-design-system.svg)
+![Distill Design System cover](plugins/distill-design/resources/covers/distill-design-system.svg)
 
 A Claude Skill that codifies the visual and editorial conventions of [Distill.pub](https://distill.pub), the now-archived web-native ML research journal.
 
@@ -18,53 +18,49 @@ The system targets the modern article template, in use 2017–2021. Tokens, comp
 | Product styling | *"Style my dashboard like Distill"* | Drop-in `tokens/colors_and_type.css` tokens, TSX components copy-paste-ready |
 | Product styling | *"Convert this brand to a scholarly-editorial system"* | Brand-to-token mapping with diagram primitives |
 | Mockups | *"Quick mockup of [feature]"* | Standalone HTML artifact |
-| Mockups | *"Lay out 6 variants side-by-side"* | Uses [templates/design-canvas.tsx](templates/design-canvas.tsx): pan/zoom, drag-reorder, focus mode |
-| Mockups | *"Add a live tweaks panel for primary color and font size"* | Uses [templates/tweaks-panel.tsx](templates/tweaks-panel.tsx): floating panel, postMessage-persisted |
-| Visual reference | *"Show me how Distill diagrams [concept]"* | 131 source figures from 10 articles in [sources/](sources/) |
+| Mockups | *"Lay out 6 variants side-by-side"* | Uses [templates/design-canvas.tsx](plugins/distill-design/templates/design-canvas.tsx): pan/zoom, drag-reorder, focus mode |
+| Mockups | *"Add a live tweaks panel for primary color and font size"* | Uses [templates/tweaks-panel.tsx](plugins/distill-design/templates/tweaks-panel.tsx): floating panel, postMessage-persisted |
+| Visual reference | *"Show me how Distill diagrams [concept]"* | 131 source figures from 10 articles in [sources/](plugins/distill-design/sources/) |
 
-## Usage modes
+## Install
 
-### As a Claude Skill
-
-```bash
-ln -s "$(pwd)" ~/.claude/skills/distill-design
-```
-
-Invoke with `/distill-design` in any Claude Code session, or describe an editorial or diagrammatic task; the skill activates by description match.
-
-### As a reference for porting
-
-| What | Where |
-|---|---|
-| CSS variables | [tokens/colors_and_type.css](tokens/colors_and_type.css) |
-| TSX components with prop interfaces | [ui_kits/article/](ui_kits/article/) |
-| Per-token reference cards (30) | [preview/](preview/) |
-| Source figures (131) | [sources/](sources/) |
-| Voice, color, typography, iconography rules | [DESIGN-SYSTEM.md](DESIGN-SYSTEM.md) |
-
-<!-- ### As a live demo
+### Claude Code (plugin)
 
 ```bash
-python3 -m http.server 8765
+/plugin marketplace add geo-mena/distill-design-system
+/plugin install distill-design@distill-design-marketplace
 ```
 
-Open [http://localhost:8765/ui_kits/article/index.html](http://localhost:8765/ui_kits/article/index.html). The article kit requires HTTP. Babel standalone fetches the `.tsx` files via XHR, and Chromium blocks XHR over `file://` under CORS. See [ui_kits/article/README.md](ui_kits/article/README.md). -->
+Restart Claude Code. Invoke with `/distill-design`, or describe an editorial or diagrammatic task — the skill activates by description match.
+
+### Claude Code (local symlink)
+
+```bash
+./install-claude.sh
+```
+
+Symlinks `plugins/distill-design/` to `~/.claude/skills/distill-design`. Useful when iterating on the skill itself.
+
+### Other agents
+
+Per-tool adapters in [configs/](configs/): [Codex](configs/codex/AGENTS.md), [Cursor](configs/cursor/distill-design.mdc), [OpenCode](configs/opencode/AGENTS.md), [OpenClaw](configs/openclaw/AGENTS.md), [Pi](configs/pi/AGENTS.md). Each one tells the target agent where to find the canonical skill at `plugins/distill-design/`.
 
 ## Repository map
 
 | Path | Purpose |
 |---|---|
-| [SKILL.md](SKILL.md) | Skill manifest, read by Claude on invocation |
-| [DESIGN-SYSTEM.md](DESIGN-SYSTEM.md) | Design rules: voice, color, typography, iconography, caveats |
-| [tokens/colors_and_type.css](tokens/colors_and_type.css) | CSS variables: 3 palettes, type scale, spacing, radii, shadows, motion |
-| [fonts/](fonts/) | Geist Pixel Square (mono only). Body and display use the OS system sans stack |
-| [assets/](assets/) | Pointer-glyph SVG, wordmark SVG, [iconography rules](assets/ICONOGRAPHY.md) |
-| [ui_kits/article/](ui_kits/article/) | Article reader: Primitives, Chrome, Diagrams (`.tsx`) and assembled `index.html` |
-| [templates/design-canvas.tsx](templates/design-canvas.tsx) | Author tool: Figma-style canvas wrapper |
-| [templates/tweaks-panel.tsx](templates/tweaks-panel.tsx) | Author tool: floating live-tweak panel |
-| [preview/](preview/) | 30 reference cards, one per token or component |
-| [sources/](sources/) | 131 source figures from 10 Distill articles |
-| [tsconfig.json](tsconfig.json), [globals.d.ts](globals.d.ts) | TypeScript config and ambient types. No `node_modules` |
+| [plugins/distill-design/SKILL.md](plugins/distill-design/SKILL.md) | Skill manifest, read by Claude on invocation |
+| [plugins/distill-design/DESIGN-SYSTEM.md](plugins/distill-design/DESIGN-SYSTEM.md) | Design rules: voice, color, typography, iconography, caveats |
+| [plugins/distill-design/tokens/colors_and_type.css](plugins/distill-design/tokens/colors_and_type.css) | CSS variables: 3 palettes, type scale, spacing, radii, shadows, motion |
+| [plugins/distill-design/fonts/](plugins/distill-design/fonts/) | Geist Pixel Square (mono only). Body and display use the OS system sans stack |
+| [plugins/distill-design/assets/](plugins/distill-design/assets/) | Pointer-glyph SVG, wordmark SVG, [iconography rules](plugins/distill-design/assets/ICONOGRAPHY.md) |
+| [plugins/distill-design/ui_kits/article/](plugins/distill-design/ui_kits/article/) | Article reader: Primitives, Chrome, Diagrams (`.tsx`) and assembled `index.html` |
+| [plugins/distill-design/templates/](plugins/distill-design/templates/) | Author tools: `design-canvas.tsx`, `tweaks-panel.tsx` |
+| [plugins/distill-design/preview/](plugins/distill-design/preview/) | 30 reference cards, one per token or component |
+| [plugins/distill-design/sources/](plugins/distill-design/sources/) | 131 source figures from 10 Distill articles |
+| [.claude-plugin/](.claude-plugin/) | Plugin manifest and marketplace metadata |
+| [configs/](configs/) | Per-agent adapters (Codex, Cursor, OpenCode, OpenClaw, Pi) |
+| [install-claude.sh](install-claude.sh) | Local symlink installer for Claude Code |
 
 ## Out of scope
 
