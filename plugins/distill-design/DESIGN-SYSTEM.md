@@ -1,6 +1,6 @@
 # Distill Design System — Reference
 
-Detailed design language documentation. Read this when applying the system to specific work, when you need exact values, or when defaults feel insufficient. For a quick orientation, see [README.md](README.md). For Claude Skill invocation rules, see [SKILL.md](SKILL.md).
+Detailed design language documentation. Read this when applying the system to specific work, when you need exact values, or when defaults feel insufficient. For a quick orientation, see [README.md](../../README.md). For Claude Skill invocation rules, see [SKILL.md](SKILL.md).
 
 ---
 

@@ -1,0 +1,44 @@
+{
+  "name": "distill-design",
+  "version": "0.1.0",
+  "description": "Distill.pub design system as a Claude Skill: tokens, TSX primitives, line-art service icons, voice rules, and author tools (canvas + tweaks panel) for editorial-diagrammatic interfaces",
+  "license": "MIT",
+  "homepage": "https://github.com/geo-mena/distill#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geo-mena/distill.git"
+  },
+  "bugs": {
+    "url": "https://github.com/geo-mena/distill/issues"
+  },
+  "keywords": [
+    "agent-skill",
+    "pi-package",
+    "claude-code-plugin",
+    "claude-marketplace",
+    "codex",
+    "opencode",
+    "openclaw",
+    "cursor",
+    "design-system",
+    "distill",
+    "editorial",
+    "diagrams",
+    "ml-research",
+    "tokens",
+    "tsx"
+  ],
+  "files": [
+    "plugins/distill-design",
+    ".claude-plugin",
+    "configs",
+    "install-claude.sh",
+    "README.md",
+    "LICENSE"
+  ],
+  "pi": {
+    "skills": [
+      "./plugins/distill-design"
+    ]
+  }
+}

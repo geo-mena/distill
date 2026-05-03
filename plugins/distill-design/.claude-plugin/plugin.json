@@ -1,6 +1,6 @@
 {
   "name": "distill-design",
-  "description": "Distill.pub design system: tokens, TSX primitives, line-art service icons, voice rules, and author tools",
+  "description": "Distill.pub design system as a Claude Skill: tokens, TSX primitives, line-art service icons, voice rules, and author tools (canvas + tweaks panel) for editorial-diagrammatic interfaces",
   "version": "0.1.0",
   "author": {
     "name": "geo-mena"
