@@ -1,4 +1,4 @@
-<h1 align="center">Distill Design System</h1>
+<h2 align="center">Distill Design System</h2>
 
 ![Distill Design System cover](plugins/distill-design/resources/covers/distill-design-system.svg)
 
