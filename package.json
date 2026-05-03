@@ -32,7 +32,7 @@
     "plugins/distill-design",
     ".claude-plugin",
     "configs",
-    "install-claude.sh",
+    "scripts",
     "README.md",
     "CHANGELOG.md",
     "LICENSE"

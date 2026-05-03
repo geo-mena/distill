@@ -7,5 +7,7 @@
   },
   "repository": "https://github.com/geo-mena/distill",
   "license": "MIT",
-  "skills": ["./"]
+  "skills": [
+    "./"
+  ]
 }

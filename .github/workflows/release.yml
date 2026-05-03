@@ -1,0 +1,73 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Extract version from tag
+        id: version
+        run: echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Extract release notes from CHANGELOG.md
+        id: notes
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          NOTES_FILE=$(mktemp)
+          # Extract everything between "## [VERSION]" and the next "## [" (or EOF).
+          awk -v ver="$VERSION" '
+            $0 ~ "^## \\[" ver "\\]" { found = 1; next }
+            found && /^## \[/ { exit }
+            found { print }
+          ' CHANGELOG.md > "$NOTES_FILE"
+          if [ ! -s "$NOTES_FILE" ]; then
+            echo "error: no CHANGELOG.md section found for version $VERSION" >&2
+            echo "Expected a heading like: ## [$VERSION] - YYYY-MM-DD" >&2
+            exit 1
+          fi
+          echo "notes_file=$NOTES_FILE" >> "$GITHUB_OUTPUT"
+          echo "--- Release notes preview ---"
+          cat "$NOTES_FILE"
+
+      - name: Verify manifest versions match the tag
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          fail=0
+          check() {
+            local file="$1" expected="$2" actual
+            actual=$(python3 -c "import json; print($expected)")
+            if [ "$actual" != "$VERSION" ]; then
+              echo "  $file: expected $VERSION, found $actual" >&2
+              fail=1
+            else
+              echo "  $file: $actual ✓"
+            fi
+          }
+          check package.json "json.load(open('package.json'))['version']"
+          check .claude-plugin/marketplace.json "json.load(open('.claude-plugin/marketplace.json'))['metadata']['version']"
+          check .claude-plugin/marketplace.json "json.load(open('.claude-plugin/marketplace.json'))['plugins'][0]['version']"
+          check plugins/distill-design/.claude-plugin/plugin.json "json.load(open('plugins/distill-design/.claude-plugin/plugin.json'))['version']"
+          if [ "$fail" = 1 ]; then
+            echo ""
+            echo "error: manifest versions do not match tag v$VERSION." >&2
+            echo "Run ./scripts/bump-version.sh $VERSION before tagging." >&2
+            exit 1
+          fi
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${{ github.ref_name }}" \
+            --title "${{ github.ref_name }}" \
+            --notes-file "${{ steps.notes.outputs.notes_file }}"

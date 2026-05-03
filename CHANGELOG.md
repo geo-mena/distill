@@ -10,7 +10,7 @@ A Claude Skill that codifies Distill.pub's visual and editorial conventions: pap
 - Claude Code marketplace structure: `.claude-plugin/marketplace.json` + `.claude-plugin/plugin.json` (root); `plugins/distill-design/.claude-plugin/plugin.json` (skill).
 - Pi package metadata in `package.json` so `pi install git:github.com/geo-mena/distill` loads the canonical `plugins/distill-design/` skill.
 - Per-tool adapter docs under `configs/`: Codex CLI, Cursor, OpenCode/opencode, OpenClaw, Pi.
-- `install-claude.sh` for one-command local symlink to `~/.claude/skills/distill-design`.
+- `scripts/install-claude.sh` for one-command local symlink to `~/.claude/skills/distill-design`.
 - MIT license.
 
 ### Skill content

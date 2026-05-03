@@ -4,7 +4,7 @@
 set -e
 
 SKILL_DIR="$HOME/.claude/skills/distill-design"
-REPO_ROOT="$(cd "$(dirname "$0")" && pwd)"
+REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 PLUGIN_DIR="$REPO_ROOT/plugins/distill-design"
 
 if [ ! -f "$PLUGIN_DIR/SKILL.md" ]; then

@@ -36,7 +36,7 @@ Restart Claude Code. Invoke with `/distill-design`, or describe an editorial or 
 ### Claude Code (local symlink)
 
 ```bash
-./install-claude.sh
+./scripts/install-claude.sh
 ```
 
 Symlinks `plugins/distill-design/` to `~/.claude/skills/distill-design`. Useful when iterating on the skill itself.
@@ -60,7 +60,7 @@ Per-tool adapters in [configs/](configs/): [Codex](configs/codex/AGENTS.md), [Cu
 | [plugins/distill-design/sources/](plugins/distill-design/sources/) | 131 source figures from 10 Distill articles |
 | [.claude-plugin/](.claude-plugin/) | Plugin manifest and marketplace metadata |
 | [configs/](configs/) | Per-agent adapters (Codex, Cursor, OpenCode, OpenClaw, Pi) |
-| [install-claude.sh](install-claude.sh) | Local symlink installer for Claude Code |
+| [scripts/](scripts/) | `install-claude.sh` (Claude Code symlink) and `bump-version.sh` (release helper) |
 
 ## Out of scope
 
