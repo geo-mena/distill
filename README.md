@@ -1,5 +1,3 @@
-<h2 align="center">Distill</h2>
-
 ![Distill Design System cover](plugins/distill-design/resources/covers/distill-design-system.svg)
 
 <p align="center">
