@@ -38,13 +38,9 @@ Reference architecture diagrams in the system's visual language — vendor-agnos
 
 ![Multi-region observability architecture](plugins/distill-design/resources/diagrams/multi-region-observability.svg)
 
-[`plugins/distill-design/resources/diagrams/multi-region-observability.svg`](plugins/distill-design/resources/diagrams/multi-region-observability.svg) — multi-region AWS architecture in four bands. EDGE: Route 53 failover routing with per-region health checks, fronted by CloudFront. COMPUTE: two regions, sa-east-1 PRIMARY and us-east-1 SECONDARY, each with ALB → Auto-Scaling Group → 2 EC2 → RDS. CLOUDWATCH: metrics, logs, alarms, EventBridge, dashboard. NOTIFICATIONS: SNS fanning to email and a Lambda Slack notifier.
-
 ### Multi-tier app with RDS
 
 ![Multi-tier app with RDS Multi-AZ and read replica](plugins/distill-design/resources/diagrams/multi-tier-rds.svg)
-
-[`plugins/distill-design/resources/diagrams/multi-tier-rds.svg`](plugins/distill-design/resources/diagrams/multi-tier-rds.svg) — three-tier app on AWS with RDS Multi-AZ and Read Replica. Users → Route 53 → Application Load Balancer in the public subnet → EC2 A and B in private subnets → RDS Primary in sa-east-1a, PostgreSQL. Multi-AZ Standby in sa-east-1b via synchronous replication; Read Replica in sa-east-1c via asynchronous replication. RDS Automated Backups with 7-day retention, S3 Manual Snapshots, CloudWatch metrics and alarms.
 
 ## Install
 
