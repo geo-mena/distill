@@ -43,9 +43,9 @@ Tokens validated by DOM audit on 10 articles (2017–2021). For deep rules, read
 | `ui_kits/article/index.html` | Fully-assembled FiLM article — serve via HTTP (`python3 -m http.server`), not `file://` |
 | `templates/design-canvas.tsx` | Author tool: Figma-ish canvas wrapper for laying out variants |
 | `templates/tweaks-panel.tsx` | Author tool: floating live-tweak panel (sliders / toggles / colors) |
-| `preview/*.html` | 30 reference cards — one per token/component |
+| `preview/*.html` | 48 reference cards — one per token/component |
 | `sources/` | 131 source figures from 10 Distill articles |
-| `resources/diagrams/_service-icons.svg` | Canonical line-art icon library for cloud-architecture diagrams (17 symbols: `service-dns`, `service-cdn`, `service-load-balancer`, `service-compute`, `service-database`, `service-pubsub`, `service-function`, `service-metrics`, `service-logs`, `service-alarms`, `service-events`, `service-dashboard`, etc.). Vendor-agnostic naming. Each `<symbol>` is 24×24 viewBox, stroke `#666`, monochrome. Inline-copy into consumer SVG `<defs>` for portability |
+| `resources/diagrams/_service-icons.svg` | Canonical line-art icon library for cloud-architecture diagrams — 29 vendor-agnostic `service-<slug>` symbols across EDGE & DNS, NETWORKING, COMPUTE, STORAGE, DATA, IDENTITY, MESSAGING, OBSERVABILITY, EXTERNAL SINKS. Each `<symbol>` is 24×24 viewBox, stroke `#666`, monochrome. Inline-copy into consumer SVG `<defs>` for portability |
 | `DESIGN-SYSTEM.md` | **Deep design rules: voice, color, typography, iconography, caveats. Read this when the user asks for specific values, voice transformation, or anything not directly answered above.** |
 
 ## Decision tree

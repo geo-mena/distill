@@ -26,9 +26,10 @@ fi
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 PKG="$REPO_ROOT/package.json"
 MARKET="$REPO_ROOT/.claude-plugin/marketplace.json"
+MARKET_PLUGIN="$REPO_ROOT/.claude-plugin/plugin.json"
 PLUGIN="$REPO_ROOT/plugins/distill-design/.claude-plugin/plugin.json"
 
-for f in "$PKG" "$MARKET" "$PLUGIN"; do
+for f in "$PKG" "$MARKET" "$MARKET_PLUGIN" "$PLUGIN"; do
     [ -f "$f" ] || { echo "error: missing $f" >&2; exit 1; }
 done
 
@@ -69,6 +70,11 @@ jq_filter_set="d['metadata']['version'] = '$NEW_VERSION'"
 bump "$MARKET" "d['metadata']['version']"
 jq_filter_set="d['plugins'][0]['version'] = '$NEW_VERSION'"
 bump "$MARKET" "d['plugins'][0]['version']"
+
+# .claude-plugin/plugin.json: marketplace wrapper manifest, top-level "version"
+echo ".claude-plugin/plugin.json:"
+jq_filter_set="d['version'] = '$NEW_VERSION'"
+bump "$MARKET_PLUGIN" "d['version']"
 
 # plugins/distill-design/.claude-plugin/plugin.json: top-level "version"
 echo "plugins/distill-design/.claude-plugin/plugin.json:"
