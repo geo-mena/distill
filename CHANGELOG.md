@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.4.0] - 2026-05-03
+
+### Added
+
+- **`/distill-design:brand-map`** slash command. Maps a product brand (primary color, accent, font preference, voice samples, target surface) onto Distill design tokens. Output: `:root { ... }` token-override CSS, component adapter notes (which existing primitives map to expected UI surfaces, with explicit pushback when Distill has no equivalent — cards, app-shell sidebars, multi-column dashboards), and a voice translation table. Closes the gap where the README's "Product styling" capability rows had no command.
+
+### Documentation
+
+- `SKILL.md` updates the commands table from 6 to 7 rows.
+- `README.md` Commands section adds the `brand-map` row.
+
 ## [0.3.0] - 2026-05-03
 
 ### Slash commands

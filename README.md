@@ -36,7 +36,7 @@ Coverage spans the full Distill corpus — 10 articles, 131 source figures audit
 
 ## Commands
 
-Six slash commands wrap the most common workflows. Each one loads the skill and adds focused instructions plus the project's hard constraints — no emoji, no marketing superlatives, no year literals, English-only, palette and stroke rules.
+Seven slash commands wrap the most common workflows. Each one loads the skill and adds focused instructions plus the project's hard constraints — no emoji, no marketing superlatives, no year literals, English-only, palette and stroke rules.
 
 | Command | Args | What it does |
 |---|---|---|
@@ -46,6 +46,7 @@ Six slash commands wrap the most common workflows. Each one loads the skill and 
 | `/distill-design:cover` | project name + pitch | 1600×500 README cover banner in the article-hero pattern |
 | `/distill-design:rewrite` | text to rewrite | Text in Distill voice — first-person plural, no superlatives, sentence case |
 | `/distill-design:slides` | topic / paper | 16:9 slide deck — one idea per slide, paper background, system sans |
+| `/distill-design:brand-map` | brand brief | Map a product brand onto Distill tokens — override CSS, component adapter notes, voice translation table |
 
 Source files live under [plugins/distill-design/commands/](plugins/distill-design/commands/) — each is a Markdown prompt template with a `description` frontmatter and a body that loads the skill before doing the task.
 

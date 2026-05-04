@@ -6,7 +6,7 @@ user-invocable: true
 
 When invoked: if the user has not given a specific request, ask what they want to build (article, diagram, slide deck, mockup, dashboard styling, voice transform) and act as an expert Distill designer. Output either HTML artifacts (for throwaway/preview work) or production-ready code (TSX + CSS) depending on the target.
 
-Six explicit slash commands wrap the most common workflows — they all load this Skill and add a focused prompt:
+Seven explicit slash commands wrap the most common workflows — they all load this Skill and add a focused prompt:
 
 | Command | What it does |
 |---|---|
@@ -16,6 +16,7 @@ Six explicit slash commands wrap the most common workflows — they all load thi
 | `/distill-design:cover` | Generate a 1600×500 README cover banner in the article-hero pattern |
 | `/distill-design:rewrite` | Rewrite text in Distill voice — first-person plural, no superlatives, sentence case |
 | `/distill-design:slides` | Generate a 16:9 slide deck — one idea per slide, paper background, system sans |
+| `/distill-design:brand-map` | Map a product brand onto Distill tokens — override CSS, component adapter notes, voice translation table |
 
 Use the commands when the user's intent maps cleanly to one of these tasks. For freeform requests outside those buckets, work directly from the decision tree below.
 
