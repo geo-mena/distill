@@ -1,0 +1,189 @@
+<svg viewBox="0 0 1200 710" xmlns="http://www.w3.org/2000/svg" role="img">
+  <title>Agent routing — docs bot</title>
+  <desc>Mermaid TD flowchart translated to a Distill diagram. A user enters a Router Node that performs agentic routing across five domain skills — Onboarding, Auth, Morfología, OCR, SDK — each backed by its own KB folder and, where applicable, an external tool (Auth API, OCR API, Zoho + GitHub). The five skills converge to a single "Respuesta al usuario" node; when the answer has insufficient information, the flow escalates to a Zoho ticket.</desc>
+  <style>
+    text {
+      font-family: -apple-system, system-ui, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+      text-rendering: geometricPrecision;
+    }
+    .eyebrow     { font-size: 11px; font-weight: 500; letter-spacing: 1.1px; fill: #6a6a6a; }
+    .block       { font-size: 13px; font-weight: 500; fill: #2a2a2a; }
+    .block-sub   { font-size: 10px; fill: #6a6a6a; }
+    .edge-label  { font-size: 10px; fill: #6a6a6a; font-style: italic; }
+  </style>
+
+  <defs>
+    <!-- bespoke line-art service icons, drawn in #666 1.5px stroke -->
+    <symbol id="service-users" viewBox="0 0 24 24">
+      <circle cx="9" cy="8" r="3" fill="none" stroke="#666" stroke-width="1.5"/>
+      <path d="M3.5 19 C 3.5 14.5 6 13.5 9 13.5 C 12 13.5 14.5 14.5 14.5 19" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="16" cy="9" r="2.3" fill="none" stroke="#666" stroke-width="1.2"/>
+      <path d="M14 18 C 14 15 16 14 17.8 14 C 19.6 14 21.5 15 21.5 18" fill="none" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="service-router" viewBox="0 0 24 24">
+      <circle cx="6" cy="12" r="2" fill="none" stroke="#666" stroke-width="1.5"/>
+      <line x1="8" y1="12" x2="17" y2="6" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="8" y1="12" x2="17" y2="12" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="8" y1="12" x2="17" y2="18" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+      <circle cx="18" cy="6" r="1.6" fill="none" stroke="#666" stroke-width="1.2"/>
+      <circle cx="18" cy="12" r="1.6" fill="none" stroke="#666" stroke-width="1.2"/>
+      <circle cx="18" cy="18" r="1.6" fill="none" stroke="#666" stroke-width="1.2"/>
+    </symbol>
+    <symbol id="service-onboarding" viewBox="0 0 24 24">
+      <rect x="5" y="4" width="14" height="17" rx="1" fill="none" stroke="#666" stroke-width="1.5"/>
+      <rect x="9" y="2.5" width="6" height="3" rx="0.5" fill="none" stroke="#666" stroke-width="1.2"/>
+      <polyline points="7.5,9.5 9,11 11.5,8.5" fill="none" stroke="#666" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="13" y1="10" x2="17" y2="10" stroke="#666" stroke-width="1"/>
+      <polyline points="7.5,14.5 9,16 11.5,13.5" fill="none" stroke="#666" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="13" y1="15" x2="17" y2="15" stroke="#666" stroke-width="1"/>
+    </symbol>
+    <symbol id="service-iam" viewBox="0 0 24 24">
+      <circle cx="8" cy="12" r="4" fill="none" stroke="#666" stroke-width="1.5"/>
+      <line x1="12" y1="12" x2="22" y2="12" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="18" y1="12" x2="18" y2="15.5" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="21" y1="12" x2="21" y2="15.5" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="service-biometric" viewBox="0 0 24 24">
+      <polyline points="3,7 3,3 7,3" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline points="17,3 21,3 21,7" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline points="21,17 21,21 17,21" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline points="7,21 3,21 3,17" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="12" cy="12" r="5" fill="none" stroke="#666" stroke-width="1.3"/>
+      <circle cx="10" cy="11" r="0.8" fill="#666"/>
+      <circle cx="14" cy="11" r="0.8" fill="#666"/>
+      <path d="M9.5 14 C 10.5 15.3 13.5 15.3 14.5 14" fill="none" stroke="#666" stroke-width="1.2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="service-ocr" viewBox="0 0 24 24">
+      <rect x="3" y="4" width="13" height="17" rx="1" fill="none" stroke="#666" stroke-width="1.5"/>
+      <line x1="6" y1="9" x2="13" y2="9" stroke="#666" stroke-width="1"/>
+      <line x1="6" y1="12" x2="13" y2="12" stroke="#666" stroke-width="1"/>
+      <line x1="6" y1="15" x2="11" y2="15" stroke="#666" stroke-width="1"/>
+      <circle cx="17.5" cy="15" r="3.2" fill="none" stroke="#666" stroke-width="1.5"/>
+      <line x1="19.8" y1="17.3" x2="22" y2="19.5" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="service-sdk" viewBox="0 0 24 24">
+      <polyline points="9,7 4,12 9,17" fill="none" stroke="#666" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline points="15,7 20,12 15,17" fill="none" stroke="#666" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="13.5" y1="5.5" x2="10.5" y2="18.5" stroke="#666" stroke-width="1.3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="service-response" viewBox="0 0 24 24">
+      <path d="M3 5 H 21 V 16 H 13 L 8 20 V 16 H 3 Z" fill="none" stroke="#666" stroke-width="1.5" stroke-linejoin="round"/>
+      <circle cx="9" cy="10.5" r="0.8" fill="#666"/>
+      <circle cx="12" cy="10.5" r="0.8" fill="#666"/>
+      <circle cx="15" cy="10.5" r="0.8" fill="#666"/>
+    </symbol>
+    <symbol id="service-ticket" viewBox="0 0 24 24">
+      <path d="M3 9 V 15 C 4.5 15 4.5 9 3 9 Z M 21 9 V 15 C 19.5 15 19.5 9 21 9 Z" fill="none" stroke="#666" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M3 9 H 21 M 3 15 H 21" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="9" y1="10" x2="9" y2="14" stroke="#666" stroke-width="1" stroke-dasharray="1.5 1.5"/>
+      <line x1="12" y1="11.5" x2="18" y2="11.5" stroke="#666" stroke-width="1"/>
+      <line x1="12" y1="13" x2="16" y2="13" stroke="#666" stroke-width="1"/>
+    </symbol>
+  </defs>
+
+  <rect width="1200" height="710" fill="#fdfdfd"/>
+
+  <text x="30" y="32" class="eyebrow">AGENT ROUTING — DOCS BOT</text>
+
+  <!-- USER (stadium / pill) -->
+  <rect x="530" y="52" width="140" height="44" rx="22" fill="#fdfdfd" stroke="#d8d8d4" stroke-width="1"/>
+  <use href="#service-users" x="542" y="64" width="20" height="20"/>
+  <text x="610" y="74" class="block" text-anchor="middle" dominant-baseline="middle">Usuario</text>
+
+  <line x1="600" y1="96" x2="600" y2="124" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <polygon points="596,124 604,124 600,128" fill="#666"/>
+
+  <!-- ROUTER (HIGHLIGHT cream) -->
+  <rect x="490" y="128" width="220" height="68" rx="4" fill="#fbecd6" stroke="#a87439" stroke-width="1.2"/>
+  <use href="#service-router" x="500" y="146" width="22" height="22"/>
+  <text x="611" y="158" class="block" text-anchor="middle">Router Node</text>
+  <text x="611" y="178" class="block-sub" text-anchor="middle">agentic routing</text>
+
+  <!-- Router → manifold -->
+  <line x1="600" y1="196" x2="600" y2="242" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Manifold horizontal -->
+  <line x1="170" y1="242" x2="1030" y2="242" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- 5 verticals to each skill with arrows -->
+  <line x1="170" y1="242" x2="170" y2="318" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <polygon points="166,318 174,318 170,322" fill="#666"/>
+  <line x1="385" y1="242" x2="385" y2="318" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <polygon points="381,318 389,318 385,322" fill="#666"/>
+  <line x1="600" y1="242" x2="600" y2="318" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <polygon points="596,318 604,318 600,322" fill="#666"/>
+  <line x1="815" y1="242" x2="815" y2="318" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <polygon points="811,318 819,318 815,322" fill="#666"/>
+  <line x1="1030" y1="242" x2="1030" y2="318" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <polygon points="1026,318 1034,318 1030,322" fill="#666"/>
+
+  <!-- Edge labels -->
+  <text x="178" y="282" class="edge-label">onboarding</text>
+  <text x="393" y="282" class="edge-label">auth</text>
+  <text x="608" y="282" class="edge-label">morfología</text>
+  <text x="823" y="282" class="edge-label">OCR</text>
+  <text x="1038" y="282" class="edge-label">SDK</text>
+
+  <!-- SKILL: Onboarding -->
+  <rect x="70" y="322" width="200" height="90" rx="4" fill="#fdfdfd" stroke="#d8d8d4" stroke-width="1"/>
+  <use href="#service-onboarding" x="78" y="336" width="22" height="22"/>
+  <text x="181" y="350" class="block" text-anchor="middle">Skill Onboarding</text>
+  <text x="181" y="370" class="block-sub" text-anchor="middle">KB: onboarding/*.md</text>
+
+  <!-- SKILL: Auth -->
+  <rect x="285" y="322" width="200" height="90" rx="4" fill="#fdfdfd" stroke="#d8d8d4" stroke-width="1"/>
+  <use href="#service-iam" x="293" y="336" width="22" height="22"/>
+  <text x="396" y="350" class="block" text-anchor="middle">Skill Auth</text>
+  <text x="396" y="370" class="block-sub" text-anchor="middle">KB: identity-api/*.md</text>
+  <text x="396" y="386" class="block-sub" text-anchor="middle">Tool: Auth API test</text>
+
+  <!-- SKILL: Morfología -->
+  <rect x="500" y="322" width="200" height="90" rx="4" fill="#fdfdfd" stroke="#d8d8d4" stroke-width="1"/>
+  <use href="#service-biometric" x="508" y="336" width="22" height="22"/>
+  <text x="611" y="350" class="block" text-anchor="middle">Skill Morfología</text>
+  <text x="611" y="370" class="block-sub" text-anchor="middle">KB: biometric/*.md</text>
+
+  <!-- SKILL: OCR -->
+  <rect x="715" y="322" width="200" height="90" rx="4" fill="#fdfdfd" stroke="#d8d8d4" stroke-width="1"/>
+  <use href="#service-ocr" x="723" y="336" width="22" height="22"/>
+  <text x="826" y="350" class="block" text-anchor="middle">Skill OCR</text>
+  <text x="826" y="370" class="block-sub" text-anchor="middle">KB: ocr/*.md</text>
+  <text x="826" y="386" class="block-sub" text-anchor="middle">Tool: OCR API</text>
+
+  <!-- SKILL: SDK -->
+  <rect x="930" y="322" width="200" height="90" rx="4" fill="#fdfdfd" stroke="#d8d8d4" stroke-width="1"/>
+  <use href="#service-sdk" x="938" y="336" width="22" height="22"/>
+  <text x="1041" y="350" class="block" text-anchor="middle">Skill SDK</text>
+  <text x="1041" y="370" class="block-sub" text-anchor="middle">KB: selphid/*.md</text>
+  <text x="1041" y="386" class="block-sub" text-anchor="middle">Tool: Zoho + GitHub</text>
+
+  <!-- 5 verticals down from each skill to converge line -->
+  <line x1="170" y1="412" x2="170" y2="452" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="385" y1="412" x2="385" y2="452" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="600" y1="412" x2="600" y2="452" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="815" y1="412" x2="815" y2="452" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="1030" y1="412" x2="1030" y2="452" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- converge horizontal -->
+  <line x1="170" y1="452" x2="1030" y2="452" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- converge → Resp -->
+  <line x1="600" y1="452" x2="600" y2="478" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <polygon points="596,478 604,478 600,482" fill="#666"/>
+
+  <!-- RESP (HIGHLIGHT green) -->
+  <rect x="490" y="482" width="220" height="60" rx="4" fill="#dbe9d6" stroke="#5a8754" stroke-width="1.2"/>
+  <use href="#service-response" x="500" y="498" width="22" height="22"/>
+  <text x="616" y="512" class="block" text-anchor="middle" dominant-baseline="middle">Respuesta al usuario</text>
+
+  <!-- Resp → Esc -->
+  <line x1="600" y1="542" x2="600" y2="618" stroke="#666" stroke-width="1.5" stroke-linecap="round"/>
+  <polygon points="596,618 604,618 600,622" fill="#666"/>
+  <text x="610" y="582" class="edge-label">sin info suficiente</text>
+
+  <!-- ESC (HIGHLIGHT red) -->
+  <rect x="490" y="622" width="220" height="68" rx="4" fill="#fbd9d4" stroke="#c44a3f" stroke-width="1.2"/>
+  <use href="#service-ticket" x="500" y="640" width="22" height="22"/>
+  <text x="611" y="652" class="block" text-anchor="middle">Escalation</text>
+  <text x="611" y="672" class="block-sub" text-anchor="middle">ticket Zoho</text>
+</svg>
